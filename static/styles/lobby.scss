@@ -1,0 +1,100 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+body {
+  background-color: black !important;
+  height: 100vh;
+}
+
+.createHeader {
+  @extend .m-1;
+  border: solid 1px white;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  button {
+    @extend .btn;
+    @extend .m-3;
+    @extend .p-1;
+    border: solid 2px white;
+    background-color: transparent;
+    color: white;
+  }
+  .userContainer {
+    // height: 80%;
+    border: solid 2px white;
+    @extend .btn;
+    @extend .m-3;
+    // @extend .p-3;
+    span {
+      @extend .m-1;
+      color: white;
+    }
+  }
+  button:hover {
+    border: solid 2px $primary;
+    color: white !important;
+    transition: all ease-in-out 0.3s;
+  }
+}
+.userContainer:hover {
+  border: solid 2px $success;
+  transition: all ease-in-out 0.3s;
+}
+.lobby {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  .lobbyList {
+    width: 50vw;
+    table {
+      @extend .m-1;
+      width: 100%;
+      border: solid 1px white;
+      thead {
+        tr {
+          th:nth-child(2n + 2) {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+// @media only screen and (min-width: 471px) {
+// }
+
+@media only screen and (max-width: 470px) {
+  .lobby {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    .lobbyList {
+      width: 45vw;
+      table {
+        @extend .m-1;
+        width: 100%;
+        border: solid 1px white;
+        thead {
+          tr {
+            th:nth-child(2n + 1) {
+              color: $primary;
+            }
+            th:nth-child(2n + 2) {
+              color: white;
+            }
+            th:nth-child(3) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .lobbyDetail {
+      width: 54vw;
+      height: 100%;
+      border: solid 1px white;
+    }
+  }
+}

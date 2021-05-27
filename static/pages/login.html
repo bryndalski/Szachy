@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/styles/login.css" />
+
+    <title>loogin</title>
+    <script src="/scripts/login.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="page">
+      <div class="loginContainer">
+        <div class="inputs">
+          <form autocomplete="on">
+            <input type="text" placeholder="login" autocomplete="on" required />
+            <input
+              type="password"
+              placeholder="hasełko"
+              autocomplete="on"
+              required
+            />
+          </form>
+        </div>
+        <div class="buttons">
+          <button id="logIn">Zaloguj się</button>
+          <button id="register">Zarejestruj się</button>
+        </div>
+        <div class="warnMessage"></div>
+      </div>
+    </div>
+  </body>
+</html>
