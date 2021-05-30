@@ -36,4 +36,5 @@ class ScrollBehavior {
     window.removeEventListener("scroll", this.checkScrollDirection);
   }
 }
+
 export default ScrollBehavior;

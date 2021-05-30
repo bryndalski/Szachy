@@ -13,5 +13,5 @@ socket.addEventListener("message", function (event) {
   console.log("Message from server ", event.data);
 });
 
-let lobby = new LobbySelect();
-lobby.render();
+document.addEventListener("DOMContentLoaded", () => new LobbySelect());
+// let lobby = n

@@ -19,7 +19,6 @@ export default class BasicLobby {
    */
   init() {
     this.scrollListen();
-    this.handelWindowResize();
     this.responsive();
     this.scroll.initScrollBehav();
     this.scrollListen();

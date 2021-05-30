@@ -10810,20 +10810,30 @@ body {
 }
 
 .lobby {
-  width: 100vw;
-  height: 100%;
-  display: flex;
   flex-direction: row;
+  position: absolute;
+  left: 7.5px;
+  display: flex;
+  border: solid 1px white;
 }
 .lobby .lobbyList {
-  width: 50vw;
+  overflow: scroll;
 }
 .lobby .lobbyList table {
+  overflow: hidden;
+  border-collapse: collapse;
   width: 100%;
-  border: solid 1px white;
+  height: 100%;
+}
+.lobby .lobbyList table thead {
+  position: sticky;
+  background-color: black;
 }
 .lobby .lobbyList table thead tr th:nth-child(2n+2) {
   color: white;
+}
+.lobby .lobbyList table tbody {
+  overflow-y: scroll !important;
 }
 .lobby .lobbyList table tbody tr:nth-child(2n+2) th {
   color: white;
@@ -10834,17 +10844,11 @@ body {
 
 @media only screen and (max-width: 470px) {
   .lobby {
-    width: 100vw;
-    height: 100%;
     display: flex;
     flex-direction: row;
   }
-  .lobby .lobbyList {
-    width: 45vw;
-  }
   .lobby .lobbyList table {
     width: 100%;
-    border: solid 1px white;
   }
   .lobby .lobbyList table thead tr th:nth-child(2n+1),
 .lobby .lobbyList table tbody tr th:nth-child(2n+1) {
