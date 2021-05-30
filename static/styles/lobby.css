@@ -6765,7 +6765,7 @@ textarea.form-control-lg {
   margin: 0 !important;
 }
 
-.m-1, .lobby .lobbyList table, .createHeader .userContainer span, .createHeader {
+.m-1, .lobby .lobbyList table, .createHeader .userContainer span {
   margin: 0.25rem !important;
 }
 
@@ -6975,7 +6975,7 @@ textarea.form-control-lg {
   padding: 0 !important;
 }
 
-.p-1, .createHeader button {
+.p-1 {
   padding: 0.25rem !important;
 }
 
@@ -6983,7 +6983,7 @@ textarea.form-control-lg {
   padding: 0.5rem !important;
 }
 
-.p-3 {
+.p-3, .createHeader .userContainer, .createHeader button {
   padding: 1rem !important;
 }
 
@@ -10770,9 +10770,16 @@ textarea.form-control-lg {
 body {
   background-color: black !important;
   height: 100vh;
+  width: 100vw;
 }
 
 .createHeader {
+  width: calc(100vw - 15px);
+  margin: 0 auto !important;
+  position: fixed;
+  top: 5px;
+  left: 7.5px;
+  float: left;
   border: solid 1px white;
   display: flex;
   flex-direction: row;
@@ -10785,6 +10792,7 @@ body {
   color: white;
 }
 .createHeader .userContainer {
+  height: 80%;
   border: solid 2px white;
 }
 .createHeader .userContainer span {
@@ -10817,6 +10825,12 @@ body {
 .lobby .lobbyList table thead tr th:nth-child(2n+2) {
   color: white;
 }
+.lobby .lobbyList table tbody tr:nth-child(2n+2) th {
+  color: white;
+}
+.lobby .lobbyList table tbody tr:nth-child(2n+1) th {
+  color: #0d6efd;
+}
 
 @media only screen and (max-width: 470px) {
   .lobby {
@@ -10832,18 +10846,16 @@ body {
     width: 100%;
     border: solid 1px white;
   }
-  .lobby .lobbyList table thead tr th:nth-child(2n+1) {
+  .lobby .lobbyList table thead tr th:nth-child(2n+1),
+.lobby .lobbyList table tbody tr th:nth-child(2n+1) {
     color: #0d6efd;
   }
-  .lobby .lobbyList table thead tr th:nth-child(2n+2) {
+  .lobby .lobbyList table thead tr th:nth-child(2n+2),
+.lobby .lobbyList table tbody tr th:nth-child(2n+2) {
     color: white;
   }
-  .lobby .lobbyList table thead tr th:nth-child(3) {
+  .lobby .lobbyList table thead tr th:nth-child(3),
+.lobby .lobbyList table tbody tr th:nth-child(3) {
     display: none;
-  }
-  .lobby .lobbyDetail {
-    width: 54vw;
-    height: 100%;
-    border: solid 1px white;
   }
 }

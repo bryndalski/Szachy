@@ -1,29 +1,39 @@
+"use strict";
+/**
+ * Controlls scroll behavior
+ * Detects scrolling up or down
+ * @freez
+ */
 class ScrollBehavior {
   constructor() {
+    this.scrollUp = new CustomEvent("scrollUp");
+    this.scrollDown = new CustomEvent("scrollDown");
     this.lastScroll = null;
-    this.initScrollBehav();
   }
+  /**
+   * Initialize scroll listener
+   */
   initScrollBehav() {
-    window.addEventListener("scroll", this.scrollHandler);
-  }
-  scrollHandler(e) {
-    console.log(e.offsetTop);
+    window.addEventListener("scroll", this.checkScrollDirection);
   }
   /**
    *Checks if user is scrolling up or down
-   * @param {number} offsetTop offset from event
-   * @returns {boolean}
-   *  - true if scrolling up
-   *  -false if scrolling down
+   * @returns {Event}
+   *  - scrollUp if scrolling up
+   *  - scrollDown if scrolling down
    */
-  checkScrollDirection(offsetTop) {
-    if (this.lastScroll == null) this.lastScroll = offsetTop;
-    if (this.lastScroll > offsetTop) return true;
-    else return false;
-  }
+  checkScrollDirection = () => {
+    if (this.lastScroll == null) this.lastScroll = window.pageYOffset;
+    if (this.lastScroll > window.pageYOffset) {
+      this.lastScroll = window.pageYOffset;
+      dispatchEvent(this.scrollUp);
+    } else {
+      this.lastScroll = window.pageYOffset;
+      dispatchEvent(this.scrollDown);
+    }
+  };
   freez() {
-    window.removeEventListener("scroll");
+    window.removeEventListener("scroll", this.checkScrollDirection);
   }
 }
-
 export default ScrollBehavior;
