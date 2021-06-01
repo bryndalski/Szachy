@@ -21,9 +21,9 @@ expressWs(app);
 app.use(
   session({
     secret: "keyboard cat", //session
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
+    resave: true,
+    saveUninitialized: false,
+    cookie: { secure: true, httpOnly: true },
   })
 );
 //* ============= ROUTING ===========

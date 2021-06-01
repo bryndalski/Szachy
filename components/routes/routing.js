@@ -21,6 +21,14 @@ router.get("/lobby", (req, res) => {
     path.join(__dirname, "..", "..", "static", "pages", "lobby.html")
   );
 });
+//* ============= DATA GET ============
+
+router.get("/userInfo", (req, res) => {
+  console.log(req.session.user);
+  req.session.user === undefined
+    ? res.sendStatus(403)
+    : res.json(req.session.user);
+});
 
 //* ========== POSTS ======================
 
@@ -31,6 +39,7 @@ router.post("/login", async (req, res) => {
   if (typeof user === Boolean) res.json({ success: false });
   else {
     req.session.user = new Session(req.body.nickname);
+    console.log(req.session.user);
     res.json({ success: true, next: "/lobby" });
   }
 });
@@ -44,12 +53,12 @@ router.post("/register", async (req, res) => {
 //*Przejmuje tworzenie nowego lobby
 
 router.post("/addRoom", async (req, res) => {
-  //TODO odkomentuj ZABEZPIECZENIE WAŻNE 
-  // if (req.session.user === undefined) res.sendStatus(403);
-  // else {
-  let room = new Room(req.session.user.roomUser,req.body.roomName);
-  console.log(room);
-  // }
+  //TODO odkomentuj ZABEZPIECZENIE WAŻNE
+  if (req.session.user === undefined) res.sendStatus(403);
+  else {
+    let room = new Room(req.session.user.roomUser, req.body.roomName);
+    console.log(room);
+  }
 });
 
 module.exports = router;

@@ -1,4 +1,4 @@
-//TODO reame me
+
 "use strict";
 import HEADER from "./templates/HEADER_SELECT.js";
 import BasicLobby from "./BasicLobby.js";
@@ -16,7 +16,7 @@ export default class LobbySelect extends BasicLobby {
     this.render(); // renders page
     this.lastScrollDirection = null; // last scroll direction
     this.init(); // method from BASCI LOBBY class
-    this.screenType = null; //contains screen type
+    this.screenType = ""; //contains screen type
     this.collectPage(); // collects page element
     this.handelWindowResize(); // handles window resize after init
   }
@@ -31,9 +31,8 @@ export default class LobbySelect extends BasicLobby {
       console.log("Mały ekranik");
       this.screenType = "small";
       console.log(window.innerHeight - this.header.clientHeight);
-      this.mainContainer.style.top = this.header.clientHeight + 10 + "px";
-      this.mainContainer.style.width = this.header.clientWidth + "px";
-      this.mainContainer.style.height =
+      this.table.style.top = this.header.clientHeight + 10 + "px";
+      this.table.style.height =
         window.innerHeight - this.header.clientHeight - 13 + "px";
     } catch (err) {
       await this.sleep(200);
@@ -41,34 +40,48 @@ export default class LobbySelect extends BasicLobby {
       // this.smallScreen();
     }
   }
+  smallScreenZip() {}
 
-  hugeScrean() {
-    console.log("Duuuży ekranik");
+  async hugeScrean() {
     this.screenType = "huge";
+    try {
+      console.log("Duuuży ekranik");
+      this.screenType = "small";
+      console.log(window.innerHeight - this.header.clientHeight);
+      this.table.style.top = this.header.clientHeight + 10 + "px";
+      this.table.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+    } catch (err) {
+      console.warn(err);
+      await this.sleep(200);
+    }
   }
 
   /**
    * Handling scrollUp
    * @override
    */
-  scrollUp() {}
-  /**
-   * Scrolling down
-   * @override
-   */
-  scrollDown() {
-    try {
-      console.log(window.innerHeight - this.header.clientHeight);
-      this.mainContainer.style.top = this.header.clientHeight + 10 + "px";
-      this.mainContainer.style.width = this.header.clientWidth + "px";
-      this.mainContainer.style.height =
+  scrollUp = async () => {
+    if (this.screenType == "small") {
+      //hides top scroll
+      console.log(this);
+      this.header.style.top = "5px";
+      this.table.style.top = this.header.clientHeight + 10 + "px";
+      this.table.style.height =
         window.innerHeight - this.header.clientHeight - 13 + "px";
-    } catch (err) {
-      await this.sleep(200);
-      console.warn(err);
-      // this.smallScreen();
     }
-  }
+  };
+  /**
+   *  Scrolling down
+   *@override
+   */
+  scrollDown = async () => {
+    if (this.screenType == "small") {
+      this.header.style.top = -1 * this.header.clientHeight + "px";
+      this.table.style.top = 5 + "px";
+      this.table.style.height = window.innerHeight + "px";
+    }
+  };
   /**
    * Collect all containers in page
    */
@@ -85,15 +98,6 @@ export default class LobbySelect extends BasicLobby {
    */
   render() {
     document.body.innerHTML += HEADER;
-    document.body.innerHTML += CONTAINERS;
-    document.querySelector(".lobbyList").innerHTML += TABLESELECT;
-  }
-  /**
-   *
-   * @param {Milliseconds} time time in ms
-   * @returns {Promise} await time
-   */
-  sleep(time) {
-    return new Promise((suc) => setTimeout(suc(), time));
+    document.body.innerHTML += TABLESELECT;
   }
 }

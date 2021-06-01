@@ -44,7 +44,9 @@ export default class BasicLobby {
    * @override
    * Handles scroll up
    */
-  scrollUp() {}
+  scrollUp() {
+    console.log("beee");
+  }
   /**
    * @override
    * Handles scroll down
@@ -68,8 +70,8 @@ export default class BasicLobby {
    * Listen for scroll direction up / down
    */
   scrollListen() {
-    window.addEventListener("scrollUp", (e) => this.scrollUp());
-    window.addEventListener("scrollDown", (e) => this.scrollDown());
+    window.addEventListener("scrollUp", this.scrollUp);
+    window.addEventListener("scrollDown", this.scrollDown);
   }
   /**
    * Remove scroll listeners
@@ -78,5 +80,14 @@ export default class BasicLobby {
   removeScrollListen() {
     window.removeEventListener("scrollUp", this.scrollUp);
     window.removeEventListener("scrollDown", this.scrollDown);
+  }
+  /**
+   * Await script execution for some time
+   * @async
+   * @param {time} time time in ms
+   * @returns {Promise} awaits script execution for some time
+   */
+  sleep(time) {
+    return new Promise((suc) => setTimeout(suc(), time));
   }
 }

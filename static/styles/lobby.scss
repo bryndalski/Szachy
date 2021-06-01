@@ -1,121 +1,72 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./scss/header.scss";
 body {
   background-color: black !important;
   height: 100vh;
   width: 100vw;
 }
 
-.createHeader {
-  width: calc(100vw - 15px);
-  margin: 0 auto !important;
-  position: fixed;
-  top: 5px;
-  left: 7.5px;
-  float: left;
-  border: solid 1px white;
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-  button {
-    @extend .btn;
-    @extend .m-3;
-    @extend .p-3;
-    border: solid 2px white;
-    background-color: transparent;
-    color: white;
-  }
-  .userContainer {
-    height: 80%;
-    border: solid 2px white;
-    @extend .btn;
-    @extend .m-3;
-    @extend .p-3;
-    span {
-      @extend .m-1;
-      color: white;
-    }
-  }
-  button:hover {
-    border: solid 2px $primary;
-    color: white !important;
-    transition: all ease-in-out 0.3s;
-  }
-}
 .userContainer:hover {
   border: solid 2px $success;
   transition: all ease-in-out 0.3s;
 }
-.lobby {
-  flex-direction: row;
+
+table {
+  transition: top ease-in-out 0.5s;
   position: absolute;
   left: 7.5px;
-  display: flex;
   border: solid 1px white;
-
-  .lobbyList {
+  overflow: hidden;
+  thead {
+    position: sticky;
+  }
+  tbody {
     overflow: scroll;
-    table {
-      overflow: hidden;
-      border-collapse: collapse;
-      @extend .m-1;
-      width: 100%;
-      height: 100%;
-      thead {
-        position: sticky;
-        background-color: black;
-        tr {
-          th:nth-child(2n + 2) {
-            color: white;
-          }
+    vertical-align: top;
+  }
+}
+.lobbyList {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+*::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 470px) {
+  table {
+    width: calc(50vw - 7.5px);
+    thead,
+    tbody {
+      tr {
+        th:nth-child(2n + 1) {
+          color: $primary;
         }
-      }
-      tbody {
-        overflow-y: scroll !important;
-        tr:nth-child(2n + 2) {
-          th {
-            color: white;
-          }
+        th:nth-child(2n + 2) {
+          color: white;
         }
-        tr:nth-child(2n + 1) {
-          th {
-            color: $primary;
-          }
+        th:nth-child(3) {
+          display: none;
         }
       }
     }
   }
 }
-@media only screen and (min-width: 471px) {
-}
 
-@media only screen and (max-width: 470px) {
-  .lobby {
-    display: flex;
-    flex-direction: row;
-    .lobbyList {
-      table {
-        width: 100%;
-        thead,
-        tbody {
-          tr {
-            th:nth-child(2n + 1) {
-              color: $primary;
-            }
-            th:nth-child(2n + 2) {
-              color: white;
-            }
-            th:nth-child(3) {
-              display: none;
-            }
-          }
+@media screen and (min-width: 471px) {
+  table {
+    width: calc(50vw - 7.5px);
+    thead,
+    tbody {
+      tr {
+        th:nth-child(2n + 1) {
+          color: $primary;
+        }
+        th:nth-child(2n + 2) {
+          color: white;
         }
       }
     }
-    // .lobbyDetail {
-    //   // width: 54vw;
-    //   // height: 100%;
-    //   // border: solid 1px white;
-    // }
   }
 }

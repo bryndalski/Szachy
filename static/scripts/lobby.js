@@ -2,16 +2,51 @@
 
 import LobbySelect from "./components/LobbySelect.js";
 
-let socket = new WebSocket("ws://localhost:5500/sockets/lobbyWS");
-// Connection opened
-socket.addEventListener("open", function (event) {
-  socket.send("my new lobby");
-});
+class ClientLobby {
+  constructor() {
+    this.socket = new WebSocket("ws://localhost:5500/sockets/lobbyWS");
+    this.init();
+  }
+  async init() {
+    try {
+      this.user = await this.getUser();
+      if (typeof this.user === Object) {
+        new LobbySelect();
+      }
+    } catch (err) {}
+  }
+  /**
+   * Connects sockets
+   */
+  connectScokets() {
+    this.socket.addEventListener("open", function (event) {
+      this.socket.send("my new lobby");
+    });
+  }
+  /**
+   * Listens to socket message
+   */
+  listenSockets() {
+    this.socket.addEventListener("message", function (event) {
+      console.log("Message from server ", event.data);
+    });
+  }
+  /**
+   * Get user data from server
+   * @async
+   * @returns {(Promise<JSON>|Error)} returns user or error
+   */
+  getUser() {
+    return new Promise(async (suc, err) => {
+      fetch("/userInfo")
+        .then((response) => response.json())
+        .then((data) => suc(data))
+        .catch((error) => {
+          console.warn("Error:", error); //TODO zakomentuj
+          err(error);
+        });
+    });
+  }
+}
 
-// Listen for messages
-socket.addEventListener("message", function (event) {
-  console.log("Message from server ", event.data);
-});
-
-document.addEventListener("DOMContentLoaded", () => new LobbySelect());
-// let lobby = n
+document.addEventListener("DOMContentLoaded", () => new ClientLobby());
