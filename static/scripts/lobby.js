@@ -10,8 +10,9 @@ class ClientLobby {
   async init() {
     try {
       this.user = await this.getUser();
-      if (typeof this.user === Object) {
-        new LobbySelect();
+      console.log(this.user);
+      if (this.user.lobbyID === null) {
+        new LobbySelect(this.user);
       }
     } catch (err) {}
   }

@@ -23,7 +23,7 @@ app.use(
     secret: "keyboard cat", //session
     resave: true,
     saveUninitialized: false,
-    cookie: { secure: true, httpOnly: true },
+    cookie: { secure: false, httpOnly: true },
   })
 );
 //* ============= ROUTING ===========

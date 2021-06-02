@@ -4,13 +4,15 @@ class HEADER {
   constructor(user) {
     this.user = user;
     this.nickname = user.nickname;
+    console.log(this.nickname);
+    this.render();
   }
   render() {
-    `
+    return `
     <header class="createHeader">
           <button>Create lobby</button>
           <div class="userContainer">
-            <span>${this.nickname}</span>
+            <span>${[this.nickname]}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -29,6 +31,6 @@ class HEADER {
     </header>
 `;
   }
-};
+}
 
 export default HEADER;

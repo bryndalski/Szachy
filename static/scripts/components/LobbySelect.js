@@ -1,4 +1,3 @@
-
 "use strict";
 import HEADER from "./templates/HEADER_SELECT.js";
 import BasicLobby from "./BasicLobby.js";
@@ -11,8 +10,9 @@ import TABLESELECT from "./templates/TABLE_SELECT.js";
  */
 
 export default class LobbySelect extends BasicLobby {
-  constructor() {
+  constructor(user) {
     super();
+    this.user = user;
     this.render(); // renders page
     this.lastScrollDirection = null; // last scroll direction
     this.init(); // method from BASCI LOBBY class
@@ -97,7 +97,8 @@ export default class LobbySelect extends BasicLobby {
    * Renders page using basic components
    */
   render() {
-    document.body.innerHTML += HEADER;
+    console.log("??");
+    document.body.innerHTML += new HEADER(this.user).render();
     document.body.innerHTML += TABLESELECT;
   }
 }
