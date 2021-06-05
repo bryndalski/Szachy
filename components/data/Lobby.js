@@ -6,6 +6,10 @@ class Lobby extends EventEmitter {
     this.lobby = [];
     this.xd = "XDD";
   }
+  // listen() {
+  //   this.addListener("change", () => console.log("no dobra tutaj słucam"));
+  // }
+
   /**
    * Dodaje pokój do lobby
    *
@@ -19,7 +23,15 @@ class Lobby extends EventEmitter {
   remove(roomID) {}
 
   get lobbyContent() {
-    return this.lobby;
+    let lobbyToReturn = this.lobby.map((element) => {
+      return {
+        roomId: element.roomId,
+        roomName: element.roomName,
+        availible: element.playerTwo === null ? true : false,
+        private: element.private,
+      };
+    });
+    return lobbyToReturn;
   }
 }
 

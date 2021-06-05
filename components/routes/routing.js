@@ -2,7 +2,8 @@ const router = require("express").Router(),
   path = require("path"),
   User = require("../User"),
   Room = require("../Room"),
-  Session = require("../Session");
+  Session = require("../Session"),
+  lobby = require("../data/Lobby");
 require("colors");
 
 //* ============= Pages GET ===============
@@ -57,12 +58,19 @@ router.post("/register", async (req, res) => {
 
 router.post("/addRoom", async (req, res) => {
   console.log(`Address : ${req.url}, method: ${req.method}`.blue);
-
   //TODO odkomentuj ZABEZPIECZENIE WAŻNE
   if (req.session.user === undefined) res.sendStatus(403);
   else {
-    let room = new Room(req.session.user.roomUser, req.body.roomName);
-    console.log(room);
+    console.log(req.body);
+    let room = new Room(
+      req.session.user.nickname,
+      req.body.name,
+      req.body.passwordRequired,
+      req.body.password
+    );
+    lobby.add(room);
+    req.session.user.sendableUser.gameID = room.roomId;
+    console.log(req.session.user);
   }
 });
 

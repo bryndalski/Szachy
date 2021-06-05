@@ -37,7 +37,6 @@
   }
   .buttons {
     @extend .mx-3;
-    // @extend .mr/-3;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

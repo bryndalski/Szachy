@@ -10,11 +10,11 @@ class Room {
    * @param {string=} [password=null] password for private room
    */
   constructor(playerOne, roomName, isPrivate, password) {
-    this.roomId = uuidv4;
+    this.roomId = uuidv4(); //unique lobby id
     this.roomName = roomName;
     this.private = isPrivate || false;
     this.playerOne = playerOne || null;
-    this.playerTwo = playerTwo || null;
+    this.playerTwo = null;
     this.roomPassword = password || null;
   }
 
@@ -32,13 +32,6 @@ class Room {
   get isAvailible() {
     if (this.playerTwo === null) return true;
     else return false;
-  }
-  /**
-   * Zwraca id room
-   * @returns {id} roomId
-   */
-  get roomId() {
-    return this.roomId;
   }
 }
 

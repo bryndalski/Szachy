@@ -1,16 +1,31 @@
 "use strict";
+
+import CreateLobbyAlert from "./CreateLobbyAlert.js";
+
 //TODO change to function
-class HEADER {
+class HEADER extends CreateLobbyAlert {
   constructor(user) {
+    super();
     this.user = user;
     this.nickname = user.nickname;
-    console.log(this.nickname);
-    this.render();
   }
+  /**
+   * Starts listening on header button
+   * @requires ! Being Colled after .render()
+   */
+  listen() {
+    this.headerCreateRoomButton = document.querySelector("header button");
+    this.headerCreateRoomButton.addEventListener("click", this.clickListen);
+  }
+
+  /**
+   *  Creates header
+   * @returns {HTML} new header
+   */
   render() {
     return `
     <header class="createHeader">
-          <button>Create lobby</button>
+          <button>Create Room</button>
           <div class="userContainer">
             <span>${[this.nickname]}</span>
             <svg

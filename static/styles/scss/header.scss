@@ -1,5 +1,5 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
-
+@import "./plachta.scss";
 .createHeader {
   width: calc(100vw - 15px);
   margin: 0 auto !important;
@@ -38,5 +38,100 @@
     border: solid 2px $primary;
     color: white !important;
     transition: all ease-in-out 0.3s;
+  }
+}
+
+.addRoom {
+  z-index: 5;
+  background-color: rgb(15, 15, 15) !important;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  border: solid 1px white !important;
+  span {
+    margin: 0 auto !important;
+    color: white;
+    text-align: center;
+    display: block;
+  }
+  div {
+    background-color: rgb(10, 10, 10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    // div {
+    input {
+      border: solid 1px white;
+      background-color: black;
+      color: white;
+      @extend .m-1;
+      @extend .p-1;
+    }
+
+    label {
+      color: white;
+    }
+    div {
+      padding: 0 !important;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  // }
+}
+.alertControlls {
+  @extend .m-3;
+  button {
+    color: white;
+    @extend .btn;
+    @extend .m-1;
+    border: solid 1px $primary;
+    transition: all ease-in-out 0.3s;
+  }
+  label * {
+    cursor: default;
+  }
+  button:hover {
+    color: white !important;
+  }
+  button:first-child:hover {
+    border-color: $success;
+  }
+  button:nth-child(2):hover {
+    border-color: $danger;
+  }
+}
+.pass {
+  // @extend .custom-control;
+  @extend .custom-switch !optional;
+  input {
+    @extend .custom-control-input !optional;
+  }
+  label {
+    @extend .custom-control-label !optional;
+  }
+}
+//małe
+
+@media only screen and (max-width: 470px) {
+  .addRoom {
+    width: 90vw;
+    height: auto;
+    margin: 0 auto;
+    top: 50px;
+  }
+}
+//duże
+@media screen and (min-width: 471px) {
+  .addRoom {
+    width: 80vw;
+    max-width: 630px;
+    height: auto;
+    margin: 0 auto;
+    top: 50px;
   }
 }

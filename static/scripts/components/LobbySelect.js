@@ -12,13 +12,19 @@ import TABLESELECT from "./templates/TABLE_SELECT.js";
 export default class LobbySelect extends BasicLobby {
   constructor(user) {
     super();
-    this.user = user;
+    this.header = new HEADER(user);
+    this.user = user; //user from params
     this.render(); // renders page
+    this.header.listen();
+    this.socket = new WebSocket("ws://localhost:5500/sockets/lobbyWS"); // init websocket
     this.lastScrollDirection = null; // last scroll direction
     this.init(); // method from BASCI LOBBY class
     this.screenType = ""; //contains screen type
     this.collectPage(); // collects page element
     this.handelWindowResize(); // handles window resize after init
+    this.connectScokets(); // connect sockets => makes handshake
+    this.listenSockets(); //start listening to socket
+    this.lobbyList = []; // containes list of lobby and connected with them div
   }
 
   /**
@@ -47,7 +53,6 @@ export default class LobbySelect extends BasicLobby {
     try {
       console.log("Duuuży ekranik");
       this.screenType = "small";
-      console.log(window.innerHeight - this.header.clientHeight);
       this.table.style.top = this.header.clientHeight + 10 + "px";
       this.table.style.height =
         window.innerHeight - this.header.clientHeight - 13 + "px";
@@ -56,7 +61,34 @@ export default class LobbySelect extends BasicLobby {
       await this.sleep(200);
     }
   }
-
+  /**
+   * Connects sockets
+   */
+  connectScokets() {
+    this.socket.addEventListener("open", (event) => {
+      this.socket.send("my new lobby");
+    });
+  }
+  /**
+   * Listens to socket message
+   */
+  listenSockets() {
+    this.socket.addEventListener("message", function (event) {
+      console.log("Message from server ", JSON.parse(event.data));
+    });
+  }
+  //TODO testuj mnie
+  filtrate(element, counter) {
+    if (counter >= this.lobbyList.length)
+      return console.log("nic do zmiany po prostu nowy dodany ");
+    if (JSON.stringify(this.lobbyList[counter]) !== JSON.stringify(element)) {
+      if (this.lobbyList[counter].availible != element.availible) {
+        console.log("element do wywalenia");
+      } else if (this.lobbyList[counter].private != element.private) {
+        console.log("do rerenderowania statusu");
+      }
+    }
+  }
   /**
    * Handling scrollUp
    * @override
@@ -64,7 +96,6 @@ export default class LobbySelect extends BasicLobby {
   scrollUp = async () => {
     if (this.screenType == "small") {
       //hides top scroll
-      console.log(this);
       this.header.style.top = "5px";
       this.table.style.top = this.header.clientHeight + 10 + "px";
       this.table.style.height =
@@ -97,8 +128,8 @@ export default class LobbySelect extends BasicLobby {
    * Renders page using basic components
    */
   render() {
-    console.log("??");
-    document.body.innerHTML += new HEADER(this.user).render();
+    console.log("Rendering ");
+    document.body.insertAdjacentHTML("beforeend", this.header.render());
     document.body.innerHTML += TABLESELECT;
   }
 }
