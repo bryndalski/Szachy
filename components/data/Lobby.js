@@ -6,9 +6,6 @@ class Lobby extends EventEmitter {
     this.lobby = [];
     this.xd = "XDD";
   }
-  // listen() {
-  //   this.addListener("change", () => console.log("no dobra tutaj słucam"));
-  // }
 
   /**
    * Dodaje pokój do lobby

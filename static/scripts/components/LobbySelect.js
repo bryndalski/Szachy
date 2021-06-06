@@ -2,7 +2,7 @@
 import HEADER from "./templates/HEADER_SELECT.js";
 import BasicLobby from "./BasicLobby.js";
 import CONTAINERS from "./templates/CONTAINERS_SELECT.js";
-import TABLESELECT from "./templates/TABLE_SELECT.js";
+import TableSelect from "./templates/TABLE_SELECT.js";
 /**
  * @bryndalski
  * @description Class creaded for maintaing and handling
@@ -25,6 +25,7 @@ export default class LobbySelect extends BasicLobby {
     this.connectScokets(); // connect sockets => makes handshake
     this.listenSockets(); //start listening to socket
     this.lobbyList = []; // containes list of lobby and connected with them div
+    this.closeListen(); // executes on code reload
   }
 
   /**
@@ -65,18 +66,34 @@ export default class LobbySelect extends BasicLobby {
    * Connects sockets
    */
   connectScokets() {
+    console.log(this.socket);
+    console.log("jazda jazda ");
     this.socket.addEventListener("open", (event) => {
+      console.log("dzień dobry");
       this.socket.send("my new lobby");
     });
   }
   /**
    * Listens to socket message
    */
+  //TODO napraw filtrowanie renderek działą
   listenSockets() {
     this.socket.addEventListener("message", function (event) {
       console.log("Message from server ", JSON.parse(event.data));
+      let data = JSON.parse(event.data);
+      try {
+        data.forEach((element, counter) => {
+          TableSelect.render(element, counter);
+          this.filtrate(element, counter);
+        });
+        this.lobbyList = event.data;
+      } catch (err) {
+        console.warn(err);
+      }
     });
   }
+  //TODO status
+  //TODO napraw pokoje publiczne
   //TODO testuj mnie
   filtrate(element, counter) {
     if (counter >= this.lobbyList.length)
@@ -123,13 +140,19 @@ export default class LobbySelect extends BasicLobby {
     this.table = document.querySelector("table");
     this.infoPanel = document.querySelector(".lobbyDetail");
   }
-
+  closeListen() {
+    console.log("no wykounje sie");
+    window.addEventListener("beforeunload", () => {
+      alert("zamykam");
+      this.socket.close();
+    });
+  }
   /**
    * Renders page using basic components
    */
   render() {
-    console.log("Rendering ");
+    console.log(TableSelect);
     document.body.insertAdjacentHTML("beforeend", this.header.render());
-    document.body.innerHTML += TABLESELECT;
+    TableSelect.renderBasic();
   }
 }
