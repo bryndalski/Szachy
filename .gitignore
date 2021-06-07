@@ -1,1 +1,3 @@
 node_modules*
+/threejs/node_modules*
+/threejs/dist*

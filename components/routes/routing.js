@@ -36,7 +36,7 @@ router.get("/userInfo", (req, res) => {
 router.post("/login", async (req, res) => {
   //TODO dokończ autoryzajce
   let user = await User.logIn(req.body.nickname, req.body.password);
-  if (typeof user === Boolean) res.json({ success: false });
+  if (typeof user === "boolean") res.json({ success: false });
   else {
     req.session.user = new Session(req.body.nickname);
     console.log(req.session.user);
