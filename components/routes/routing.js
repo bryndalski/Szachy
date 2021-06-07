@@ -48,9 +48,9 @@ router.post("/login", async (req, res) => {
 //*Przejmuje rejestracje
 router.post("/register", async (req, res) => {
   console.log(`Address : ${req.url}, method: ${req.method}`.blue);
-
   if (await User.register(req.body.nickname, req.body.password)) {
-    req.session.user = await User.logIn(req.body.nickname, req.body.password);
+    let user = await User.logIn(req.body.nickname, req.body.password);
+    req.session.user = new Session(user);
     res.json({ success: true, next: "/lobby" });
   } else res.json({ success: false });
 });
@@ -72,6 +72,7 @@ router.post("/addRoom", async (req, res) => {
     req.session.user.sendableUser.gameID = room.roomId;
     console.log(req.session.user);
   }
+  res.sendStatus(200);
 });
 
 module.exports = router;

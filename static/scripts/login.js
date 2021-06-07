@@ -50,8 +50,9 @@ const loginMenager = {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           if (data.success) window.location.href = data.next;
-          else callback;
+          else callback();
         });
     else {
       document.querySelector(".warnMessage").innerText = "Oba pola są wyamgane";

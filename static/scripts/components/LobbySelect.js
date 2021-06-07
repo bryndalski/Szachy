@@ -84,7 +84,7 @@ export default class LobbySelect extends BasicLobby {
       try {
         data.forEach((element, counter) => {
           TableSelect.render(element, counter);
-          this.filtrate(element, counter);
+          // this.filtrate(element, counter);
         });
         this.lobbyList = event.data;
       } catch (err) {

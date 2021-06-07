@@ -10792,3 +10792,7 @@ textarea.form-control-lg {
   color: white;
   border: solid 1px white;
 }
+.warnMessage {
+  color: #dc3545;
+  text-align: center;
+}
