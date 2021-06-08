@@ -1,0 +1,83 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./scss/header.scss";
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  min-width: 340px;
+  overflow: hidden;
+}
+
+header {
+  height: 10vh;
+  width: calc(100vw - 10px);
+  margin: 0 auto;
+  border: solid 1px white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 70px;
+  button {
+    @extend .btn;
+    border: solid 1px white;
+    @extend .m-3;
+    color: white;
+  }
+  button:nth-child(2) {
+    border-color: $danger;
+  }
+}
+//duże ekraniątka
+@media screen and (min-width: 900px) {
+  .restContainer {
+    display: flex;
+    flex-direction: row;
+    width: calc(100vw - 10px);
+    height: calc(100vh - 10vh);
+    margin: 0 auto;
+    border: solid 1px white;
+    justify-content: space-between;
+    div {
+      width: calc(50% - 0.5rem);
+      margin: 1rem;
+      border: solid 1px white;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .restContainer {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 10px);
+    height: calc(100vh - 11vh);
+    margin: 0 auto;
+    border: solid 1px white;
+
+    justify-content: space-between;
+    div {
+      height: calc(50% - 0.5rem);
+      margin: 1rem;
+      border: solid 1px white;
+      padding: 0;
+    }
+  }
+}
+
+.userData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  button {
+    @extend .btn;
+    border: solid 1px white;
+    padding: 1rem;
+    width: 40%;
+    height: 40%;
+    color: white;
+  }
+  button:hover {
+    color: $primary;
+  }
+}

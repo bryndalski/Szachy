@@ -60,11 +60,8 @@ class TableSelect {
     let roomPrivate = document.createElement("th");
     roomPrivate.innerText = element.private ? "Prywatny" : "Publiczny";
     this.tableStructureData.push({
-      number: assignedNumber,
       ...element,
-      structure:{
-
-      }
+      structure: {},
     });
 
     row.appendChild(cellNumber);

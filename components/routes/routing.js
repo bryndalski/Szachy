@@ -22,6 +22,14 @@ router.get("/lobby", (req, res) => {
     );
   else res.redirect("/");
 });
+
+router.get("/user", (req, res) => {
+  if (req.session.user !== undefined)
+    res.sendFile(
+      path.join(__dirname, "..", "..", "static", "pages", "user.html")
+    );
+  else res.redirect("/");
+});
 //* ============= DATA GET ============
 
 router.get("/userInfo", (req, res) => {

@@ -16,6 +16,13 @@ class HEADER extends CreateLobbyAlert {
   listen() {
     this.headerCreateRoomButton = document.querySelector("header button");
     this.headerCreateRoomButton.addEventListener("click", this.clickListen);
+    this.headerUserButton = document
+      .querySelector(".userContainer")
+      .addEventListener("click", this.userButton);
+  }
+  userButton() {
+    console.log("bajlando bajlando");
+    window.location.href = "/user ";
   }
 
   /**

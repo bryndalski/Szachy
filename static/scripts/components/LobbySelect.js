@@ -35,9 +35,7 @@ export default class LobbySelect extends BasicLobby {
    */
   async smallScreen() {
     try {
-      console.log("Mały ekranik");
       this.screenType = "small";
-      console.log(window.innerHeight - this.header.clientHeight);
       this.table.style.top = this.header.clientHeight + 10 + "px";
       this.table.style.height =
         window.innerHeight - this.header.clientHeight - 13 + "px";
@@ -52,7 +50,6 @@ export default class LobbySelect extends BasicLobby {
   async hugeScrean() {
     this.screenType = "huge";
     try {
-      console.log("Duuuży ekranik");
       this.screenType = "small";
       this.table.style.top = this.header.clientHeight + 10 + "px";
       this.table.style.height =
@@ -67,10 +64,8 @@ export default class LobbySelect extends BasicLobby {
    */
   connectScokets() {
     console.log(this.socket);
-    console.log("jazda jazda ");
     this.socket.addEventListener("open", (event) => {
-      console.log("dzień dobry");
-      this.socket.send("my new lobby");
+      this.socket.send("Good morning ");
     });
   }
   /**
@@ -78,32 +73,33 @@ export default class LobbySelect extends BasicLobby {
    */
   //TODO napraw filtrowanie renderek działą
   listenSockets() {
-    this.socket.addEventListener("message", function (event) {
+    this.socket.addEventListener("message", (event) => {
       console.log("Message from server ", JSON.parse(event.data));
       let data = JSON.parse(event.data);
-      try {
-        data.forEach((element, counter) => {
-          TableSelect.render(element, counter);
-          // this.filtrate(element, counter);
+      if (this.lobbyList.length === 0) {
+        this.lobbyList = data;
+        this.lobbyList.forEach((element, counter) => {
+          TableSelect.render(element, counter + 1);
         });
-        this.lobbyList = event.data;
+      }
+      try {
+        data.forEach((element, counter) => this.filtrate(element, counter));
       } catch (err) {
         console.warn(err);
       }
     });
   }
-  //TODO status
-  //TODO napraw pokoje publiczne
-  //TODO testuj mnie
-  filtrate(element, counter) {
-    if (counter >= this.lobbyList.length)
-      return console.log("nic do zmiany po prostu nowy dodany ");
-    if (JSON.stringify(this.lobbyList[counter]) !== JSON.stringify(element)) {
-      if (this.lobbyList[counter].availible != element.availible) {
-        console.log("element do wywalenia");
-      } else if (this.lobbyList[counter].private != element.private) {
-        console.log("do rerenderowania statusu");
-      }
+  /**
+   * Filtrates if rooms exists
+   * @param {JSON} room room data
+   * @param {Number} counter room number
+   */
+  filtrate(room, counter) {
+    let index = this.lobbyList.find(
+      (element) => element.roomId === room.roomId
+    );
+    if (index === undefined) {
+      TableSelect.render(room, counter + 1);
     }
   }
   /**
@@ -141,9 +137,7 @@ export default class LobbySelect extends BasicLobby {
     this.infoPanel = document.querySelector(".lobbyDetail");
   }
   closeListen() {
-    console.log("no wykounje sie");
     window.addEventListener("beforeunload", () => {
-      alert("zamykam");
       this.socket.close();
     });
   }
@@ -151,7 +145,6 @@ export default class LobbySelect extends BasicLobby {
    * Renders page using basic components
    */
   render() {
-    console.log(TableSelect);
     document.body.insertAdjacentHTML("beforeend", this.header.render());
     TableSelect.renderBasic();
   }

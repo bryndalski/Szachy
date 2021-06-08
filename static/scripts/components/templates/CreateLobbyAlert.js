@@ -43,23 +43,19 @@ export default class CreateLobbyAlert extends BasicLobby {
    * Send data of new room
    */
   joinLobby() {
-    let inputs = Array.from(document.querySelectorAll(".options input")).map(
-      (element) => element.value
-    );
-    console.log("wziuu");
+    let inputs = Array.from(document.querySelectorAll(".options input"));
+    console.log(inputs[1].checked);
     fetch("/addRoom", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: inputs[0],
-        passwordRequired: inputs[1] == "on" ? true : false,
-        password: inputs[2],
+        name: inputs[0].value,
+        passwordRequired: inputs[1].checked,
+        password: inputs[2].value,
       }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    });
   }
   /**
    *Listens to alert fire action on listener
