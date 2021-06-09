@@ -27,6 +27,12 @@ import Collisions from "./Raycaster.js"
 
 export default class Main {
     constructor(container) {
+        // połączenie z websocketem i pobranie danych o kolorze pionków
+        this.websocket = new WebSocket("ws://localhost:5500/sockets/Szaszki")
+
+        this.websocket.onopen = (e) => {
+
+        }
         // właściwości klasy
         this.container = container;
         this.scene = new Scene();
