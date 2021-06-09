@@ -10,7 +10,7 @@ body {
   border: solid 2px $success;
   transition: all ease-in-out 0.3s;
 }
-
+//TODO upięknij tabelkę
 table {
   transition: top ease-in-out 0.5s;
   position: absolute;
@@ -23,6 +23,13 @@ table {
   tbody {
     overflow: scroll;
     vertical-align: top;
+  }
+  tr {
+    cursor: pointer;
+    max-height: 10%;
+  }
+  tr:hover {
+    border: solid 1px $success;
   }
 }
 .lobbyList {
@@ -52,6 +59,9 @@ table {
       }
     }
   }
+  .rightContainer {
+    width: calc(50vw - 7.5px);
+  }
 }
 
 @media screen and (min-width: 471px) {
@@ -67,6 +77,56 @@ table {
           color: white;
         }
       }
+    }
+  }
+  .rightContainer {
+    width: calc(50vw - 7.5px);
+  }
+}
+
+.rightContainer {
+  border: solid 1px white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  img {
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    margin-bottom: auto;
+  }
+  span {
+    color: white;
+    text-align: center;
+  }
+  .RightSideAuthcContainer {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 50%;
+    input {
+      width: 90%;
+      background-color: black;
+      border: solid 1px white;
+      @extend .form-control;
+      margin: 0 auto;
+    }
+    input:focus {
+      background-color: black;
+      color: white;
+      border-color: $primary;
+    }
+    button {
+      color: $primary;
+      @extend .m-3;
+      @extend .btn;
+      border: solid 1px white;
+    }
+    button:hover {
+      color: $success;
     }
   }
 }

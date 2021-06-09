@@ -2143,7 +2143,7 @@ progress {
   color: #6c757d;
 }
 
-.form-control {
+.form-control, .rightContainer .RightSideAuthcContainer input {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -2159,35 +2159,35 @@ progress {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control {
+  .form-control, .rightContainer .RightSideAuthcContainer input {
     transition: none;
   }
 }
-.form-control[type=file] {
+.form-control[type=file], .rightContainer .RightSideAuthcContainer input[type=file] {
   overflow: hidden;
 }
-.form-control[type=file]:not(:disabled):not([readonly]) {
+.form-control[type=file]:not(:disabled):not([readonly]), .rightContainer .RightSideAuthcContainer input[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
 }
-.form-control:focus {
+.form-control:focus, .rightContainer .RightSideAuthcContainer input:focus {
   color: #212529;
   background-color: #fff;
   border-color: #86b7fe;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
-.form-control::-webkit-date-and-time-value {
+.form-control::-webkit-date-and-time-value, .rightContainer .RightSideAuthcContainer input::-webkit-date-and-time-value {
   height: 1.5em;
 }
-.form-control::placeholder {
+.form-control::placeholder, .rightContainer .RightSideAuthcContainer input::placeholder {
   color: #6c757d;
   opacity: 1;
 }
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled, .rightContainer .RightSideAuthcContainer input:disabled, .form-control[readonly], .rightContainer .RightSideAuthcContainer input[readonly] {
   background-color: #e9ecef;
   opacity: 1;
 }
-.form-control::file-selector-button {
+.form-control::file-selector-button, .rightContainer .RightSideAuthcContainer input::file-selector-button {
   padding: 0.375rem 0.75rem;
   margin: -0.375rem -0.75rem;
   margin-inline-end: 0.75rem;
@@ -2202,14 +2202,14 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::file-selector-button {
+  .form-control::file-selector-button, .rightContainer .RightSideAuthcContainer input::file-selector-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button, .rightContainer .RightSideAuthcContainer input:hover:not(:disabled):not([readonly])::file-selector-button {
   background-color: #dde0e3;
 }
-.form-control::-webkit-file-upload-button {
+.form-control::-webkit-file-upload-button, .rightContainer .RightSideAuthcContainer input::-webkit-file-upload-button {
   padding: 0.375rem 0.75rem;
   margin: -0.375rem -0.75rem;
   margin-inline-end: 0.75rem;
@@ -2224,11 +2224,11 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::-webkit-file-upload-button {
+  .form-control::-webkit-file-upload-button, .rightContainer .RightSideAuthcContainer input::-webkit-file-upload-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .rightContainer .RightSideAuthcContainer input:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
   background-color: #dde0e3;
 }
 
@@ -2453,7 +2453,7 @@ textarea.form-control-lg {
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 }
-.btn-check[disabled] + .btn, .alertControlls .btn-check[disabled] + button, .createHeader .btn-check[disabled] + .userContainer, .createHeader .btn-check[disabled] + button, .btn-check:disabled + .btn, .alertControlls .btn-check:disabled + button, .createHeader .btn-check:disabled + .userContainer, .createHeader .btn-check:disabled + button {
+.btn-check[disabled] + .btn, .rightContainer .RightSideAuthcContainer .btn-check[disabled] + button, .alertControlls .btn-check[disabled] + button, .createHeader .btn-check[disabled] + .userContainer, .createHeader .btn-check[disabled] + button, .btn-check:disabled + .btn, .rightContainer .RightSideAuthcContainer .btn-check:disabled + button, .alertControlls .btn-check:disabled + button, .createHeader .btn-check:disabled + .userContainer, .createHeader .btn-check:disabled + button {
   pointer-events: none;
   filter: none;
   opacity: 0.65;
@@ -2544,7 +2544,7 @@ textarea.form-control-lg {
 .form-floating {
   position: relative;
 }
-.form-floating > .form-control,
+.form-floating > .form-control, .rightContainer .RightSideAuthcContainer .form-floating > input,
 .form-floating > .form-select {
   height: calc(3.5rem + 2px);
   padding: 1rem 0.75rem;
@@ -2565,14 +2565,14 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-.form-floating > .form-control::placeholder {
+.form-floating > .form-control::placeholder, .rightContainer .RightSideAuthcContainer .form-floating > input::placeholder {
   color: transparent;
 }
-.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+.form-floating > .form-control:focus, .rightContainer .RightSideAuthcContainer .form-floating > input:focus, .form-floating > .form-control:not(:placeholder-shown), .rightContainer .RightSideAuthcContainer .form-floating > input:not(:placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:-webkit-autofill {
+.form-floating > .form-control:-webkit-autofill, .rightContainer .RightSideAuthcContainer .form-floating > input:-webkit-autofill {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
@@ -2580,13 +2580,14 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:focus ~ label, .rightContainer .RightSideAuthcContainer .form-floating > input:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.rightContainer .RightSideAuthcContainer .form-floating > input:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:-webkit-autofill ~ label {
+.form-floating > .form-control:-webkit-autofill ~ label, .rightContainer .RightSideAuthcContainer .form-floating > input:-webkit-autofill ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
@@ -2598,22 +2599,22 @@ textarea.form-control-lg {
   align-items: stretch;
   width: 100%;
 }
-.input-group > .form-control,
+.input-group > .form-control, .rightContainer .RightSideAuthcContainer .input-group > input,
 .input-group > .form-select {
   position: relative;
   flex: 1 1 auto;
   width: 1%;
   min-width: 0;
 }
-.input-group > .form-control:focus,
+.input-group > .form-control:focus, .rightContainer .RightSideAuthcContainer .input-group > input:focus,
 .input-group > .form-select:focus {
   z-index: 3;
 }
-.input-group .btn, .input-group .alertControlls button, .alertControlls .input-group button, .input-group .createHeader .userContainer, .createHeader .input-group .userContainer, .input-group .createHeader button, .createHeader .input-group button {
+.input-group .btn, .input-group .rightContainer .RightSideAuthcContainer button, .rightContainer .RightSideAuthcContainer .input-group button, .input-group .alertControlls button, .alertControlls .input-group button, .input-group .createHeader .userContainer, .createHeader .input-group .userContainer, .input-group .createHeader button, .createHeader .input-group button {
   position: relative;
   z-index: 2;
 }
-.input-group .btn:focus, .input-group .alertControlls button:focus, .alertControlls .input-group button:focus, .input-group .createHeader .userContainer:focus, .createHeader .input-group .userContainer:focus, .input-group .createHeader button:focus, .createHeader .input-group button:focus {
+.input-group .btn:focus, .input-group .rightContainer .RightSideAuthcContainer button:focus, .rightContainer .RightSideAuthcContainer .input-group button:focus, .input-group .alertControlls button:focus, .alertControlls .input-group button:focus, .input-group .createHeader .userContainer:focus, .createHeader .input-group .userContainer:focus, .input-group .createHeader button:focus, .createHeader .input-group button:focus {
   z-index: 3;
 }
 
@@ -2632,10 +2633,11 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
 }
 
-.input-group-lg > .form-control,
+.input-group-lg > .form-control, .rightContainer .RightSideAuthcContainer .input-group-lg > input,
 .input-group-lg > .form-select,
 .input-group-lg > .input-group-text,
 .input-group-lg > .btn,
+.rightContainer .RightSideAuthcContainer .input-group-lg > button,
 .alertControlls .input-group-lg > button,
 .createHeader .input-group-lg > .userContainer,
 .createHeader .input-group-lg > button {
@@ -2644,10 +2646,11 @@ textarea.form-control-lg {
   border-radius: 0.3rem;
 }
 
-.input-group-sm > .form-control,
+.input-group-sm > .form-control, .rightContainer .RightSideAuthcContainer .input-group-sm > input,
 .input-group-sm > .form-select,
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn,
+.rightContainer .RightSideAuthcContainer .input-group-sm > button,
 .alertControlls .input-group-sm > button,
 .createHeader .input-group-sm > .userContainer,
 .createHeader .input-group-sm > button {
@@ -2706,7 +2709,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:valid, .form-control.is-valid {
+.was-validated .form-control:valid, .was-validated .rightContainer .RightSideAuthcContainer input:valid, .rightContainer .RightSideAuthcContainer .was-validated input:valid, .form-control.is-valid, .rightContainer .RightSideAuthcContainer input.is-valid {
   border-color: #198754;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -2714,7 +2717,7 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+.was-validated .form-control:valid:focus, .was-validated .rightContainer .RightSideAuthcContainer input:valid:focus, .rightContainer .RightSideAuthcContainer .was-validated input:valid:focus, .form-control.is-valid:focus, .rightContainer .RightSideAuthcContainer input.is-valid:focus {
   border-color: #198754;
   box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 }
@@ -2755,12 +2758,12 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group .form-control:valid, .input-group .form-control.is-valid,
+.was-validated .input-group .form-control:valid, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:valid, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:valid, .input-group .form-control.is-valid, .input-group .rightContainer .RightSideAuthcContainer input.is-valid, .rightContainer .RightSideAuthcContainer .input-group input.is-valid,
 .was-validated .input-group .form-select:valid,
 .input-group .form-select.is-valid {
   z-index: 1;
 }
-.was-validated .input-group .form-control:valid:focus, .input-group .form-control.is-valid:focus,
+.was-validated .input-group .form-control:valid:focus, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:valid:focus, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:valid:focus, .input-group .form-control.is-valid:focus, .input-group .rightContainer .RightSideAuthcContainer input.is-valid:focus, .rightContainer .RightSideAuthcContainer .input-group input.is-valid:focus,
 .was-validated .input-group .form-select:valid:focus,
 .input-group .form-select.is-valid:focus {
   z-index: 3;
@@ -2795,7 +2798,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid {
+.was-validated .form-control:invalid, .was-validated .rightContainer .RightSideAuthcContainer input:invalid, .rightContainer .RightSideAuthcContainer .was-validated input:invalid, .form-control.is-invalid, .rightContainer .RightSideAuthcContainer input.is-invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -2803,7 +2806,7 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+.was-validated .form-control:invalid:focus, .was-validated .rightContainer .RightSideAuthcContainer input:invalid:focus, .rightContainer .RightSideAuthcContainer .was-validated input:invalid:focus, .form-control.is-invalid:focus, .rightContainer .RightSideAuthcContainer input.is-invalid:focus {
   border-color: #dc3545;
   box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
@@ -2844,18 +2847,18 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group .form-control:invalid, .input-group .form-control.is-invalid,
+.was-validated .input-group .form-control:invalid, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:invalid, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:invalid, .input-group .form-control.is-invalid, .input-group .rightContainer .RightSideAuthcContainer input.is-invalid, .rightContainer .RightSideAuthcContainer .input-group input.is-invalid,
 .was-validated .input-group .form-select:invalid,
 .input-group .form-select.is-invalid {
   z-index: 2;
 }
-.was-validated .input-group .form-control:invalid:focus, .input-group .form-control.is-invalid:focus,
+.was-validated .input-group .form-control:invalid:focus, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:invalid:focus, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:invalid:focus, .input-group .form-control.is-invalid:focus, .input-group .rightContainer .RightSideAuthcContainer input.is-invalid:focus, .rightContainer .RightSideAuthcContainer .input-group input.is-invalid:focus,
 .was-validated .input-group .form-select:invalid:focus,
 .input-group .form-select.is-invalid:focus {
   z-index: 3;
 }
 
-.btn, .alertControlls button, .createHeader .userContainer, .createHeader button {
+.btn, .rightContainer .RightSideAuthcContainer button, .alertControlls button, .createHeader .userContainer, .createHeader button {
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
@@ -2873,18 +2876,18 @@ textarea.form-control-lg {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn, .alertControlls button, .createHeader .userContainer, .createHeader button {
+  .btn, .rightContainer .RightSideAuthcContainer button, .alertControlls button, .createHeader .userContainer, .createHeader button {
     transition: none;
   }
 }
-.btn:hover, .alertControlls button:hover, .createHeader .userContainer:hover, .createHeader button:hover {
+.btn:hover, .rightContainer .RightSideAuthcContainer button:hover, .alertControlls button:hover, .createHeader .userContainer:hover, .createHeader button:hover {
   color: #212529;
 }
-.btn-check:focus + .btn, .alertControlls .btn-check:focus + button, .createHeader .btn-check:focus + .userContainer, .createHeader .btn-check:focus + button, .btn:focus, .alertControlls button:focus, .createHeader .userContainer:focus, .createHeader button:focus {
+.btn-check:focus + .btn, .rightContainer .RightSideAuthcContainer .btn-check:focus + button, .alertControlls .btn-check:focus + button, .createHeader .btn-check:focus + .userContainer, .createHeader .btn-check:focus + button, .btn:focus, .rightContainer .RightSideAuthcContainer button:focus, .alertControlls button:focus, .createHeader .userContainer:focus, .createHeader button:focus {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
-.btn:disabled, .alertControlls button:disabled, .createHeader .userContainer:disabled, .createHeader button:disabled, .btn.disabled, .alertControlls button.disabled, .createHeader .disabled.userContainer, .createHeader button.disabled, fieldset:disabled .btn, fieldset:disabled .alertControlls button, .alertControlls fieldset:disabled button, fieldset:disabled .createHeader .userContainer, .createHeader fieldset:disabled .userContainer, fieldset:disabled .createHeader button, .createHeader fieldset:disabled button {
+.btn:disabled, .rightContainer .RightSideAuthcContainer button:disabled, .alertControlls button:disabled, .createHeader .userContainer:disabled, .createHeader button:disabled, .btn.disabled, .rightContainer .RightSideAuthcContainer button.disabled, .alertControlls button.disabled, .createHeader .disabled.userContainer, .createHeader button.disabled, fieldset:disabled .btn, fieldset:disabled .rightContainer .RightSideAuthcContainer button, .rightContainer .RightSideAuthcContainer fieldset:disabled button, fieldset:disabled .alertControlls button, .alertControlls fieldset:disabled button, fieldset:disabled .createHeader .userContainer, .createHeader fieldset:disabled .userContainer, fieldset:disabled .createHeader button, .createHeader fieldset:disabled button {
   pointer-events: none;
   opacity: 0.65;
 }
@@ -3341,13 +3344,13 @@ textarea.form-control-lg {
   color: #6c757d;
 }
 
-.btn-lg, .btn-group-lg > .btn, .alertControlls .btn-group-lg > button, .createHeader .btn-group-lg > .userContainer, .createHeader .btn-group-lg > button {
+.btn-lg, .btn-group-lg > .btn, .rightContainer .RightSideAuthcContainer .btn-group-lg > button, .alertControlls .btn-group-lg > button, .createHeader .btn-group-lg > .userContainer, .createHeader .btn-group-lg > button {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn, .alertControlls .btn-group-sm > button, .createHeader .btn-group-sm > .userContainer, .createHeader .btn-group-sm > button {
+.btn-sm, .btn-group-sm > .btn, .rightContainer .RightSideAuthcContainer .btn-group-sm > button, .alertControlls .btn-group-sm > button, .createHeader .btn-group-sm > .userContainer, .createHeader .btn-group-sm > button {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.2rem;
@@ -3692,56 +3695,68 @@ textarea.form-control-lg {
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-group > .btn, .alertControlls .btn-group > button, .createHeader .btn-group > .userContainer, .createHeader .btn-group > button,
+.btn-group > .btn, .rightContainer .RightSideAuthcContainer .btn-group > button, .alertControlls .btn-group > button, .createHeader .btn-group > .userContainer, .createHeader .btn-group > button,
 .btn-group-vertical > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button,
 .alertControlls .btn-group-vertical > button,
 .createHeader .btn-group-vertical > .userContainer,
 .createHeader .btn-group-vertical > button {
   position: relative;
   flex: 1 1 auto;
 }
-.btn-group > .btn-check:checked + .btn, .alertControlls .btn-group > .btn-check:checked + button, .createHeader .btn-group > .btn-check:checked + .userContainer, .createHeader .btn-group > .btn-check:checked + button,
+.btn-group > .btn-check:checked + .btn, .rightContainer .RightSideAuthcContainer .btn-group > .btn-check:checked + button, .alertControlls .btn-group > .btn-check:checked + button, .createHeader .btn-group > .btn-check:checked + .userContainer, .createHeader .btn-group > .btn-check:checked + button,
 .btn-group > .btn-check:focus + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > .btn-check:focus + button,
 .alertControlls .btn-group > .btn-check:focus + button,
 .createHeader .btn-group > .btn-check:focus + .userContainer,
 .createHeader .btn-group > .btn-check:focus + button,
 .btn-group > .btn:hover,
+.rightContainer .RightSideAuthcContainer .btn-group > button:hover,
 .alertControlls .btn-group > button:hover,
 .createHeader .btn-group > .userContainer:hover,
 .createHeader .btn-group > button:hover,
 .btn-group > .btn:focus,
+.rightContainer .RightSideAuthcContainer .btn-group > button:focus,
 .alertControlls .btn-group > button:focus,
 .createHeader .btn-group > .userContainer:focus,
 .createHeader .btn-group > button:focus,
 .btn-group > .btn:active,
+.rightContainer .RightSideAuthcContainer .btn-group > button:active,
 .alertControlls .btn-group > button:active,
 .createHeader .btn-group > .userContainer:active,
 .createHeader .btn-group > button:active,
 .btn-group > .btn.active,
+.rightContainer .RightSideAuthcContainer .btn-group > button.active,
 .alertControlls .btn-group > button.active,
 .createHeader .btn-group > .active.userContainer,
 .createHeader .btn-group > button.active,
 .btn-group-vertical > .btn-check:checked + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-check:checked + button,
 .alertControlls .btn-group-vertical > .btn-check:checked + button,
 .createHeader .btn-group-vertical > .btn-check:checked + .userContainer,
 .createHeader .btn-group-vertical > .btn-check:checked + button,
 .btn-group-vertical > .btn-check:focus + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-check:focus + button,
 .alertControlls .btn-group-vertical > .btn-check:focus + button,
 .createHeader .btn-group-vertical > .btn-check:focus + .userContainer,
 .createHeader .btn-group-vertical > .btn-check:focus + button,
 .btn-group-vertical > .btn:hover,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button:hover,
 .alertControlls .btn-group-vertical > button:hover,
 .createHeader .btn-group-vertical > .userContainer:hover,
 .createHeader .btn-group-vertical > button:hover,
 .btn-group-vertical > .btn:focus,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button:focus,
 .alertControlls .btn-group-vertical > button:focus,
 .createHeader .btn-group-vertical > .userContainer:focus,
 .createHeader .btn-group-vertical > button:focus,
 .btn-group-vertical > .btn:active,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button:active,
 .alertControlls .btn-group-vertical > button:active,
 .createHeader .btn-group-vertical > .userContainer:active,
 .createHeader .btn-group-vertical > button:active,
 .btn-group-vertical > .btn.active,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button.active,
 .alertControlls .btn-group-vertical > button.active,
 .createHeader .btn-group-vertical > .active.userContainer,
 .createHeader .btn-group-vertical > button.active {
@@ -3757,24 +3772,27 @@ textarea.form-control-lg {
   width: auto;
 }
 
-.btn-group > .btn:not(:first-child), .alertControlls .btn-group > button:not(:first-child), .createHeader .btn-group > .userContainer:not(:first-child), .createHeader .btn-group > button:not(:first-child),
+.btn-group > .btn:not(:first-child), .rightContainer .RightSideAuthcContainer .btn-group > button:not(:first-child), .alertControlls .btn-group > button:not(:first-child), .createHeader .btn-group > .userContainer:not(:first-child), .createHeader .btn-group > button:not(:first-child),
 .btn-group > .btn-group:not(:first-child) {
   margin-left: -1px;
 }
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > button:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .rightContainer .RightSideAuthcContainer .btn-group > button:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > button:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn-group:not(:last-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > .btn-group:not(:last-child) > button,
 .alertControlls .btn-group > .btn-group:not(:last-child) > button,
 .createHeader .btn-group > .btn-group:not(:last-child) > .userContainer,
 .createHeader .btn-group > .btn-group:not(:last-child) > button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.btn-group > .btn:nth-child(n+3), .alertControlls .btn-group > button:nth-child(n+3), .createHeader .btn-group > .userContainer:nth-child(n+3), .createHeader .btn-group > button:nth-child(n+3),
+.btn-group > .btn:nth-child(n+3), .rightContainer .RightSideAuthcContainer .btn-group > button:nth-child(n+3), .alertControlls .btn-group > button:nth-child(n+3), .createHeader .btn-group > .userContainer:nth-child(n+3), .createHeader .btn-group > button:nth-child(n+3),
 .btn-group > :not(.btn-check) + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > :not(.btn-check) + button,
 .alertControlls .btn-group > :not(.btn-check) + button,
 .createHeader .btn-group > :not(.btn-check) + .userContainer,
 .createHeader .btn-group > :not(.btn-check) + button,
 .btn-group > .btn-group:not(:first-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > .btn-group:not(:first-child) > button,
 .alertControlls .btn-group > .btn-group:not(:first-child) > button,
 .createHeader .btn-group > .btn-group:not(:first-child) > .userContainer,
 .createHeader .btn-group > .btn-group:not(:first-child) > button {
@@ -3793,12 +3811,12 @@ textarea.form-control-lg {
   margin-right: 0;
 }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .alertControlls .btn-group-sm > button + .dropdown-toggle-split, .createHeader .btn-group-sm > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-sm > button + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .rightContainer .RightSideAuthcContainer .btn-group-sm > button + .dropdown-toggle-split, .alertControlls .btn-group-sm > button + .dropdown-toggle-split, .createHeader .btn-group-sm > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-sm > button + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .alertControlls .btn-group-lg > button + .dropdown-toggle-split, .createHeader .btn-group-lg > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-lg > button + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .rightContainer .RightSideAuthcContainer .btn-group-lg > button + .dropdown-toggle-split, .alertControlls .btn-group-lg > button + .dropdown-toggle-split, .createHeader .btn-group-lg > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-lg > button + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -3808,24 +3826,26 @@ textarea.form-control-lg {
   align-items: flex-start;
   justify-content: center;
 }
-.btn-group-vertical > .btn, .alertControlls .btn-group-vertical > button, .createHeader .btn-group-vertical > .userContainer, .createHeader .btn-group-vertical > button,
+.btn-group-vertical > .btn, .rightContainer .RightSideAuthcContainer .btn-group-vertical > button, .alertControlls .btn-group-vertical > button, .createHeader .btn-group-vertical > .userContainer, .createHeader .btn-group-vertical > button,
 .btn-group-vertical > .btn-group {
   width: 100%;
 }
-.btn-group-vertical > .btn:not(:first-child), .alertControlls .btn-group-vertical > button:not(:first-child), .createHeader .btn-group-vertical > .userContainer:not(:first-child), .createHeader .btn-group-vertical > button:not(:first-child),
+.btn-group-vertical > .btn:not(:first-child), .rightContainer .RightSideAuthcContainer .btn-group-vertical > button:not(:first-child), .alertControlls .btn-group-vertical > button:not(:first-child), .createHeader .btn-group-vertical > .userContainer:not(:first-child), .createHeader .btn-group-vertical > button:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
   margin-top: -1px;
 }
-.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .rightContainer .RightSideAuthcContainer .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
 .btn-group-vertical > .btn-group:not(:last-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-group:not(:last-child) > button,
 .alertControlls .btn-group-vertical > .btn-group:not(:last-child) > button,
 .createHeader .btn-group-vertical > .btn-group:not(:last-child) > .userContainer,
 .createHeader .btn-group-vertical > .btn-group:not(:last-child) > button {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.btn-group-vertical > .btn ~ .btn, .alertControlls .btn-group-vertical > button ~ .btn, .alertControlls .btn-group-vertical > .btn ~ button, .alertControlls .btn-group-vertical > button ~ button, .createHeader .btn-group-vertical > .userContainer ~ .btn, .createHeader .btn-group-vertical > .btn ~ .userContainer, .createHeader .btn-group-vertical > .userContainer ~ .userContainer, .createHeader .btn-group-vertical > button ~ .btn, .createHeader .btn-group-vertical > button ~ .userContainer, .createHeader .btn-group-vertical > .btn ~ button, .createHeader .btn-group-vertical > .userContainer ~ button, .createHeader .btn-group-vertical > button ~ button,
+.btn-group-vertical > .btn ~ .btn, .rightContainer .RightSideAuthcContainer .btn-group-vertical > button ~ .btn, .rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn ~ button, .rightContainer .RightSideAuthcContainer .btn-group-vertical > button ~ button, .alertControlls .btn-group-vertical > button ~ .btn, .alertControlls .btn-group-vertical > .btn ~ button, .alertControlls .btn-group-vertical > button ~ button, .createHeader .btn-group-vertical > .userContainer ~ .btn, .createHeader .btn-group-vertical > .btn ~ .userContainer, .createHeader .btn-group-vertical > .userContainer ~ .userContainer, .createHeader .btn-group-vertical > button ~ .btn, .createHeader .btn-group-vertical > button ~ .userContainer, .createHeader .btn-group-vertical > .btn ~ button, .createHeader .btn-group-vertical > .userContainer ~ button, .createHeader .btn-group-vertical > button ~ button,
 .btn-group-vertical > .btn-group:not(:first-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-group:not(:first-child) > button,
 .alertControlls .btn-group-vertical > .btn-group:not(:first-child) > button,
 .createHeader .btn-group-vertical > .btn-group:not(:first-child) > .userContainer,
 .createHeader .btn-group-vertical > .btn-group:not(:first-child) > button {
@@ -4642,7 +4662,7 @@ textarea.form-control-lg {
   display: none;
 }
 
-.btn .badge, .alertControlls button .badge, .createHeader .userContainer .badge, .createHeader button .badge {
+.btn .badge, .rightContainer .RightSideAuthcContainer button .badge, .alertControlls button .badge, .createHeader .userContainer .badge, .createHeader button .badge {
   position: relative;
   top: -1px;
 }
@@ -6792,7 +6812,7 @@ textarea.form-control-lg {
   margin: 0.5rem !important;
 }
 
-.m-3, .alertControlls, .createHeader .userContainer, .createHeader button {
+.m-3, .rightContainer .RightSideAuthcContainer button, .alertControlls, .createHeader .userContainer, .createHeader button {
   margin: 1rem !important;
 }
 
@@ -12930,7 +12950,7 @@ progress {
   color: #6c757d;
 }
 
-.form-control {
+.form-control, .rightContainer .RightSideAuthcContainer input {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -12946,35 +12966,35 @@ progress {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control {
+  .form-control, .rightContainer .RightSideAuthcContainer input {
     transition: none;
   }
 }
-.form-control[type=file] {
+.form-control[type=file], .rightContainer .RightSideAuthcContainer input[type=file] {
   overflow: hidden;
 }
-.form-control[type=file]:not(:disabled):not([readonly]) {
+.form-control[type=file]:not(:disabled):not([readonly]), .rightContainer .RightSideAuthcContainer input[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
 }
-.form-control:focus {
+.form-control:focus, .rightContainer .RightSideAuthcContainer input:focus {
   color: #212529;
   background-color: #fff;
   border-color: #86b7fe;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
-.form-control::-webkit-date-and-time-value {
+.form-control::-webkit-date-and-time-value, .rightContainer .RightSideAuthcContainer input::-webkit-date-and-time-value {
   height: 1.5em;
 }
-.form-control::placeholder {
+.form-control::placeholder, .rightContainer .RightSideAuthcContainer input::placeholder {
   color: #6c757d;
   opacity: 1;
 }
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled, .rightContainer .RightSideAuthcContainer input:disabled, .form-control[readonly], .rightContainer .RightSideAuthcContainer input[readonly] {
   background-color: #e9ecef;
   opacity: 1;
 }
-.form-control::file-selector-button {
+.form-control::file-selector-button, .rightContainer .RightSideAuthcContainer input::file-selector-button {
   padding: 0.375rem 0.75rem;
   margin: -0.375rem -0.75rem;
   margin-inline-end: 0.75rem;
@@ -12989,14 +13009,14 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::file-selector-button {
+  .form-control::file-selector-button, .rightContainer .RightSideAuthcContainer input::file-selector-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button, .rightContainer .RightSideAuthcContainer input:hover:not(:disabled):not([readonly])::file-selector-button {
   background-color: #dde0e3;
 }
-.form-control::-webkit-file-upload-button {
+.form-control::-webkit-file-upload-button, .rightContainer .RightSideAuthcContainer input::-webkit-file-upload-button {
   padding: 0.375rem 0.75rem;
   margin: -0.375rem -0.75rem;
   margin-inline-end: 0.75rem;
@@ -13011,11 +13031,11 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::-webkit-file-upload-button {
+  .form-control::-webkit-file-upload-button, .rightContainer .RightSideAuthcContainer input::-webkit-file-upload-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .rightContainer .RightSideAuthcContainer input:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
   background-color: #dde0e3;
 }
 
@@ -13240,7 +13260,7 @@ textarea.form-control-lg {
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 }
-.btn-check[disabled] + .btn, .alertControlls .btn-check[disabled] + button, .createHeader .btn-check[disabled] + .userContainer, .createHeader .btn-check[disabled] + button, .btn-check:disabled + .btn, .alertControlls .btn-check:disabled + button, .createHeader .btn-check:disabled + .userContainer, .createHeader .btn-check:disabled + button {
+.btn-check[disabled] + .btn, .rightContainer .RightSideAuthcContainer .btn-check[disabled] + button, .alertControlls .btn-check[disabled] + button, .createHeader .btn-check[disabled] + .userContainer, .createHeader .btn-check[disabled] + button, .btn-check:disabled + .btn, .rightContainer .RightSideAuthcContainer .btn-check:disabled + button, .alertControlls .btn-check:disabled + button, .createHeader .btn-check:disabled + .userContainer, .createHeader .btn-check:disabled + button {
   pointer-events: none;
   filter: none;
   opacity: 0.65;
@@ -13331,7 +13351,7 @@ textarea.form-control-lg {
 .form-floating {
   position: relative;
 }
-.form-floating > .form-control,
+.form-floating > .form-control, .rightContainer .RightSideAuthcContainer .form-floating > input,
 .form-floating > .form-select {
   height: calc(3.5rem + 2px);
   padding: 1rem 0.75rem;
@@ -13352,14 +13372,14 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-.form-floating > .form-control::placeholder {
+.form-floating > .form-control::placeholder, .rightContainer .RightSideAuthcContainer .form-floating > input::placeholder {
   color: transparent;
 }
-.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+.form-floating > .form-control:focus, .rightContainer .RightSideAuthcContainer .form-floating > input:focus, .form-floating > .form-control:not(:placeholder-shown), .rightContainer .RightSideAuthcContainer .form-floating > input:not(:placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:-webkit-autofill {
+.form-floating > .form-control:-webkit-autofill, .rightContainer .RightSideAuthcContainer .form-floating > input:-webkit-autofill {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
@@ -13367,13 +13387,14 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:focus ~ label, .rightContainer .RightSideAuthcContainer .form-floating > input:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.rightContainer .RightSideAuthcContainer .form-floating > input:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:-webkit-autofill ~ label {
+.form-floating > .form-control:-webkit-autofill ~ label, .rightContainer .RightSideAuthcContainer .form-floating > input:-webkit-autofill ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
@@ -13385,22 +13406,22 @@ textarea.form-control-lg {
   align-items: stretch;
   width: 100%;
 }
-.input-group > .form-control,
+.input-group > .form-control, .rightContainer .RightSideAuthcContainer .input-group > input,
 .input-group > .form-select {
   position: relative;
   flex: 1 1 auto;
   width: 1%;
   min-width: 0;
 }
-.input-group > .form-control:focus,
+.input-group > .form-control:focus, .rightContainer .RightSideAuthcContainer .input-group > input:focus,
 .input-group > .form-select:focus {
   z-index: 3;
 }
-.input-group .btn, .input-group .alertControlls button, .alertControlls .input-group button, .input-group .createHeader .userContainer, .createHeader .input-group .userContainer, .input-group .createHeader button, .createHeader .input-group button {
+.input-group .btn, .input-group .rightContainer .RightSideAuthcContainer button, .rightContainer .RightSideAuthcContainer .input-group button, .input-group .alertControlls button, .alertControlls .input-group button, .input-group .createHeader .userContainer, .createHeader .input-group .userContainer, .input-group .createHeader button, .createHeader .input-group button {
   position: relative;
   z-index: 2;
 }
-.input-group .btn:focus, .input-group .alertControlls button:focus, .alertControlls .input-group button:focus, .input-group .createHeader .userContainer:focus, .createHeader .input-group .userContainer:focus, .input-group .createHeader button:focus, .createHeader .input-group button:focus {
+.input-group .btn:focus, .input-group .rightContainer .RightSideAuthcContainer button:focus, .rightContainer .RightSideAuthcContainer .input-group button:focus, .input-group .alertControlls button:focus, .alertControlls .input-group button:focus, .input-group .createHeader .userContainer:focus, .createHeader .input-group .userContainer:focus, .input-group .createHeader button:focus, .createHeader .input-group button:focus {
   z-index: 3;
 }
 
@@ -13419,10 +13440,11 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
 }
 
-.input-group-lg > .form-control,
+.input-group-lg > .form-control, .rightContainer .RightSideAuthcContainer .input-group-lg > input,
 .input-group-lg > .form-select,
 .input-group-lg > .input-group-text,
 .input-group-lg > .btn,
+.rightContainer .RightSideAuthcContainer .input-group-lg > button,
 .alertControlls .input-group-lg > button,
 .createHeader .input-group-lg > .userContainer,
 .createHeader .input-group-lg > button {
@@ -13431,10 +13453,11 @@ textarea.form-control-lg {
   border-radius: 0.3rem;
 }
 
-.input-group-sm > .form-control,
+.input-group-sm > .form-control, .rightContainer .RightSideAuthcContainer .input-group-sm > input,
 .input-group-sm > .form-select,
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn,
+.rightContainer .RightSideAuthcContainer .input-group-sm > button,
 .alertControlls .input-group-sm > button,
 .createHeader .input-group-sm > .userContainer,
 .createHeader .input-group-sm > button {
@@ -13493,7 +13516,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:valid, .form-control.is-valid {
+.was-validated .form-control:valid, .was-validated .rightContainer .RightSideAuthcContainer input:valid, .rightContainer .RightSideAuthcContainer .was-validated input:valid, .form-control.is-valid, .rightContainer .RightSideAuthcContainer input.is-valid {
   border-color: #198754;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -13501,7 +13524,7 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+.was-validated .form-control:valid:focus, .was-validated .rightContainer .RightSideAuthcContainer input:valid:focus, .rightContainer .RightSideAuthcContainer .was-validated input:valid:focus, .form-control.is-valid:focus, .rightContainer .RightSideAuthcContainer input.is-valid:focus {
   border-color: #198754;
   box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 }
@@ -13542,12 +13565,12 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group .form-control:valid, .input-group .form-control.is-valid,
+.was-validated .input-group .form-control:valid, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:valid, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:valid, .input-group .form-control.is-valid, .input-group .rightContainer .RightSideAuthcContainer input.is-valid, .rightContainer .RightSideAuthcContainer .input-group input.is-valid,
 .was-validated .input-group .form-select:valid,
 .input-group .form-select.is-valid {
   z-index: 1;
 }
-.was-validated .input-group .form-control:valid:focus, .input-group .form-control.is-valid:focus,
+.was-validated .input-group .form-control:valid:focus, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:valid:focus, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:valid:focus, .input-group .form-control.is-valid:focus, .input-group .rightContainer .RightSideAuthcContainer input.is-valid:focus, .rightContainer .RightSideAuthcContainer .input-group input.is-valid:focus,
 .was-validated .input-group .form-select:valid:focus,
 .input-group .form-select.is-valid:focus {
   z-index: 3;
@@ -13582,7 +13605,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid {
+.was-validated .form-control:invalid, .was-validated .rightContainer .RightSideAuthcContainer input:invalid, .rightContainer .RightSideAuthcContainer .was-validated input:invalid, .form-control.is-invalid, .rightContainer .RightSideAuthcContainer input.is-invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -13590,7 +13613,7 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+.was-validated .form-control:invalid:focus, .was-validated .rightContainer .RightSideAuthcContainer input:invalid:focus, .rightContainer .RightSideAuthcContainer .was-validated input:invalid:focus, .form-control.is-invalid:focus, .rightContainer .RightSideAuthcContainer input.is-invalid:focus {
   border-color: #dc3545;
   box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
@@ -13631,18 +13654,18 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group .form-control:invalid, .input-group .form-control.is-invalid,
+.was-validated .input-group .form-control:invalid, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:invalid, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:invalid, .input-group .form-control.is-invalid, .input-group .rightContainer .RightSideAuthcContainer input.is-invalid, .rightContainer .RightSideAuthcContainer .input-group input.is-invalid,
 .was-validated .input-group .form-select:invalid,
 .input-group .form-select.is-invalid {
   z-index: 2;
 }
-.was-validated .input-group .form-control:invalid:focus, .input-group .form-control.is-invalid:focus,
+.was-validated .input-group .form-control:invalid:focus, .was-validated .input-group .rightContainer .RightSideAuthcContainer input:invalid:focus, .rightContainer .RightSideAuthcContainer .was-validated .input-group input:invalid:focus, .input-group .form-control.is-invalid:focus, .input-group .rightContainer .RightSideAuthcContainer input.is-invalid:focus, .rightContainer .RightSideAuthcContainer .input-group input.is-invalid:focus,
 .was-validated .input-group .form-select:invalid:focus,
 .input-group .form-select.is-invalid:focus {
   z-index: 3;
 }
 
-.btn, .alertControlls button, .createHeader .userContainer, .createHeader button {
+.btn, .rightContainer .RightSideAuthcContainer button, .alertControlls button, .createHeader .userContainer, .createHeader button {
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
@@ -13660,18 +13683,18 @@ textarea.form-control-lg {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn, .alertControlls button, .createHeader .userContainer, .createHeader button {
+  .btn, .rightContainer .RightSideAuthcContainer button, .alertControlls button, .createHeader .userContainer, .createHeader button {
     transition: none;
   }
 }
-.btn:hover, .alertControlls button:hover, .createHeader .userContainer:hover, .createHeader button:hover {
+.btn:hover, .rightContainer .RightSideAuthcContainer button:hover, .alertControlls button:hover, .createHeader .userContainer:hover, .createHeader button:hover {
   color: #212529;
 }
-.btn-check:focus + .btn, .alertControlls .btn-check:focus + button, .createHeader .btn-check:focus + .userContainer, .createHeader .btn-check:focus + button, .btn:focus, .alertControlls button:focus, .createHeader .userContainer:focus, .createHeader button:focus {
+.btn-check:focus + .btn, .rightContainer .RightSideAuthcContainer .btn-check:focus + button, .alertControlls .btn-check:focus + button, .createHeader .btn-check:focus + .userContainer, .createHeader .btn-check:focus + button, .btn:focus, .rightContainer .RightSideAuthcContainer button:focus, .alertControlls button:focus, .createHeader .userContainer:focus, .createHeader button:focus {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
-.btn:disabled, .alertControlls button:disabled, .createHeader .userContainer:disabled, .createHeader button:disabled, .btn.disabled, .alertControlls button.disabled, .createHeader .disabled.userContainer, .createHeader button.disabled, fieldset:disabled .btn, fieldset:disabled .alertControlls button, .alertControlls fieldset:disabled button, fieldset:disabled .createHeader .userContainer, .createHeader fieldset:disabled .userContainer, fieldset:disabled .createHeader button, .createHeader fieldset:disabled button {
+.btn:disabled, .rightContainer .RightSideAuthcContainer button:disabled, .alertControlls button:disabled, .createHeader .userContainer:disabled, .createHeader button:disabled, .btn.disabled, .rightContainer .RightSideAuthcContainer button.disabled, .alertControlls button.disabled, .createHeader .disabled.userContainer, .createHeader button.disabled, fieldset:disabled .btn, fieldset:disabled .rightContainer .RightSideAuthcContainer button, .rightContainer .RightSideAuthcContainer fieldset:disabled button, fieldset:disabled .alertControlls button, .alertControlls fieldset:disabled button, fieldset:disabled .createHeader .userContainer, .createHeader fieldset:disabled .userContainer, fieldset:disabled .createHeader button, .createHeader fieldset:disabled button {
   pointer-events: none;
   opacity: 0.65;
 }
@@ -14128,13 +14151,13 @@ textarea.form-control-lg {
   color: #6c757d;
 }
 
-.btn-lg, .btn-group-lg > .btn, .alertControlls .btn-group-lg > button, .createHeader .btn-group-lg > .userContainer, .createHeader .btn-group-lg > button {
+.btn-lg, .btn-group-lg > .btn, .rightContainer .RightSideAuthcContainer .btn-group-lg > button, .alertControlls .btn-group-lg > button, .createHeader .btn-group-lg > .userContainer, .createHeader .btn-group-lg > button {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn, .alertControlls .btn-group-sm > button, .createHeader .btn-group-sm > .userContainer, .createHeader .btn-group-sm > button {
+.btn-sm, .btn-group-sm > .btn, .rightContainer .RightSideAuthcContainer .btn-group-sm > button, .alertControlls .btn-group-sm > button, .createHeader .btn-group-sm > .userContainer, .createHeader .btn-group-sm > button {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.2rem;
@@ -14479,56 +14502,68 @@ textarea.form-control-lg {
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-group > .btn, .alertControlls .btn-group > button, .createHeader .btn-group > .userContainer, .createHeader .btn-group > button,
+.btn-group > .btn, .rightContainer .RightSideAuthcContainer .btn-group > button, .alertControlls .btn-group > button, .createHeader .btn-group > .userContainer, .createHeader .btn-group > button,
 .btn-group-vertical > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button,
 .alertControlls .btn-group-vertical > button,
 .createHeader .btn-group-vertical > .userContainer,
 .createHeader .btn-group-vertical > button {
   position: relative;
   flex: 1 1 auto;
 }
-.btn-group > .btn-check:checked + .btn, .alertControlls .btn-group > .btn-check:checked + button, .createHeader .btn-group > .btn-check:checked + .userContainer, .createHeader .btn-group > .btn-check:checked + button,
+.btn-group > .btn-check:checked + .btn, .rightContainer .RightSideAuthcContainer .btn-group > .btn-check:checked + button, .alertControlls .btn-group > .btn-check:checked + button, .createHeader .btn-group > .btn-check:checked + .userContainer, .createHeader .btn-group > .btn-check:checked + button,
 .btn-group > .btn-check:focus + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > .btn-check:focus + button,
 .alertControlls .btn-group > .btn-check:focus + button,
 .createHeader .btn-group > .btn-check:focus + .userContainer,
 .createHeader .btn-group > .btn-check:focus + button,
 .btn-group > .btn:hover,
+.rightContainer .RightSideAuthcContainer .btn-group > button:hover,
 .alertControlls .btn-group > button:hover,
 .createHeader .btn-group > .userContainer:hover,
 .createHeader .btn-group > button:hover,
 .btn-group > .btn:focus,
+.rightContainer .RightSideAuthcContainer .btn-group > button:focus,
 .alertControlls .btn-group > button:focus,
 .createHeader .btn-group > .userContainer:focus,
 .createHeader .btn-group > button:focus,
 .btn-group > .btn:active,
+.rightContainer .RightSideAuthcContainer .btn-group > button:active,
 .alertControlls .btn-group > button:active,
 .createHeader .btn-group > .userContainer:active,
 .createHeader .btn-group > button:active,
 .btn-group > .btn.active,
+.rightContainer .RightSideAuthcContainer .btn-group > button.active,
 .alertControlls .btn-group > button.active,
 .createHeader .btn-group > .active.userContainer,
 .createHeader .btn-group > button.active,
 .btn-group-vertical > .btn-check:checked + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-check:checked + button,
 .alertControlls .btn-group-vertical > .btn-check:checked + button,
 .createHeader .btn-group-vertical > .btn-check:checked + .userContainer,
 .createHeader .btn-group-vertical > .btn-check:checked + button,
 .btn-group-vertical > .btn-check:focus + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-check:focus + button,
 .alertControlls .btn-group-vertical > .btn-check:focus + button,
 .createHeader .btn-group-vertical > .btn-check:focus + .userContainer,
 .createHeader .btn-group-vertical > .btn-check:focus + button,
 .btn-group-vertical > .btn:hover,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button:hover,
 .alertControlls .btn-group-vertical > button:hover,
 .createHeader .btn-group-vertical > .userContainer:hover,
 .createHeader .btn-group-vertical > button:hover,
 .btn-group-vertical > .btn:focus,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button:focus,
 .alertControlls .btn-group-vertical > button:focus,
 .createHeader .btn-group-vertical > .userContainer:focus,
 .createHeader .btn-group-vertical > button:focus,
 .btn-group-vertical > .btn:active,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button:active,
 .alertControlls .btn-group-vertical > button:active,
 .createHeader .btn-group-vertical > .userContainer:active,
 .createHeader .btn-group-vertical > button:active,
 .btn-group-vertical > .btn.active,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > button.active,
 .alertControlls .btn-group-vertical > button.active,
 .createHeader .btn-group-vertical > .active.userContainer,
 .createHeader .btn-group-vertical > button.active {
@@ -14544,24 +14579,27 @@ textarea.form-control-lg {
   width: auto;
 }
 
-.btn-group > .btn:not(:first-child), .alertControlls .btn-group > button:not(:first-child), .createHeader .btn-group > .userContainer:not(:first-child), .createHeader .btn-group > button:not(:first-child),
+.btn-group > .btn:not(:first-child), .rightContainer .RightSideAuthcContainer .btn-group > button:not(:first-child), .alertControlls .btn-group > button:not(:first-child), .createHeader .btn-group > .userContainer:not(:first-child), .createHeader .btn-group > button:not(:first-child),
 .btn-group > .btn-group:not(:first-child) {
   margin-left: -1px;
 }
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > button:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .rightContainer .RightSideAuthcContainer .btn-group > button:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group > button:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn-group:not(:last-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > .btn-group:not(:last-child) > button,
 .alertControlls .btn-group > .btn-group:not(:last-child) > button,
 .createHeader .btn-group > .btn-group:not(:last-child) > .userContainer,
 .createHeader .btn-group > .btn-group:not(:last-child) > button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.btn-group > .btn:nth-child(n+3), .alertControlls .btn-group > button:nth-child(n+3), .createHeader .btn-group > .userContainer:nth-child(n+3), .createHeader .btn-group > button:nth-child(n+3),
+.btn-group > .btn:nth-child(n+3), .rightContainer .RightSideAuthcContainer .btn-group > button:nth-child(n+3), .alertControlls .btn-group > button:nth-child(n+3), .createHeader .btn-group > .userContainer:nth-child(n+3), .createHeader .btn-group > button:nth-child(n+3),
 .btn-group > :not(.btn-check) + .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > :not(.btn-check) + button,
 .alertControlls .btn-group > :not(.btn-check) + button,
 .createHeader .btn-group > :not(.btn-check) + .userContainer,
 .createHeader .btn-group > :not(.btn-check) + button,
 .btn-group > .btn-group:not(:first-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group > .btn-group:not(:first-child) > button,
 .alertControlls .btn-group > .btn-group:not(:first-child) > button,
 .createHeader .btn-group > .btn-group:not(:first-child) > .userContainer,
 .createHeader .btn-group > .btn-group:not(:first-child) > button {
@@ -14580,12 +14618,12 @@ textarea.form-control-lg {
   margin-right: 0;
 }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .alertControlls .btn-group-sm > button + .dropdown-toggle-split, .createHeader .btn-group-sm > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-sm > button + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .rightContainer .RightSideAuthcContainer .btn-group-sm > button + .dropdown-toggle-split, .alertControlls .btn-group-sm > button + .dropdown-toggle-split, .createHeader .btn-group-sm > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-sm > button + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .alertControlls .btn-group-lg > button + .dropdown-toggle-split, .createHeader .btn-group-lg > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-lg > button + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .rightContainer .RightSideAuthcContainer .btn-group-lg > button + .dropdown-toggle-split, .alertControlls .btn-group-lg > button + .dropdown-toggle-split, .createHeader .btn-group-lg > .userContainer + .dropdown-toggle-split, .createHeader .btn-group-lg > button + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -14595,24 +14633,26 @@ textarea.form-control-lg {
   align-items: flex-start;
   justify-content: center;
 }
-.btn-group-vertical > .btn, .alertControlls .btn-group-vertical > button, .createHeader .btn-group-vertical > .userContainer, .createHeader .btn-group-vertical > button,
+.btn-group-vertical > .btn, .rightContainer .RightSideAuthcContainer .btn-group-vertical > button, .alertControlls .btn-group-vertical > button, .createHeader .btn-group-vertical > .userContainer, .createHeader .btn-group-vertical > button,
 .btn-group-vertical > .btn-group {
   width: 100%;
 }
-.btn-group-vertical > .btn:not(:first-child), .alertControlls .btn-group-vertical > button:not(:first-child), .createHeader .btn-group-vertical > .userContainer:not(:first-child), .createHeader .btn-group-vertical > button:not(:first-child),
+.btn-group-vertical > .btn:not(:first-child), .rightContainer .RightSideAuthcContainer .btn-group-vertical > button:not(:first-child), .alertControlls .btn-group-vertical > button:not(:first-child), .createHeader .btn-group-vertical > .userContainer:not(:first-child), .createHeader .btn-group-vertical > button:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
   margin-top: -1px;
 }
-.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .rightContainer .RightSideAuthcContainer .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .alertControlls .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > .userContainer:not(:last-child):not(.dropdown-toggle), .createHeader .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
 .btn-group-vertical > .btn-group:not(:last-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-group:not(:last-child) > button,
 .alertControlls .btn-group-vertical > .btn-group:not(:last-child) > button,
 .createHeader .btn-group-vertical > .btn-group:not(:last-child) > .userContainer,
 .createHeader .btn-group-vertical > .btn-group:not(:last-child) > button {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.btn-group-vertical > .btn ~ .btn, .alertControlls .btn-group-vertical > button ~ .btn, .alertControlls .btn-group-vertical > .btn ~ button, .alertControlls .btn-group-vertical > button ~ button, .createHeader .btn-group-vertical > .userContainer ~ .btn, .createHeader .btn-group-vertical > .btn ~ .userContainer, .createHeader .btn-group-vertical > .userContainer ~ .userContainer, .createHeader .btn-group-vertical > button ~ .btn, .createHeader .btn-group-vertical > button ~ .userContainer, .createHeader .btn-group-vertical > .btn ~ button, .createHeader .btn-group-vertical > .userContainer ~ button, .createHeader .btn-group-vertical > button ~ button,
+.btn-group-vertical > .btn ~ .btn, .rightContainer .RightSideAuthcContainer .btn-group-vertical > button ~ .btn, .rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn ~ button, .rightContainer .RightSideAuthcContainer .btn-group-vertical > button ~ button, .alertControlls .btn-group-vertical > button ~ .btn, .alertControlls .btn-group-vertical > .btn ~ button, .alertControlls .btn-group-vertical > button ~ button, .createHeader .btn-group-vertical > .userContainer ~ .btn, .createHeader .btn-group-vertical > .btn ~ .userContainer, .createHeader .btn-group-vertical > .userContainer ~ .userContainer, .createHeader .btn-group-vertical > button ~ .btn, .createHeader .btn-group-vertical > button ~ .userContainer, .createHeader .btn-group-vertical > .btn ~ button, .createHeader .btn-group-vertical > .userContainer ~ button, .createHeader .btn-group-vertical > button ~ button,
 .btn-group-vertical > .btn-group:not(:first-child) > .btn,
+.rightContainer .RightSideAuthcContainer .btn-group-vertical > .btn-group:not(:first-child) > button,
 .alertControlls .btn-group-vertical > .btn-group:not(:first-child) > button,
 .createHeader .btn-group-vertical > .btn-group:not(:first-child) > .userContainer,
 .createHeader .btn-group-vertical > .btn-group:not(:first-child) > button {
@@ -15429,7 +15469,7 @@ textarea.form-control-lg {
   display: none;
 }
 
-.btn .badge, .alertControlls button .badge, .createHeader .userContainer .badge, .createHeader button .badge {
+.btn .badge, .rightContainer .RightSideAuthcContainer button .badge, .alertControlls button .badge, .createHeader .userContainer .badge, .createHeader button .badge {
   position: relative;
   top: -1px;
 }
@@ -17579,7 +17619,7 @@ textarea.form-control-lg {
   margin: 0.5rem !important;
 }
 
-.m-3, .alertControlls, .createHeader .userContainer, .createHeader button {
+.m-3, .rightContainer .RightSideAuthcContainer button, .alertControlls, .createHeader .userContainer, .createHeader button {
   margin: 1rem !important;
 }
 
@@ -21714,6 +21754,13 @@ table tbody {
   overflow: scroll;
   vertical-align: top;
 }
+table tr {
+  cursor: pointer;
+  max-height: 10%;
+}
+table tr:hover {
+  border: solid 1px #198754;
+}
 
 .lobbyList {
   overflow-x: hidden;
@@ -21741,6 +21788,10 @@ table tbody tr th:nth-child(2n+2) {
 table tbody tr th:nth-child(3) {
     display: none;
   }
+
+  .rightContainer {
+    width: calc(50vw - 7.5px);
+  }
 }
 @media screen and (min-width: 471px) {
   table {
@@ -21754,4 +21805,51 @@ table tbody tr th:nth-child(2n+1) {
 table tbody tr th:nth-child(2n+2) {
     color: white;
   }
+
+  .rightContainer {
+    width: calc(50vw - 7.5px);
+  }
+}
+.rightContainer {
+  border: solid 1px white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+.rightContainer img {
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  margin-bottom: auto;
+}
+.rightContainer span {
+  color: white;
+  text-align: center;
+}
+.rightContainer .RightSideAuthcContainer {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 50%;
+}
+.rightContainer .RightSideAuthcContainer input {
+  width: 90%;
+  background-color: black;
+  border: solid 1px white;
+  margin: 0 auto;
+}
+.rightContainer .RightSideAuthcContainer input:focus {
+  background-color: black;
+  color: white;
+  border-color: #0d6efd;
+}
+.rightContainer .RightSideAuthcContainer button {
+  color: #0d6efd;
+  border: solid 1px white;
+}
+.rightContainer .RightSideAuthcContainer button:hover {
+  color: #198754;
 }

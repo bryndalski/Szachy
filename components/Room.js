@@ -1,5 +1,9 @@
 "use strict";
+const e = require("express");
 const { v4: uuidv4 } = require("uuid");
+/**
+ * EXTENDS CHESS JS
+ */
 
 class Room {
   /**
@@ -21,9 +25,16 @@ class Room {
   /**
    * Pozwala na dodanie nowego gracza do room
    * @param {string} nickname2 nick drugiego gracza
+   * @param {string} password room password
+   * @returns {Boolean} If password has passed
    */
-  addNewPlayer(nickname2) {
-    this.playerTwo = nickname2;
+  addNewPlayer(nickname2, password) {
+    if (isPrivate)
+      if (this.password === password) {
+        this.playerTwo = nickname2;
+      } else return false;
+    else this.playerTwo = nickname2;
+    return true;
   }
   /**
    * Zwraca dostępnośc room

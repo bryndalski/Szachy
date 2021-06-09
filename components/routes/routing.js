@@ -69,7 +69,6 @@ router.post("/addRoom", async (req, res) => {
   //TODO odkomentuj ZABEZPIECZENIE WAŻNE
   if (req.session.user === undefined) res.sendStatus(403);
   else {
-    console.log(req.body);
     let room = new Room(
       req.session.user.nickname,
       req.body.name,
@@ -78,9 +77,20 @@ router.post("/addRoom", async (req, res) => {
     );
     lobby.add(room);
     req.session.user.sendableUser.gameID = room.roomId;
-    console.log(req.session.user);
   }
   res.sendStatus(200);
 });
 
+//*Przyjmuje dodawanie do nowego lobbu
+
+router.post("/addToRoom", async (req, res) => {
+  //!!! to może walnąc sprawdź czy nie walnie a jak walnie to solidnie
+  if (
+    req.session.user === undefined ||
+    req.session.user.sendableUser.gameID === null
+  )
+    return res.sendStatus(403);
+    lobby.changeInportantValue()
+    console.log(req.body);
+});
 module.exports = router;

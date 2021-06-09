@@ -1,31 +1,7 @@
 "use strict";
 /**
- *
- * @param {JSON} rooms object containg all rooms( lobbys )
+ * Contains class that controlls table with rooms
  */
-// export default function TABLESELECT(rooms) {}
-
-//TODO temporaty template only for tests
-const TABLESELECT = `
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nazwa pokoju</th>
-              <th>Dostępność</th>
-            </tr>
-          </thead>
-          <tbody>
-        
-            <tr>
-              <th>1</th>
-              <th>Nazwa pokoju</th>
-              <th>Dostępny</th>
-            </tr>
-          </tbody>
-        </table>
-    `;
-
 class TableSelect {
   constructor() {
     this.tableStructureData = [];
@@ -50,7 +26,11 @@ class TableSelect {
     this.table.appendChild(this.tableBody);
     document.body.appendChild(this.table);
   }
-
+  /**
+   * Renders cell with room
+   * @param {JOSN} element
+   * @param {Number} assignedNumber
+   */
   render(element, assignedNumber) {
     let row = document.createElement("tr");
     let cellNumber = document.createElement("th");
@@ -63,10 +43,13 @@ class TableSelect {
       ...element,
       structure: {},
     });
-
     row.appendChild(cellNumber);
     row.appendChild(roomName);
     row.appendChild(roomPrivate);
+    row.addEventListener("click", () => {
+      console.log(element);
+      dispatchEvent(new CustomEvent("roomChange", { detail: { ...element } }));
+    });
     this.tableBody.appendChild(row);
   }
   reRender() {}

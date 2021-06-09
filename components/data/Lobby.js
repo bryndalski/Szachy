@@ -17,8 +17,42 @@ class Lobby extends EventEmitter {
     this.lobby.push(room);
     this.emit("change");
   }
-  remove(roomID) {}
+  /**
+   * Removes element with this ID
+   *
+   * @param {String} roomID
+   */
+  remove(roomID) {
+    this.emit("change");
+  }
 
+  /**
+   * Changes value in lobby such as availibility
+   *
+   * Uses to daa user to lobby
+   * Emits event
+   *
+   * @param {String } roomId
+   * @param {Object} Value
+   * !!! czy potrzebne 
+   */
+  changeInportantValue(roomId, key, value) {
+    let indexNumber = this.lobby.find((element) => element.roomId === roomId);
+    console.log(indexNumber);
+    //checks if room with matching id exists
+    if (indexNumber === null || indexNumber === undefined) return false;
+    this.lobby[indexNumber][key] = value;
+    this.emit("change");
+  }
+  /**
+   * Tryes to add new player to lobby
+   */
+  addPlayerToRoomLobby() {
+
+  }
+  /**
+   * Returns lobby content
+   */
   get lobbyContent() {
     let lobbyToReturn = this.lobby.map((element) => {
       return {

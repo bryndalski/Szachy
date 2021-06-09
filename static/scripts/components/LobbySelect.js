@@ -1,18 +1,20 @@
 "use strict";
-import HEADER from "./templates/HEADER_SELECT.js";
+import HEADER from "./templates/HeaderSelect.js";
 import BasicLobby from "./BasicLobby.js";
-import CONTAINERS from "./templates/CONTAINERS_SELECT.js";
-import TableSelect from "./templates/TABLE_SELECT.js";
+import TableSelect from "./templates/TableSelect.js";
+import RightSideContainer from "./templates/RightSide.js";
 /**
  * @bryndalski
  * @description Class creaded for maintaing and handling
  * view of smaller lobby with JOIN options.
  */
+//TODO zmień przed hostowaniem adres websocketa
 
 export default class LobbySelect extends BasicLobby {
   constructor(user) {
     super();
     this.header = new HEADER(user);
+    this.rightContainer = new RightSideContainer();
     this.user = user; //user from params
     this.render(); // renders page
     this.header.listen();
@@ -39,20 +41,27 @@ export default class LobbySelect extends BasicLobby {
       this.table.style.top = this.header.clientHeight + 10 + "px";
       this.table.style.height =
         window.innerHeight - this.header.clientHeight - 13 + "px";
+      this.rightSidePanel.style.top = this.header.clientHeight + 10 + "px";
+      this.rightSidePanel.style.left = this.table.clientWidth + 10 + "px";
+      this.rightSidePanel.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
     } catch (err) {
       await this.sleep(200);
       console.warn(err);
-      // this.smallScreen();
     }
   }
-  smallScreenZip() {}
 
   async hugeScrean() {
     this.screenType = "huge";
     try {
-      this.screenType = "small";
+      this.screenType = "huge";
       this.table.style.top = this.header.clientHeight + 10 + "px";
       this.table.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+
+      this.rightSidePanel.style.top = this.header.clientHeight + 10 + "px";
+      this.rightSidePanel.style.left = this.table.clientWidth + 10 + "px";
+      this.rightSidePanel.style.height =
         window.innerHeight - this.header.clientHeight - 13 + "px";
     } catch (err) {
       console.warn(err);
@@ -70,6 +79,7 @@ export default class LobbySelect extends BasicLobby {
   }
   /**
    * Listens to socket message
+   * @netwotk
    */
   //TODO napraw filtrowanie renderek działą
   listenSockets() {
@@ -135,7 +145,11 @@ export default class LobbySelect extends BasicLobby {
     this.tableConstinaer = document.querySelector(".lobbyList");
     this.table = document.querySelector("table");
     this.infoPanel = document.querySelector(".lobbyDetail");
+    this.rightSidePanel = document.querySelector(".rightContainer");
   }
+  /**
+   * Closes socket on window unload
+   */
   closeListen() {
     window.addEventListener("beforeunload", () => {
       this.socket.close();
@@ -147,5 +161,6 @@ export default class LobbySelect extends BasicLobby {
   render() {
     document.body.insertAdjacentHTML("beforeend", this.header.render());
     TableSelect.renderBasic();
+    this.rightContainer.render();
   }
 }
