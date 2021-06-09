@@ -30,6 +30,16 @@ router.get("/user", (req, res) => {
     );
   else res.redirect("/");
 });
+
+router.get("/game", (req, res) => {
+  if (req.session.undefined !== undefined) res.redirect("/login ");
+  else if (req.session.user.sendableUser.gameID === null)
+    res.redirect("/lobby");
+  else
+    res.sendFile(
+      path.join(__dirname, "..", "..", "static", "pages", "game.html")
+    );
+});
 //* ============= DATA GET ============
 
 router.get("/userInfo", (req, res) => {
@@ -77,20 +87,34 @@ router.post("/addRoom", async (req, res) => {
     );
     lobby.add(room);
     req.session.user.sendableUser.gameID = room.roomId;
+    res.json({ success: true });
   }
-  res.sendStatus(200);
 });
 
 //*Przyjmuje dodawanie do nowego lobbu
 
 router.post("/addToRoom", async (req, res) => {
+  console.log(`Address : ${req.url}, method: ${req.method}`.blue);
   //!!! to może walnąc sprawdź czy nie walnie a jak walnie to solidnie
+  //if user owns room
+  console.log(req.session);
   if (
     req.session.user === undefined ||
-    req.session.user.sendableUser.gameID === null
+    req.session.user.sendableUser.gameID !== null
   )
     return res.sendStatus(403);
-    lobby.changeInportantValue()
-    console.log(req.body);
+  console.log(req.body);
+  if (
+    lobby.addPlayerToRoomLobby(
+      req.body.roomId,
+      req.session.user.nickname,
+      req.body.password
+    )
+  ) {
+    console.log(req.session.user.sendableUser);
+    req.session.user.sendableUser.gameID = req.body.roomId;
+    console.log("Jak szefunio dodaję");
+    res.json({ success: true });
+  } else res.json({ success: false });
 });
 module.exports = router;

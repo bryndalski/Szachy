@@ -1,5 +1,4 @@
 "use strict";
-const e = require("express");
 const { v4: uuidv4 } = require("uuid");
 /**
  * EXTENDS CHESS JS
@@ -29,7 +28,7 @@ class Room {
    * @returns {Boolean} If password has passed
    */
   addNewPlayer(nickname2, password) {
-    if (isPrivate)
+    if (this.isPrivate)
       if (this.password === password) {
         this.playerTwo = nickname2;
       } else return false;

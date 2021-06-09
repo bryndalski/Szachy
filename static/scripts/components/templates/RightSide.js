@@ -79,7 +79,13 @@ export default class RightSideContainer extends ScrollBehavior {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("jakakowliek cokolwiek");
         console.log("Success:", data);
+        if (data.success) {
+          window.location.href = "/game";
+        } else {
+          this.authorizeError.innerText = "Błędne hasło zostało podane";
+        }
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -1,4 +1,5 @@
 const EventEmitter = require("events");
+const e = require("express");
 
 class Lobby extends EventEmitter {
   constructor() {
@@ -34,10 +35,12 @@ class Lobby extends EventEmitter {
    *
    * @param {String } roomId
    * @param {Object} Value
-   * !!! czy potrzebne 
+   * !!! czy potrzebne
    */
   changeInportantValue(roomId, key, value) {
-    let indexNumber = this.lobby.find((element) => element.roomId === roomId);
+    let indexNumber = this.lobby.findIndex(
+      (element) => element.roomId === roomId
+    );
     console.log(indexNumber);
     //checks if room with matching id exists
     if (indexNumber === null || indexNumber === undefined) return false;
@@ -45,10 +48,24 @@ class Lobby extends EventEmitter {
     this.emit("change");
   }
   /**
-   * Tryes to add new player to lobby
+   * Adds new user to room
+   *
+   * @param {String} roomID room id
+   * @param {String} playerName player to add
+   * @param {[String|null]} password p
+   * @returns
    */
-  addPlayerToRoomLobby() {
-
+  addPlayerToRoomLobby(roomID, playerName, password) {
+    let indexNumber = this.lobby.findIndex(
+      (element) => element.roomId === roomID
+    );
+    //checks if room with matching id exists
+    if (indexNumber === null || indexNumber === undefined) return false;
+    if (this.lobby[indexNumber].addNewPlayer(playerName, password)) {
+      console.log("No to raczej się udało");
+      this.emit("change");
+      return true;
+    } else return false;
   }
   /**
    * Returns lobby content
