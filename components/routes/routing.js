@@ -49,6 +49,8 @@ router.get("/userInfo", (req, res) => {
     : res.json(req.session.user.sendableUser);
 });
 
+ 
+
 //* log out
 
 router.get("/logOut", (req, res) => {
