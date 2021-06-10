@@ -32,9 +32,12 @@ app.use(router); // routing
 
 //Connecting to mongoDB && starting server if success
 mongoClient
-  .connect("mongodb://localhost:27017", {
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://admin:Efu0mK3UJGXxloPP@fpsusers.kvxcj.mongodb.net/PROJECT 0?retryWrites=true&w=majority",
+    {
+      useUnifiedTopology: true,
+    }
+  )
   .then((client) => {
     console.log("mongo podłączone".zebra);
     const db = client.db(clientName);
@@ -49,4 +52,4 @@ mongoClient
       );
     });
   })
-  .catch((error) => console.log("error").red);
+  .catch((error) => console.log(error));
