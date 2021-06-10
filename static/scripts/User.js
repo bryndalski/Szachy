@@ -1,5 +1,7 @@
 // import NickChangeAlert from "./components/auth/NickChangeAlert.js";
+import ChangePasswordAlert from "./components/auth/ChangePasswordAlert.js";
 import ConfirmAlert from "./components/auth/ConfirmAlert.js";
+
 class User {
   constructor() {
     this.stats = {};
@@ -10,6 +12,7 @@ class User {
     //alerts
     // this.nickLobbyAlert = new NickChangeAlert();
     this.conrirmAlert = new ConfirmAlert();
+    this.passwordChangeAlert = new ChangePasswordAlert();
     this.scaleCanvas();
     this.init();
   }
@@ -18,7 +21,7 @@ class User {
    */
   async init() {
     this.buttonize();
-    window.addEventListener("resize", this.scaleCanvas);
+    // window.addEventListener("resize", this.scaleCanvas);
     this.chats();
   }
   /**
@@ -48,6 +51,9 @@ class User {
         ],
       },
       options: {
+        devicePixelRatio: 1,
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [
             {
@@ -64,11 +70,24 @@ class User {
    * Starts handling buttons actione
    */
   buttonize() {
+    //go back
+    document
+      .querySelector("header button:first-child")
+      .addEventListener("click", () => {
+        window.location.href = "/lobby";
+      });
+    //zmień nick
     document
       .querySelector(".userData button:first-child")
       .addEventListener("click", () => {
         // this.nickLobbyAlert.fire();
-      }); // zmień nick
+      });
+    //zmień hasło
+    document
+      .querySelector(".userData button:nth-child(2)")
+      .addEventListener("click", (e) => {
+        this.passwordChangeAlert.clickListen(e);
+      });
     //wyloguj
     document
       .querySelector("header button:nth-child(2)")

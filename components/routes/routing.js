@@ -49,6 +49,13 @@ router.get("/userInfo", (req, res) => {
     : res.json(req.session.user.sendableUser);
 });
 
+//* log out
+
+router.get("/logOut", (req, res) => {
+  if (req.session.user === undefined) res.sendStatus(401);
+  else req.session.destroy();
+});
+
 //* ========== POSTS ======================
 
 //*Przejmuje logowania
@@ -97,7 +104,6 @@ router.post("/addToRoom", async (req, res) => {
   console.log(`Address : ${req.url}, method: ${req.method}`.blue);
   //!!! to może walnąc sprawdź czy nie walnie a jak walnie to solidnie
   //if user owns room
-  console.log(req.session);
   if (
     req.session.user === undefined ||
     req.session.user.sendableUser.gameID !== null
