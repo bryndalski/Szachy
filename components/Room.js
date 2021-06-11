@@ -14,11 +14,12 @@ class Room {
    * @param {string=} [password=null] password for private room
    */
   constructor(playerOne, roomName, isPrivate, password) {
-
     this.roomId = uuidv4(); //unique lobby id
     this.roomName = roomName;
     this.private = isPrivate || false;
-    this.playerOne = playerOne || null;
+    this.playerOneColor = "white";
+    this.playerTwoColor = "black";
+    this.playerOne = playerOne;
     this.playerTwo = null;
     this.roomPassword = password || null;
   }

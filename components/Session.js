@@ -14,6 +14,7 @@ class Session {
       nickname: user.nickname || undefined,
       stats: { ...user.stats },
       lobbyID: null,
+      color: null,
       gameID: null, //TODO sprawdź czy jest potrzebne
     };
   }

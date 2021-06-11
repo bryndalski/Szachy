@@ -5,6 +5,10 @@ window.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("register")
     .addEventListener("click", loginMenager.handleRegButton);
+
+  window.addEventListener("keypress", (e) => {
+    if (e.key == "Enter") loginMenager.handleButton();
+  });
 });
 const loginMenager = {
   login: "",

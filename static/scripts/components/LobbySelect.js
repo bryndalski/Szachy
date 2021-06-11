@@ -18,7 +18,9 @@ export default class LobbySelect extends BasicLobby {
     this.user = user; //user from params
     this.render(); // renders page
     this.header.listen();
-    this.socket = new WebSocket("ws://localhost:5500/sockets/lobbyWS"); // init websocket
+    this.socket = new WebSocket(
+      `ws://${window.location.hostname}:${window.location.port}/sockets/lobbyWS`
+    ); // init websocket
     this.lastScrollDirection = null; // last scroll direction
     this.init(); // method from BASCI LOBBY class
     this.screenType = ""; //contains screen type
