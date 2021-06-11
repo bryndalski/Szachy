@@ -46,7 +46,7 @@ export default class Main {
                 [['a1'], ['r']]
             ]
 
-            this.websocket.send(JSON.stringify({ type: "init" }))
+            this.websocket.send(JSON.stringify({ type: "init", board: bord }))
         }
 
         this.pieces = {}
@@ -71,7 +71,7 @@ export default class Main {
                 case "init":
                     this.pieces = JSON.parse(e.data)
                     this.board = this.pieces.loadBoard
-                    this.puzzle()
+                    this.puzle()
                     break;
                 case "moveOptions":
                     if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
