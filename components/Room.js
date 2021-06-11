@@ -1,6 +1,7 @@
 "use strict";
 const e = require("express");
 const { v4: uuidv4 } = require("uuid");
+// const chess = require('chess');
 /**
  * EXTENDS CHESS JS
  */
@@ -14,6 +15,7 @@ class Room {
    * @param {string=} [password=null] password for private room
    */
   constructor(playerOne, roomName, isPrivate, password) {
+
     this.roomId = uuidv4(); //unique lobby id
     this.roomName = roomName;
     this.private = isPrivate || false;

@@ -14,6 +14,7 @@ import {
     TextureLoader,
     DoubleSide,
     AxesHelper,
+    PlaneGeometry,
 } from 'three';
 
 import Stats from 'three/examples/jsm/libs/stats.module.js';
@@ -27,15 +28,104 @@ import Collisions from "./Raycaster.js"
 
 export default class Main {
     constructor(container) {
+        // właściwości klasy
+        this.container = container;
+        this.scene = new Scene();
+
         // połączenie z websocketem i pobranie danych o kolorze pionków
         this.websocket = new WebSocket("ws://localhost:5500/sockets/Szaszki")
 
         this.websocket.onopen = (e) => {
-
+            this.websocket.send(JSON.stringify({ type: "init" }))
         }
-        // właściwości klasy
-        this.container = container;
-        this.scene = new Scene();
+
+        this.pieces = {}
+        this.fieldsMap = new Map()
+        this.fieldsMap.set('a', 1)
+        this.fieldsMap.set('b', 2)
+        this.fieldsMap.set('c', 3)
+        this.fieldsMap.set('d', 4)
+        this.fieldsMap.set('e', 5)
+        this.fieldsMap.set('f', 6)
+        this.fieldsMap.set('g', 7)
+        this.fieldsMap.set('h', 8)
+
+        this.greenFields = []
+
+        // odbieranie danych z serwera
+        this.websocket.onmessage = (e) => {
+            console.log(e.data)
+            this.data = JSON.parse(e.data)
+            console.log(this.data)
+            switch (this.data.type) {
+                case "init":
+                    this.pieces = JSON.parse(e.data)
+                    this.board = this.pieces.board
+                    break;
+                case "moveOptions":
+                    if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
+                        console.log(this.data.ischeck, this.data.ischeckmate, this.data.isdraw, this.data.isstalemate)
+                        console.log("to już jest koniec... gry")
+                        if (this.data.ischeck) {
+
+                        }
+                        if (this.data.ischeckmate) {
+
+                        }
+                        if (this.data.isstalemate) {
+
+                        }
+                        if (this.data.isdraw) {
+
+                        }
+                    } else {
+                        console.log(this.data.moves)
+
+                        /*
+                            podczas generowania zielonych pól dla dozwolonych ruchów pole a1 jest równe -39.5, -39.5
+                            kolejna plansza w każdą stronę będzie przesunięta o 11.25
+                        */
+                        this.greenFields.forEach(mesh => this.scene.remove(mesh))
+                        this.greenFields = []
+                        this.scene.remove(this.selectedPiece)
+
+                        this.selectedPiece = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0xe6d30b }))
+                        this.selectedPiece.boardPosition = this.data.clicked
+                        this.selectedPiece.rotation.x = -Math.PI / 2
+                        if (this.data.clicked.length == 3) {
+                            this.selectedPiece.position.set(-39.5 + 11.25 * (this.fieldsMap.get(this.data.clicked[1]) - 1), 0.25, -39.5 + 11.25 * (parseInt(this.data.clicked[2]) - 1))
+                        } else {
+                            this.selectedPiece.position.set(-39.5 + 11.25 * (this.fieldsMap.get(this.data.clicked[0]) - 1), 0.25, -39.5 + 11.25 * (parseInt(this.data.clicked[1]) - 1))
+                        }
+                        this.scene.add(this.selectedPiece)
+
+                        this.data.moves.forEach(pos => {
+                            this.plane = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0x2cde62 }))
+                            this.plane.boardPosition = pos
+                            this.plane.rotation.x = -Math.PI / 2
+                            if (pos.length == 3) {
+                                this.plane.position.set(-39.5 + 11.25 * (this.fieldsMap.get(pos[1]) - 1), 0.25, -39.5 + 11.25 * (parseInt(pos[2]) - 1))
+                            } else {
+                                this.plane.position.set(-39.5 + 11.25 * (this.fieldsMap.get(pos[0]) - 1), 0.25, -39.5 + 11.25 * (parseInt(pos[1]) - 1))
+                            }
+                            this.scene.add(this.plane)
+                            this.greenFields.push(this.plane)
+                        })
+
+                        // przekazanie do raycastera pól do wyboru oraz pozycji zaznaczonego elementu
+                        this.raycaster.greenFields = this.greenFields
+                        this.raycaster.selectedPiece = this.selectedPiece
+                    }
+
+                    break;
+
+                case "move":
+                    console.log(this.data.move)
+                    break;
+            }
+        }
+
+        // właściwości klasy ciąg dalszy
         this.renderer = new Renderer(this.scene, container);
         this.camera = new Camera(75, this.renderer.threeRenderer.domElement.width, this.renderer.threeRenderer.domElement.height);
         this.camera.position.set(0, 90, 0)
@@ -83,7 +173,7 @@ export default class Main {
                 mesh.material.color.set(0xeaebda)
             });
 
-            //!!! przesunięcie o jedno polę po osi x lub y == 30.5s
+            //!!! przesunięcie o jedno polę po osi x lub z == 30.5s
             this.whitePieces.chessSet.children[0].name = "whiteQueen"
             this.whitePieces.chessSet.children[0].boardPosition = "d1"
             this.whitePieces.chessSet.children[0].position.set(-193, 0, -11.5)
@@ -147,7 +237,7 @@ export default class Main {
                 mesh.material.color.set(0x404040)
             });
 
-            //!!! przesunięcie o jedno polę po osi x lub y == 30.5
+            //!!! przesunięcie o jedno polę po osi x lub z == 30.5
             this.blackPieces.chessSet.children[0].name = "blackQueen"
             this.blackPieces.chessSet.children[0].boardPosition = "d8"
             this.blackPieces.chessSet.children[0].position.set(-193, 0, 202)
@@ -197,8 +287,9 @@ export default class Main {
             this.blackPieces.chessSet.children[15].boardPosition = "g8"
             this.blackPieces.chessSet.children[15].position.set(-51, 0, 202)
 
+            console.log("raycaster")
+            this.raycaster = new Collisions(this.scene, this.camera, this.whitePieces, this.blackPieces, this.pieces, this.websocket, this.fieldsMap)
 
-            this.raycaster = new Collisions(this.scene, this.camera, this.whitePieces, this.blackPieces)
             this.render();
         };
 
@@ -229,6 +320,8 @@ export default class Main {
         this.stats.begin()
 
         this.renderer.render(this.scene, this.camera);
+
+        this.raycaster.updatePos()
 
         // koniec statystyk
         this.stats.end()

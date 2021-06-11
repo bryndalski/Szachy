@@ -9,7 +9,7 @@ export default class Camera extends PerspectiveCamera {
         this.height = height
         this.updateSize();
         // resize
-        window.addEventListener('resize', () => this.updateSize(), false);
+        window.addEventListener('resize', () => this.updateSize());
     }
 
     updateSize() {
