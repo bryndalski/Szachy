@@ -84,15 +84,9 @@ class User {
       .addEventListener("click", () => {
         window.location.href = "/lobby";
       });
-    //zmień nick
-    document
-      .querySelector(".userData button:first-child")
-      .addEventListener("click", () => {
-        // this.nickLobbyAlert.fire();
-      });
     //zmień hasło
     document
-      .querySelector(".userData button:nth-child(2)")
+      .querySelector(".userData button:first-child")
       .addEventListener("click", (e) => {
         this.passwordChangeAlert.clickListen(e);
       });

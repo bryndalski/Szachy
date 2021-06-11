@@ -49,8 +49,6 @@ router.get("/userInfo", (req, res) => {
     : res.json(req.session.user.sendableUser);
 });
 
- 
-
 //* log out
 
 router.get("/logOut", (req, res) => {
@@ -100,6 +98,13 @@ router.post("/addRoom", async (req, res) => {
   }
 });
 
+router.post("/changePassword", async (req, res) => {
+  console.log(`Address : ${req.url}, method: ${req.method}`.blue);
+  await User.changePassword(req.session.user.user._id, req.body.password);
+  req.session.destroy();
+  res.sendStatus(200);
+});
+
 //*Przyjmuje dodawanie do nowego lobbu
 
 router.post("/addToRoom", async (req, res) => {
@@ -111,7 +116,6 @@ router.post("/addToRoom", async (req, res) => {
     req.session.user.sendableUser.gameID !== null
   )
     return res.sendStatus(403);
-  console.log(req.body);
   if (
     lobby.addPlayerToRoomLobby(
       req.body.roomId,
@@ -121,7 +125,6 @@ router.post("/addToRoom", async (req, res) => {
   ) {
     console.log(req.session.user.sendableUser);
     req.session.user.sendableUser.gameID = req.body.roomId;
-    console.log("Jak szefunio dodaję");
     res.json({ success: true });
   } else res.json({ success: false });
 });

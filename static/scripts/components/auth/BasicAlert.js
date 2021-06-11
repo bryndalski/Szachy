@@ -28,6 +28,7 @@ export default class BasicAlertClass extends BasicLobby {
 
   submitButtonListen() {
     console.log("zgadzam się w 100 %");
+    
   }
 
   /**

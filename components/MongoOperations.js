@@ -78,6 +78,23 @@ class MongoOperations {
   }
   /**
    *
+   * @param {MONGO_ID} _id mogno db id
+   * @param {String} password crypted password
+   * @returns
+   */
+  changePassword(_id, password) {
+    return new Promise(async (suc) => {
+      suc(
+        await this.collection.updateOne(
+          { _id: this.ObjectID(_id) },
+          { $set: { password: password } }
+        )
+      );
+    });
+  }
+
+  /**
+   *
    * @param {JSON} data object containg nickname
    * @returns {Promise<JSON>} returns JSON or null
    */

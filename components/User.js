@@ -84,6 +84,19 @@ class User {
       }
     });
   }
+  /**
+   *
+   * @param {_id} _id  mongo db id
+   * @param {*} password new encrypted password
+   * @returns {Promise} empty promise that
+   */
+  changePassword(_id, password) {
+    return new Promise(async (suc) => {
+      let hashedPass = await bcrypt.hash(password, 10);
+      await MongoOperations.changePassword(_id, hashedPass);
+      suc(false);
+    });
+  }
 }
 
 module.exports = new User();
