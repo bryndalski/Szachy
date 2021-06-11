@@ -48,7 +48,7 @@ mongoClient
         );
       } else MongoOperations.selectCollection(db.collection(colname), ObjectID);
       app.listen(port, () =>
-        console.log(`Example app listening on port ${port}!`.rainbow)
+        console.log(`Trust me. I'm an engineer on port ${port}!`.rainbow)
       );
     });
   })

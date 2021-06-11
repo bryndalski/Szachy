@@ -32,7 +32,7 @@ router.get("/user", (req, res) => {
 });
 
 router.get("/game", (req, res) => {
-  if (req.session.undefined !== undefined) res.redirect("/login ");
+  if (req.session.user === undefined) res.redirect("/ ");
   else if (req.session.user.sendableUser.gameID === null)
     res.redirect("/lobby");
   else
@@ -86,8 +86,9 @@ router.post("/addRoom", async (req, res) => {
   //TODO odkomentuj ZABEZPIECZENIE WAŻNE
   if (req.session.user === undefined) res.sendStatus(403);
   else {
+    console.log(req.session.user.nickname);
     let room = new Room(
-      req.session.user.nickname,
+      req.session.user.user.nickname,
       req.body.name,
       req.body.passwordRequired,
       req.body.password
@@ -119,7 +120,7 @@ router.post("/addToRoom", async (req, res) => {
   if (
     lobby.addPlayerToRoomLobby(
       req.body.roomId,
-      req.session.user.nickname,
+      req.session.user.user.nickname,
       req.body.password
     )
   ) {
@@ -128,4 +129,8 @@ router.post("/addToRoom", async (req, res) => {
     res.json({ success: true });
   } else res.json({ success: false });
 });
+
+//* LAST CHANCE
+router.get("*", (req, res) => res.redirect("/"));
+
 module.exports = router;
