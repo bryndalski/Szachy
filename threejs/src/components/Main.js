@@ -325,69 +325,71 @@ export default class Main {
         this.usedB = []
         for (let i = 0; i < 8; i++) { // i = numerki
             for (let j = 0; j < 8; j++) { // j = literki
-                if (this.board[i][j] != null) {
-                    if (this.board[i][j].color = "b") {
-                        let restOfPieces = this.blackPieces.chessSet
-                        for (let k = 0; k < this.usedB; k++) {
-                            restOfPieces = restOfPieces.children.filter(x => x.uuid != this.usedB[k].uuid)
-                        }
-                        restOfPieces = restOfPieces.children.filter(x => x.name == this.board[i][j].type)[0]
-                        this.piecePos = restOfPieces.boardPosition
-                        this.usedB.push(restOfPieces)
-                        let x
-                        let z
-                        x = this.fieldsMap.get(this.piecePos[0]) - j
-                        z = parseInt(this.piecePos[1]) - i
+                // if (this.board[i][j] != null) {
+                //     if (this.board[i][j].color = "b") {
+                //         let restOfPieces = this.blackPieces.chessSet
+                //         for (let k = 0; k < this.usedB; k++) {
+                //             restOfPieces = restOfPieces.children.filter(x => x.uuid != this.usedB[k].uuid)
+                //         }
+                //         restOfPieces = restOfPieces.children.filter(x => x.name == this.board[i][j].type)[0]
+                //         this.piecePos = restOfPieces.boardPosition
+                //         this.usedB.push(restOfPieces)
+                //         let x
+                //         let z
+                //         x = this.fieldsMap.get(this.piecePos[0]) - j
+                //         z = parseInt(this.piecePos[1]) - i
 
-                        if (Math.abs(30.5 * x) > Math.abs(30.5 * z)) {
-                            this.v2 = new Vector3(restOfPieces.position.x - 30.5 * x, 0, restOfPieces.position.z - 30.5 * z)
-                        } else {
-                            this.v2 = new Vector3(restOfPieces.position.x - 30.5 * x, 0, restOfPieces.position.z - 30.5 * z)
-                        }
+                //         if (Math.abs(30.5 * x) > Math.abs(30.5 * z)) {
+                //             this.v2 = new Vector3(restOfPieces.position.x - 30.5 * x, 0, restOfPieces.position.z - 30.5 * z)
+                //         } else {
+                //             this.v2 = new Vector3(restOfPieces.position.x - 30.5 * x, 0, restOfPieces.position.z - 30.5 * z)
+                //         }
 
-                        console.log(this.v2)
 
-                        let temp = ""
+                //         console.log(this.v2)
 
-                        switch (j) {
-                            case 1:
-                                temp = "a"
-                                break
-                            case 2:
-                                temp = "b"
-                                break
-                            case 3:
-                                temp = "c"
-                                break
-                            case 4:
-                                temp = "d"
-                                break
-                            case 5:
-                                temp = "e"
-                                break
-                            case 6:
-                                temp = "f"
-                                break
-                            case 7:
-                                temp = "g"
-                                break
-                            case 8:
-                                temp = "h"
-                                break
-                        }
+                //         let temp = ""
 
-                        this.piecePos = temp + toString(i)
-                        console.log(this.piecePos)
+                //         switch (j) {
+                //             case 1:
+                //                 temp = "a"
+                //                 break
+                //             case 2:
+                //                 temp = "b"
+                //                 break
+                //             case 3:
+                //                 temp = "c"
+                //                 break
+                //             case 4:
+                //                 temp = "d"
+                //                 break
+                //             case 5:
+                //                 temp = "e"
+                //                 break
+                //             case 6:
+                //                 temp = "f"
+                //                 break
+                //             case 7:
+                //                 temp = "g"
+                //                 break
+                //             case 8:
+                //                 temp = "h"
+                //                 break
+                //         }
 
-                        restOfPieces.position.set(this.v2.x, this.v2.y, this.v2.z)
-                        console.log(restOfPieces)
+                //         this.piecePos = temp + toString(i)
+                //         console.log(this.piecePos)
 
-                        console.log(this.board[i][j])
-                    }
-                    if (this.board[i][j].color = "w") {
-                        console.log(this.board[i][j])
-                    }
-                }
+                //         console.log(restOfPieces.position)
+                //         restOfPieces.position.set(this.v2.x, this.v2.y, this.v2.z)
+                //         console.log(restOfPieces.position)
+
+                //         console.log(this.board[i][j])
+                //     }
+                //     if (this.board[i][j].color = "w") {
+                //         console.log(this.board[i][j])
+                //     }
+                // }
 
             }
         }

@@ -15,7 +15,7 @@ router.ws("/lobbyWS", function (ws, req) {
     lobby.addListener("change", () => {
       try {
         ws.send(JSON.stringify(lobby.lobbyContent));
-      } catch (err) {}
+      } catch (err) { }
     });
     ws.on("close", (msg) => {
       console.log(ws.readyState);
