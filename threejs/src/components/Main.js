@@ -60,7 +60,7 @@ export default class Main {
             switch (this.data.type) {
                 case "init":
                     this.pieces = JSON.parse(e.data)
-                    this.board = this.pieces.board
+                    this.board = this.pieces.loadBoard
                     break;
                 case "moveOptions":
                     if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
@@ -159,9 +159,6 @@ export default class Main {
         this.whitePieces = new Model(this.scene, this.manager);
         this.whitePieces.load(chess);
 
-        this.blackPieces = new Model(this.scene, this.manager2);
-        this.blackPieces.load(chess)
-
         this.manager.onLoad = () => {
             console.log("MODEL LOADED!!!")
             console.log(this.whitePieces)
@@ -174,124 +171,134 @@ export default class Main {
             });
 
             //!!! przesunięcie o jedno polę po osi x lub z == 30.5s
-            this.whitePieces.chessSet.children[0].name = "whiteQueen"
+            // Object.assign(thi.efefefef, {chess pram})
+            this.whitePieces.chessSet.children[0].name = "q"
             this.whitePieces.chessSet.children[0].boardPosition = "d1"
             this.whitePieces.chessSet.children[0].position.set(-193, 0, -11.5)
-            this.whitePieces.chessSet.children[1].name = "whiteTower1"
+            this.whitePieces.chessSet.children[1].name = "r"
             this.whitePieces.chessSet.children[1].boardPosition = "a1"
             this.whitePieces.chessSet.children[1].position.set(-284, 0, -62.5)
-            this.whitePieces.chessSet.children[2].name = "whitePawn1"
+            this.whitePieces.chessSet.children[2].name = "p"
             this.whitePieces.chessSet.children[2].boardPosition = "a2"
             this.whitePieces.chessSet.children[2].position.set(-259, 0, 43.5)
-            this.whitePieces.chessSet.children[3].name = "whiteBishop1"
+            this.whitePieces.chessSet.children[3].name = "b"
             this.whitePieces.chessSet.children[3].boardPosition = "c1"
             this.whitePieces.chessSet.children[3].position.set(-198, 0, -11.5)
-            this.whitePieces.chessSet.children[4].name = "whiteKing"
+            this.whitePieces.chessSet.children[4].name = "k"
             this.whitePieces.chessSet.children[4].boardPosition = "e1"
             this.whitePieces.chessSet.children[4].position.set(-87, 0, -62.5)
-            this.whitePieces.chessSet.children[5].name = "whiteTower2"
+            this.whitePieces.chessSet.children[5].name = "r"
             this.whitePieces.chessSet.children[5].boardPosition = "h1"
             this.whitePieces.chessSet.children[5].position.set(4, 0, -11.5)
-            this.whitePieces.chessSet.children[6].name = "whiteKnight1"
+            this.whitePieces.chessSet.children[6].name = "n"
             this.whitePieces.chessSet.children[6].boardPosition = "b1"
             this.whitePieces.chessSet.children[6].position.set(-229, 0, -62.5)
-            this.whitePieces.chessSet.children[7].name = "whiteBishop2"
+            this.whitePieces.chessSet.children[7].name = "b"
             this.whitePieces.chessSet.children[7].boardPosition = "f1"
             this.whitePieces.chessSet.children[7].position.set(-81, 0, -62.5)
-            this.whitePieces.chessSet.children[8].name = "whitePawn2"
+            this.whitePieces.chessSet.children[8].name = "p"
             this.whitePieces.chessSet.children[8].boardPosition = "b2"
             this.whitePieces.chessSet.children[8].position.set(-204, 0, 43.5)
-            this.whitePieces.chessSet.children[9].name = "whitePawn3"
+            this.whitePieces.chessSet.children[9].name = "p"
             this.whitePieces.chessSet.children[9].boardPosition = "c2"
             this.whitePieces.chessSet.children[9].position.set(-148, 0, 43.5)
-            this.whitePieces.chessSet.children[10].name = "whitePawn4"
+            this.whitePieces.chessSet.children[10].name = "p"
             this.whitePieces.chessSet.children[10].boardPosition = "d2"
             this.whitePieces.chessSet.children[10].position.set(-193, 0, 43.5)
-            this.whitePieces.chessSet.children[11].name = "whitePawn5"
+            this.whitePieces.chessSet.children[11].name = "p"
             this.whitePieces.chessSet.children[11].boardPosition = "e2"
             this.whitePieces.chessSet.children[11].position.set(-87, 0, -6.5)
-            this.whitePieces.chessSet.children[12].name = "whitePawn6"
+            this.whitePieces.chessSet.children[12].name = "p"
             this.whitePieces.chessSet.children[12].boardPosition = "f2"
             this.whitePieces.chessSet.children[12].position.set(-82, 0, -6.5)
-            this.whitePieces.chessSet.children[13].name = "whitePawn7"
+            this.whitePieces.chessSet.children[13].name = "p"
             this.whitePieces.chessSet.children[13].boardPosition = "g2"
             this.whitePieces.chessSet.children[13].position.set(-76, 0, -6.5)
-            this.whitePieces.chessSet.children[14].name = "whitePawn8"
+            this.whitePieces.chessSet.children[14].name = "p"
             this.whitePieces.chessSet.children[14].boardPosition = "h2"
             this.whitePieces.chessSet.children[14].position.set(-71, 0, -6.5)
-            this.whitePieces.chessSet.children[15].name = "whiteKnight2"
+            this.whitePieces.chessSet.children[15].name = "k"
             this.whitePieces.chessSet.children[15].boardPosition = "g1"
             this.whitePieces.chessSet.children[15].position.set(-51, 0, -11.5)
         };
-        this.manager2.onLoad = () => {
+        setTimeout(() => {
+            this.blackPieces = new Model(this.scene, this.manager2);
+            this.blackPieces.load(chess)
 
-            this.isLoaded = true;
-            //
-            console.log("MODEL LOADED!!!")
-            console.log(this.blackPieces)
-            this.scene.add(this.blackPieces.chessSet)
+            this.manager2.onLoad = () => {
 
-            this.blackPieces.chessSet.scale.set(0.37, 0.37, 0.37)
+                this.isLoaded = true;
+                //
+                console.log("MODEL LOADED!!!")
+                console.log(this.blackPieces)
+                this.scene.add(this.blackPieces.chessSet)
 
-            this.blackPieces.chessSet.children.forEach(mesh => {
-                mesh.material.color.set(0x404040)
-            });
+                this.blackPieces.chessSet.scale.set(0.37, 0.37, 0.37)
 
-            //!!! przesunięcie o jedno polę po osi x lub z == 30.5
-            this.blackPieces.chessSet.children[0].name = "blackQueen"
-            this.blackPieces.chessSet.children[0].boardPosition = "d8"
-            this.blackPieces.chessSet.children[0].position.set(-193, 0, 202)
-            this.blackPieces.chessSet.children[1].name = "blackTower1"
-            this.blackPieces.chessSet.children[1].boardPosition = "a8"
-            this.blackPieces.chessSet.children[1].position.set(-284, 0, 151)
-            this.blackPieces.chessSet.children[2].name = "blackPawn1"
-            this.blackPieces.chessSet.children[2].boardPosition = "a7"
-            this.blackPieces.chessSet.children[2].position.set(-259, 0, 196)
-            this.blackPieces.chessSet.children[3].name = "blackBishop1"
-            this.blackPieces.chessSet.children[3].boardPosition = "c8"
-            this.blackPieces.chessSet.children[3].position.set(-198, 0, 202)
-            this.blackPieces.chessSet.children[4].name = "blackKing"
-            this.blackPieces.chessSet.children[4].boardPosition = "e8"
-            this.blackPieces.chessSet.children[4].position.set(-87, 0, 151)
-            this.blackPieces.chessSet.children[5].name = "blackTower2"
-            this.blackPieces.chessSet.children[5].boardPosition = "h8"
-            this.blackPieces.chessSet.children[5].position.set(4, 0, 202)
-            this.blackPieces.chessSet.children[6].name = "blackKnight1"
-            this.blackPieces.chessSet.children[6].boardPosition = "b8"
-            this.blackPieces.chessSet.children[6].position.set(-229, 0, 151)
-            this.blackPieces.chessSet.children[7].name = "blackBishop2"
-            this.blackPieces.chessSet.children[7].boardPosition = "f8"
-            this.blackPieces.chessSet.children[7].position.set(-81, 0, 151)
-            this.blackPieces.chessSet.children[8].name = "blackPawn2"
-            this.blackPieces.chessSet.children[8].boardPosition = "b7"
-            this.blackPieces.chessSet.children[8].position.set(-204, 0, 196)
-            this.blackPieces.chessSet.children[9].name = "blackPawn3"
-            this.blackPieces.chessSet.children[9].boardPosition = "c7"
-            this.blackPieces.chessSet.children[9].position.set(-148, 0, 196)
-            this.blackPieces.chessSet.children[10].name = "blackPawn4"
-            this.blackPieces.chessSet.children[10].boardPosition = "d7"
-            this.blackPieces.chessSet.children[10].position.set(-193, 0, 196)
-            this.blackPieces.chessSet.children[11].name = "blackPawn5"
-            this.blackPieces.chessSet.children[11].boardPosition = "e7"
-            this.blackPieces.chessSet.children[11].position.set(-87, 0, 146)
-            this.blackPieces.chessSet.children[12].name = "blackPawn6"
-            this.blackPieces.chessSet.children[12].boardPosition = "f7"
-            this.blackPieces.chessSet.children[12].position.set(-82, 0, 146)
-            this.blackPieces.chessSet.children[13].name = "blackPawn7"
-            this.blackPieces.chessSet.children[13].boardPosition = "g7"
-            this.blackPieces.chessSet.children[13].position.set(-76, 0, 146)
-            this.blackPieces.chessSet.children[14].name = "blackPawn8"
-            this.blackPieces.chessSet.children[14].boardPosition = "h7"
-            this.blackPieces.chessSet.children[14].position.set(-71, 0, 146)
-            this.blackPieces.chessSet.children[15].name = "blackKnight2"
-            this.blackPieces.chessSet.children[15].boardPosition = "g8"
-            this.blackPieces.chessSet.children[15].position.set(-51, 0, 202)
+                this.blackPieces.chessSet.children.forEach(mesh => {
+                    mesh.material.color.set(0x404040)
+                });
 
-            console.log("raycaster")
-            this.raycaster = new Collisions(this.scene, this.camera, this.whitePieces, this.blackPieces, this.pieces, this.websocket, this.fieldsMap)
+                //!!! przesunięcie o jedno polę po osi x lub z == 30.5
+                this.blackPieces.chessSet.children[0].name = "q"
+                this.blackPieces.chessSet.children[0].boardPosition = "d8"
+                this.blackPieces.chessSet.children[0].position.set(-193, 0, 202)
+                this.blackPieces.chessSet.children[1].name = "r"
+                this.blackPieces.chessSet.children[1].boardPosition = "a8"
+                this.blackPieces.chessSet.children[1].position.set(-284, 0, 151)
+                this.blackPieces.chessSet.children[2].name = "p"
+                this.blackPieces.chessSet.children[2].boardPosition = "a7"
+                this.blackPieces.chessSet.children[2].position.set(-259, 0, 196)
+                this.blackPieces.chessSet.children[3].name = "b"
+                this.blackPieces.chessSet.children[3].boardPosition = "c8"
+                this.blackPieces.chessSet.children[3].position.set(-198, 0, 202)
+                this.blackPieces.chessSet.children[4].name = "k"
+                this.blackPieces.chessSet.children[4].boardPosition = "e8"
+                this.blackPieces.chessSet.children[4].position.set(-87, 0, 151)
+                this.blackPieces.chessSet.children[5].name = "r"
+                this.blackPieces.chessSet.children[5].boardPosition = "h8"
+                this.blackPieces.chessSet.children[5].position.set(4, 0, 202)
+                this.blackPieces.chessSet.children[6].name = "n"
+                this.blackPieces.chessSet.children[6].boardPosition = "b8"
+                this.blackPieces.chessSet.children[6].position.set(-229, 0, 151)
+                this.blackPieces.chessSet.children[7].name = "b"
+                this.blackPieces.chessSet.children[7].boardPosition = "f8"
+                this.blackPieces.chessSet.children[7].position.set(-81, 0, 151)
+                this.blackPieces.chessSet.children[8].name = "p"
+                this.blackPieces.chessSet.children[8].boardPosition = "b7"
+                this.blackPieces.chessSet.children[8].position.set(-204, 0, 196)
+                this.blackPieces.chessSet.children[9].name = "p"
+                this.blackPieces.chessSet.children[9].boardPosition = "c7"
+                this.blackPieces.chessSet.children[9].position.set(-148, 0, 196)
+                this.blackPieces.chessSet.children[10].name = "p"
+                this.blackPieces.chessSet.children[10].boardPosition = "d7"
+                this.blackPieces.chessSet.children[10].position.set(-193, 0, 196)
+                this.blackPieces.chessSet.children[11].name = "p"
+                this.blackPieces.chessSet.children[11].boardPosition = "e7"
+                this.blackPieces.chessSet.children[11].position.set(-87, 0, 146)
+                this.blackPieces.chessSet.children[12].name = "p"
+                this.blackPieces.chessSet.children[12].boardPosition = "f7"
+                this.blackPieces.chessSet.children[12].position.set(-82, 0, 146)
+                this.blackPieces.chessSet.children[13].name = "p"
+                this.blackPieces.chessSet.children[13].boardPosition = "g7"
+                this.blackPieces.chessSet.children[13].position.set(-76, 0, 146)
+                this.blackPieces.chessSet.children[14].name = "p"
+                this.blackPieces.chessSet.children[14].boardPosition = "h7"
+                this.blackPieces.chessSet.children[14].position.set(-71, 0, 146)
+                this.blackPieces.chessSet.children[15].name = "n"
+                this.blackPieces.chessSet.children[15].boardPosition = "g8"
+                this.blackPieces.chessSet.children[15].position.set(-51, 0, 202)
 
-            this.render();
-        };
+                console.log("raycaster")
+                this.raycaster = new Collisions(this.scene, this.camera, this.whitePieces, this.blackPieces, this.pieces, this.websocket, this.fieldsMap)
+
+                this.puzle()
+
+                this.render();
+            };
+        }, 800)
+
+
 
         let materials = []
         materials[0] = new MeshStandardMaterial({ side: DoubleSide, map: new TextureLoader().load(boardSideTexture) })
@@ -309,6 +316,15 @@ export default class Main {
         //!! do późniejszego wywalenia
         const axes = new AxesHelper(1000)
         this.board.add(axes)
+    }
+
+    puzle() {
+        console.log(this.board)
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                console.log(this.board[i][j])
+            }
+        }
     }
 
     render() {
