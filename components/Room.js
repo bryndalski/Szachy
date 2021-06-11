@@ -34,7 +34,7 @@ class Room {
    */
   addNewPlayer(nickname2, password) {
     if (this.isPrivate)
-      if (this.password === password) {
+      if (this.password == password) {
         this.playerTwo = nickname2;
       } else return false;
     else this.playerTwo = nickname2;

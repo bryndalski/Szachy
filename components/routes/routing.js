@@ -124,7 +124,6 @@ router.post("/addToRoom", async (req, res) => {
       req.body.password
     )
   ) {
-    console.log(req.session.user.sendableUser);
     req.session.user.sendableUser.gameID = req.body.roomId;
     res.json({ success: true });
   } else res.json({ success: false });
