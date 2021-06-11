@@ -70,7 +70,6 @@ router.ws("/Szaszki", function (ws, req) {
                   lobby.lobby[room].playerOne == req.session.user.user.nickname
                     ? "white"
                     : "black",
-                loadBoard: msg.board,
               })
             );
             break;

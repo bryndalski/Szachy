@@ -78,10 +78,6 @@ export default class Collisions extends Raycaster {
                     this.toMove[0].boardPosition = this.destPos
                     this.fading = 20
 
-                    this.whitePieces.chessSet.children.forEach(x => this.bord.push([[x.boardPosition], [x.name]]))
-                    this.blackPieces.chessSet.children.forEach(x => this.bord.push([[x.boardPosition], [x.name]]))
-                    this.websocket.send(JSON.stringify({ type: "init", board: this.bord }))
-
 
                     this.greenFields.forEach(mesh => this.scene.remove(mesh))
                     this.scene.remove(this.selectedPiece)
