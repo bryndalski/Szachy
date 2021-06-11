@@ -19,6 +19,8 @@ class Room {
     this.private = isPrivate || false;
     this.playerOneColor = "white";
     this.playerTwoColor = "black";
+    this.playerOneWsId = null;
+    this.playerTwoWsId = null;
     this.playerOne = playerOne;
     this.playerTwo = null;
     this.roomPassword = password || null;
