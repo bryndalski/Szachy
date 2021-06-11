@@ -436,11 +436,7 @@ export default class Main {
     this.stats.begin();
 
     this.renderer.render(this.scene, this.camera);
-
-    this.raycaster.updatePos();
-
-    // koniec statystyk
-    this.stats.end();
+idstats.end();
 
     requestAnimationFrame(this.render.bind(this));
   }
