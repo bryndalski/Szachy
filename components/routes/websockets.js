@@ -32,49 +32,6 @@ router.ws("/Szaszki", function (ws, req) {
 
   try {
     ws.on("message", function (msg) {
-<<<<<<< HEAD
-      console.log(req.session);
-      let room = lobby.lobby.findIndex(
-        (elem) => elem.roomId == req.session.user.sendableUser.gameID
-      );
-      console.log(lobby.lobby[room]);
-      msg = JSON.parse(msg);
-      let board = msg.board
-      switch (msg.type) {
-        case "init":
-          //!! na razie ustawione statycznie
-          ws.send(
-            JSON.stringify({
-              type: "init",
-              color:
-                lobby.lobby[room].playerOne == req.session.user.user.nickname
-                  ? "white"
-                  : "black",
-              loadBoard: msg.board,
-            })
-          );
-          break;
-        case "moveOptions":
-          console.log(msg.position);
-          const moves = chess.moves({ square: msg.position });
-          console.log(moves);
-          ws.send(
-            JSON.stringify({
-              type: "moveOptions",
-              clicked: msg.position,
-              moves: moves,
-              ischeck: chess.in_check(),
-              ischeckmate: chess.in_checkmate(),
-              isdraw: chess.in_draw(),
-              isstalemate: chess.in_stalemate(),
-            })
-          );
-          break;
-        case "move":
-          let move = chess.move({ from: msg.piecePos, to: msg.destPos });
-          ws.send(JSON.stringify({ type: "move", move: move }));
-          break;
-=======
       try {
         let room = lobby.lobby.findIndex(
           (elem) => elem.roomId == req.session.user.sendableUser.gameID
@@ -113,7 +70,7 @@ router.ws("/Szaszki", function (ws, req) {
                   lobby.lobby[room].playerOne == req.session.user.user.nickname
                     ? "white"
                     : "black",
-                loadBoard: chess.board(),
+                loadBoard: msg.board,
               })
             );
             break;
@@ -141,7 +98,6 @@ router.ws("/Szaszki", function (ws, req) {
         }
       } catch (err) {
         console.log(err);
->>>>>>> bc92b8b3528913a3017db79e3147c041107e03cd
       }
     });
   } catch (err) {
