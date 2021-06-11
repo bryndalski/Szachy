@@ -38,6 +38,10 @@ export default class Main {
         this.websocket = new WebSocket("ws://localhost:5500/sockets/Szaszki")
 
         this.websocket.onopen = (e) => {
+            const bord = [
+                [['a1'], ['r']]
+            ]
+
             this.websocket.send(JSON.stringify({ type: "init" }))
         }
 
@@ -63,6 +67,7 @@ export default class Main {
                 case "init":
                     this.pieces = JSON.parse(e.data)
                     this.board = this.pieces.loadBoard
+                    this.puzzle()
                     break;
                 case "moveOptions":
                     if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
@@ -294,8 +299,6 @@ export default class Main {
                 console.log("raycaster")
                 this.raycaster = new Collisions(this.scene, this.camera, this.whitePieces, this.blackPieces, this.pieces, this.websocket, this.fieldsMap)
 
-                this.puzle()
-
                 this.render();
             };
         }, 800)
@@ -321,78 +324,85 @@ export default class Main {
     }
 
     puzle() {
-        this.usedW = []
-        this.usedB = []
-        for (let i = 0; i < 8; i++) { // i = numerki
-            for (let j = 0; j < 8; j++) { // j = literki
-                // if (this.board[i][j] != null) {
-                //     if (this.board[i][j].color = "b") {
-                //         let restOfPieces = this.blackPieces.chessSet
-                //         for (let k = 0; k < this.usedB; k++) {
-                //             restOfPieces = restOfPieces.children.filter(x => x.uuid != this.usedB[k].uuid)
-                //         }
-                //         restOfPieces = restOfPieces.children.filter(x => x.name == this.board[i][j].type)[0]
-                //         this.piecePos = restOfPieces.boardPosition
-                //         this.usedB.push(restOfPieces)
-                //         let x
-                //         let z
-                //         x = this.fieldsMap.get(this.piecePos[0]) - j
-                //         z = parseInt(this.piecePos[1]) - i
+        this.positionize = (row, counter) => {
+            const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
+            return "${ letters[row] } ${ counter }";
+        };
+        this.coordinate = (row, counter) => {
+            let scalsesX = -284;
+            let scylesZ = -62.5;
+            console.log(counter);
+            // let x = scalsesX + -1 * (row - 7) * 30.5;
+            let z = scylesZ + counter * 30.5;
+            // if (row > 3) x * -1;
+            // console.log((x, z));
+            if (counter > 3) z * -1;
+            return [-284, 0, z];
+        };
+        let i = 0;
+        this.board.forEach((element, index) => {
+            if (element !== null) {
+                if (index < 16) {
+                    i++;
+                    console.log(element);
+                    this.whitePieces.chessSet.children[i].name = element[i][1];
+                    this.whitePieces.chessSet.children[i].boardPosition = element[i][0]
+                    console.log(this.whitePieces.chessSet.children[i].name = element[i][1])
+                    console.log(this.whitePieces.chessSet.children[i].boardPosition = element[i][0])
 
-                //         if (Math.abs(30.5 * x) > Math.abs(30.5 * z)) {
-                //             this.v2 = new Vector3(restOfPieces.position.x - 30.5 * x, 0, restOfPieces.position.z - 30.5 * z)
-                //         } else {
-                //             this.v2 = new Vector3(restOfPieces.position.x - 30.5 * x, 0, restOfPieces.position.z - 30.5 * z)
-                //         }
+                    this.piecePos = this.whitePieces.chessSet.children[i].boardPosition
+                    this.destPos = element[i][0]
 
+                    this.toMove = this.whitePieces.chessSet.children.filter(x => x.boardPosition == this.piecePos)
 
-                //         console.log(this.v2)
+                    //this.toMove = this.blackPieces.chessSet.children.filter(x => x.boardPosition == this.piecePos)
 
-                //         let temp = ""
+                    let x
+                    let z
+                    x = this.fieldsMap.get(this.toMove[0].boardPosition[0]) - this.fieldsMap.get(this.destPos[0])
+                    z = parseInt(this.toMove[0].boardPosition[1]) - parseInt(this.destPos[1])
 
-                //         switch (j) {
-                //             case 1:
-                //                 temp = "a"
-                //                 break
-                //             case 2:
-                //                 temp = "b"
-                //                 break
-                //             case 3:
-                //                 temp = "c"
-                //                 break
-                //             case 4:
-                //                 temp = "d"
-                //                 break
-                //             case 5:
-                //                 temp = "e"
-                //                 break
-                //             case 6:
-                //                 temp = "f"
-                //                 break
-                //             case 7:
-                //                 temp = "g"
-                //                 break
-                //             case 8:
-                //                 temp = "h"
-                //                 break
-                //         }
+                    if (Math.abs(30.5 * x) > Math.abs(30.5 * z)) {
+                        this.v2 = new Vector3(this.toMove[0].position.x - 30.5 * x, Math.abs(30.5 * x) / 2, this.toMove[0].position.z - 30.5 * z)
+                    } else {
+                        this.v2 = new Vector3(this.toMove[0].position.x - 30.5 * x, Math.abs(30.5 * z) / 2, this.toMove[0].position.z - 30.5 * z)
+                    }
 
-                //         this.piecePos = temp + toString(i)
-                //         console.log(this.piecePos)
+                    console.log(this.v2)
 
-                //         console.log(restOfPieces.position)
-                //         restOfPieces.position.set(this.v2.x, this.v2.y, this.v2.z)
-                //         console.log(restOfPieces.position)
+                    this.toMove[0].position = this.v2
+                }
+                if (index > 15) {
+                    i++;
+                    console.log(element);
+                    this.whitePieces.chessSet.children[i].name = element[i][1];
+                    this.whitePieces.chessSet.children[i].boardPosition = element[i][0]
+                    console.log(this.whitePieces.chessSet.children[i].name = element[i][1])
+                    console.log(this.whitePieces.chessSet.children[i].boardPosition = element[i][0])
 
-                //         console.log(this.board[i][j])
-                //     }
-                //     if (this.board[i][j].color = "w") {
-                //         console.log(this.board[i][j])
-                //     }
-                // }
+                    this.piecePos = this.whitePieces.chessSet.children[i].boardPosition
+                    this.destPos = element[i][0]
 
+                    this.toMove = this.blackPieces.chessSet.children.filter(x => x.boardPosition == this.piecePos)
+
+                    let x
+                    let z
+                    x = this.fieldsMap.get(this.toMove[0].boardPosition[0]) - this.fieldsMap.get(this.destPos[0])
+                    z = parseInt(this.toMove[0].boardPosition[1]) - parseInt(this.destPos[1])
+
+                    if (Math.abs(30.5 * x) > Math.abs(30.5 * z)) {
+                        this.v2 = new Vector3(this.toMove[0].position.x - 30.5 * x, Math.abs(30.5 * x) / 2, this.toMove[0].position.z - 30.5 * z)
+                    } else {
+                        this.v2 = new Vector3(this.toMove[0].position.x - 30.5 * x, Math.abs(30.5 * z) / 2, this.toMove[0].position.z - 30.5 * z)
+                    }
+
+                    console.log(this.v2)
+
+                    this.toMove[0].position = this.v2
+                }
             }
-        }
+        })
+
     }
 
     render() {

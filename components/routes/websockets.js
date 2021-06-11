@@ -27,6 +27,7 @@ router.ws("/lobbyWS", function (ws, req) {
 });
 
 router.ws("/Szaszki", function (ws, req) {
+
   try {
     ws.on("message", function (msg) {
       console.log(req.session);
@@ -35,6 +36,7 @@ router.ws("/Szaszki", function (ws, req) {
       );
       console.log(lobby.lobby[room]);
       msg = JSON.parse(msg);
+      let board = msg.board
       switch (msg.type) {
         case "init":
           //!! na razie ustawione statycznie
@@ -45,7 +47,7 @@ router.ws("/Szaszki", function (ws, req) {
                 lobby.lobby[room].playerOne == req.session.user.user.nickname
                   ? "white"
                   : "black",
-              loadBoard: chess.board(),
+              loadBoard: msg.board,
             })
           );
           break;
