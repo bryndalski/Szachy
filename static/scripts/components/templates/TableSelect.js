@@ -32,6 +32,7 @@ class TableSelect {
    * @param {Number} assignedNumber
    */
   render(element, assignedNumber) {
+    if (!element.availible) return;
     let row = document.createElement("tr");
     let cellNumber = document.createElement("th");
     cellNumber.innerText = assignedNumber;
@@ -47,7 +48,6 @@ class TableSelect {
     row.appendChild(roomName);
     row.appendChild(roomPrivate);
     row.addEventListener("click", () => {
-      console.log(element);
       dispatchEvent(new CustomEvent("roomChange", { detail: { ...element } }));
     });
     this.tableBody.appendChild(row);

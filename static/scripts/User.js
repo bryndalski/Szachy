@@ -1,5 +1,7 @@
 // import NickChangeAlert from "./components/auth/NickChangeAlert.js";
+import ChangePasswordAlert from "./components/auth/ChangePasswordAlert.js";
 import ConfirmAlert from "./components/auth/ConfirmAlert.js";
+
 class User {
   constructor() {
     this.stats = {};
@@ -10,17 +12,26 @@ class User {
     //alerts
     // this.nickLobbyAlert = new NickChangeAlert();
     this.conrirmAlert = new ConfirmAlert();
+    this.passwordChangeAlert = new ChangePasswordAlert();
+    //chart data
+    this.chartStats = [];
     this.scaleCanvas();
     this.init();
   }
+
   /**
    * Init user
    */
   async init() {
-    this.buttonize();
-    window.addEventListener("resize", this.scaleCanvas);
-    this.chats();
+    fetch("/userinfo")
+      .then((response) => response.json())
+      .then((data) => {
+        this.chartStats = Object.values(data.stats);
+        this.buttonize();
+        this.chats();
+      });
   }
+
   /**
    * Scales canvas
    */
@@ -40,7 +51,7 @@ class User {
         datasets: [
           {
             label: "Statystyka",
-            data: [12, 19, 3], //TODO dane z serwera tutaj
+            data: this.chartStats, //TODO dane z serwera tutaj
             backgroundColor: ["transparent", "transparent", "transparent"],
             borderColor: ["#5cb85c", "#d9534f", "#5bc0de"],
             borderWidth: 2,
@@ -48,6 +59,9 @@ class User {
         ],
       },
       options: {
+        devicePixelRatio: 1,
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [
             {
@@ -64,11 +78,18 @@ class User {
    * Starts handling buttons actione
    */
   buttonize() {
+    //go back
+    document
+      .querySelector("header button:first-child")
+      .addEventListener("click", () => {
+        window.location.href = "/lobby";
+      });
+    //zmień hasło
     document
       .querySelector(".userData button:first-child")
-      .addEventListener("click", () => {
-        // this.nickLobbyAlert.fire();
-      }); // zmień nick
+      .addEventListener("click", (e) => {
+        this.passwordChangeAlert.clickListen(e);
+      });
     //wyloguj
     document
       .querySelector("header button:nth-child(2)")

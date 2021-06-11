@@ -21,7 +21,6 @@ class HEADER extends CreateLobbyAlert {
       .addEventListener("click", this.userButton);
   }
   userButton() {
-    console.log("bajlando bajlando");
     window.location.href = "/user ";
   }
 

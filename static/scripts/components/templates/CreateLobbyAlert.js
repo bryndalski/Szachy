@@ -42,7 +42,7 @@ export default class CreateLobbyAlert extends BasicLobby {
   /**
    * Send data of new room
    */
-  joinLobby() {
+  joinLobby = () => {
     let inputs = Array.from(document.querySelectorAll(".options input"));
     console.log(inputs[1].checked);
     fetch("/addRoom", {
@@ -55,8 +55,16 @@ export default class CreateLobbyAlert extends BasicLobby {
         passwordRequired: inputs[1].checked,
         password: inputs[2].value,
       }),
-    });
-  }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("Essa");
+          window.location.href = "/game";
+        }
+      });
+    this.atomize();
+  };
   /**
    *Listens to alert fire action on listener
    */

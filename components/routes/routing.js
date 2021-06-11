@@ -30,6 +30,16 @@ router.get("/user", (req, res) => {
     );
   else res.redirect("/");
 });
+
+router.get("/game", (req, res) => {
+  if (req.session.undefined !== undefined) res.redirect("/login ");
+  else if (req.session.user.sendableUser.gameID === null)
+    res.redirect("/lobby");
+  else
+    res.sendFile(
+      path.join(__dirname, "..", "..", "static", "pages", "game.html")
+    );
+});
 //* ============= DATA GET ============
 
 router.get("/userInfo", (req, res) => {
@@ -37,6 +47,13 @@ router.get("/userInfo", (req, res) => {
   req.session.user === undefined
     ? res.sendStatus(403)
     : res.json(req.session.user.sendableUser);
+});
+
+//* log out
+
+router.get("/logOut", (req, res) => {
+  if (req.session.user === undefined) res.sendStatus(401);
+  else req.session.destroy();
 });
 
 //* ========== POSTS ======================
@@ -77,20 +94,38 @@ router.post("/addRoom", async (req, res) => {
     );
     lobby.add(room);
     req.session.user.sendableUser.gameID = room.roomId;
+    res.json({ success: true });
   }
+});
+
+router.post("/changePassword", async (req, res) => {
+  console.log(`Address : ${req.url}, method: ${req.method}`.blue);
+  await User.changePassword(req.session.user.user._id, req.body.password);
+  req.session.destroy();
   res.sendStatus(200);
 });
 
 //*Przyjmuje dodawanie do nowego lobbu
 
 router.post("/addToRoom", async (req, res) => {
+  console.log(`Address : ${req.url}, method: ${req.method}`.blue);
   //!!! to może walnąc sprawdź czy nie walnie a jak walnie to solidnie
+  //if user owns room
   if (
     req.session.user === undefined ||
-    req.session.user.sendableUser.gameID === null
+    req.session.user.sendableUser.gameID !== null
   )
     return res.sendStatus(403);
-    lobby.changeInportantValue()
-    console.log(req.body);
+  if (
+    lobby.addPlayerToRoomLobby(
+      req.body.roomId,
+      req.session.user.nickname,
+      req.body.password
+    )
+  ) {
+    console.log(req.session.user.sendableUser);
+    req.session.user.sendableUser.gameID = req.body.roomId;
+    res.json({ success: true });
+  } else res.json({ success: false });
 });
 module.exports = router;
