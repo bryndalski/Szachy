@@ -133,7 +133,8 @@ router.post("/addToRoom", async (req, res) => {
 
 router.get("/TEST", async (req, res) => {
   console.log(
-    await MongoOperations.increment("60c213360b6c360f287cc738", "stats.played")
+    await MongoOperations.increment("60c213360b6c360f287cc738", "stats.played"), //req.session.user.user._id
+    await MongoOperations.increment("60c213360b6c360f287cc738", "stats.wins") //req.session.user.user._id
   );
   res.json({ xd: "ddd" });
 });

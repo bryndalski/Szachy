@@ -6,8 +6,6 @@ let socektId = 0;
 let socektArray = [];
 let room = "";
 //!! tymaczasowe chess
-const { Chess } = require("chess.js");
-const chess = new Chess();
 
 router.ws("/lobbyWS", function (ws, req) {
   try {
