@@ -1,6 +1,11 @@
 import Renderer from './Renderer';
 import Camera from './Camera';
-
+/**
+* !!! JAK DASZ MI CHOCIAŻ JEDNĄ KURWA 
+* !!! LINIJKĘ W TYM ZAJEBANYM CONSTRUCTORE
+* !!! KTÓRA NIE BĘDZIE INICJACJĄ KLASY ALBO WYWOŁANIEM FUNCKJI
+* !!! TO NIE RĘCZĘ ZA SIEBIE 
+*/
 import {
     Scene,
     AmbientLight,

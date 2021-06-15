@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/LobbySelect.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/LobbySelect.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+import HEADER from "./templates/HeaderSelect.js";
+import BasicLobby from "./BasicLobby.js";
+import TableSelect from "./templates/TableSelect.js";
+import RightSideContainer from "./templates/RightSide.js";
+/**
+ * @bryndalski
+ * @description Class creaded for maintaing and handling
+ * view of smaller lobby with JOIN options.
+ */
+//TODO zmień przed hostowaniem adres websocketa
+
+export default class LobbySelect extends BasicLobby {
+  constructor(user) {
+    super();
+    this.header = new HEADER(user);
+    this.rightContainer = new RightSideContainer();
+    this.user = user; //user from params
+    this.render(); // renders page
+    this.header.listen();
+    this.socket = new WebSocket(
+      `wss://${window.location.hostname}:${window.location.port}/sockets/lobbyWS`
+    ); // init websocket
+    this.lastScrollDirection = null; // last scroll direction
+    this.init(); // method from BASCI LOBBY class
+    this.screenType = ""; //contains screen type
+    this.collectPage(); // collects page element
+    this.handelWindowResize(); // handles window resize after init
+    this.connectScokets(); // connect sockets => makes handshake
+    this.listenSockets(); //start listening to socket
+    this.lobbyList = []; // containes list of lobby and connected with them div
+    this.closeListen(); // executes on code reload
+  }
+
+  /**
+   *  handle behaviour for small screens
+   * @override
+   * @method
+   */
+  async smallScreen() {
+    try {
+      this.screenType = "small";
+      this.table.style.top = this.header.clientHeight + 10 + "px";
+      this.table.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+      this.rightSidePanel.style.top = this.header.clientHeight + 10 + "px";
+      this.rightSidePanel.style.left = this.table.clientWidth + 10 + "px";
+      this.rightSidePanel.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+    } catch (err) {
+      await this.sleep(200);
+      console.warn(err);
+    }
+  }
+
+  async hugeScrean() {
+    this.screenType = "huge";
+    try {
+      this.screenType = "huge";
+      this.table.style.top = this.header.clientHeight + 10 + "px";
+      this.table.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+
+      this.rightSidePanel.style.top = this.header.clientHeight + 10 + "px";
+      this.rightSidePanel.style.left = this.table.clientWidth + 10 + "px";
+      this.rightSidePanel.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+    } catch (err) {
+      console.warn(err);
+      await this.sleep(200);
+    }
+  }
+  /**
+   * Connects sockets
+   */
+  connectScokets() {
+    console.log(this.socket);
+    this.socket.addEventListener("open", (event) => {
+      this.socket.send("Good morning ");
+    });
+  }
+  /**
+   * Listens to socket message
+   * @netwotk
+   */
+  //TODO napraw filtrowanie renderek działą
+  listenSockets() {
+    this.socket.addEventListener("message", (event) => {
+      console.log("Message from server ", JSON.parse(event.data));
+      let data = JSON.parse(event.data);
+      if (this.lobbyList.length === 0) {
+        this.lobbyList = data;
+        this.lobbyList.forEach((element, counter) => {
+          TableSelect.render(element, counter + 1);
+        });
+      }
+      try {
+        data.forEach((element, counter) => this.filtrate(element, counter));
+      } catch (err) {
+        console.warn(err);
+      }
+    });
+  }
+  /**
+   * Filtrates if rooms exists
+   * @param {JSON} room room data
+   * @param {Number} counter room number
+   */
+  filtrate(room, counter) {
+    let index = this.lobbyList.find(
+      (element) => element.roomId === room.roomId
+    );
+    if (index === undefined) {
+      TableSelect.render(room, counter + 1);
+    }
+  }
+  /**
+   * Handling scrollUp
+   * @override
+   */
+  scrollUp = async () => {
+    if (this.screenType == "small") {
+      //hides top scroll
+      this.header.style.top = "5px";
+      this.table.style.top = this.header.clientHeight + 10 + "px";
+      this.table.style.height =
+        window.innerHeight - this.header.clientHeight - 13 + "px";
+    }
+  };
+  /**
+   *  Scrolling down
+   *@override
+   */
+  scrollDown = async () => {
+    if (this.screenType == "small") {
+      this.header.style.top = -1 * this.header.clientHeight + "px";
+      this.table.style.top = 5 + "px";
+      this.table.style.height = window.innerHeight + "px";
+    }
+  };
+  /**
+   * Collect all containers in page
+   */
+  collectPage() {
+    this.header = document.querySelector("header");
+    this.mainContainer = document.querySelector(".lobby");
+    this.tableConstinaer = document.querySelector(".lobbyList");
+    this.table = document.querySelector("table");
+    this.infoPanel = document.querySelector(".lobbyDetail");
+    this.rightSidePanel = document.querySelector(".rightContainer");
+  }
+  /**
+   * Closes socket on window unload
+   */
+  closeListen() {
+    window.addEventListener("beforeunload", () => {
+      this.socket.close();
+    });
+  }
+  /**
+   * Renders page using basic components
+   */
+  render() {
+    document.body.insertAdjacentHTML("beforeend", this.header.render());
+    TableSelect.renderBasic();
+    this.rightContainer.render();
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="ScrollBehavior.html">ScrollBehavior</a></li><li><a href="TableSelect.html">TableSelect</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:screllDown">screllDown</a></li></ul><h3>Global</h3><ul><li><a href="global.html#alertListener">alertListener</a></li><li><a href="global.html#atomize">atomize</a></li><li><a href="global.html#buildUserize">buildUserize</a></li><li><a href="global.html#closeListen">closeListen</a></li><li><a href="global.html#collectPage">collectPage</a></li><li><a href="global.html#connectScokets">connectScokets</a></li><li><a href="global.html#customListen">customListen</a></li><li><a href="global.html#customListenersRemover">customListenersRemover</a></li><li><a href="global.html#filtrate">filtrate</a></li><li><a href="global.html#fire">fire</a></li><li><a href="global.html#hugeScrean">hugeScrean</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#listenSockets">listenSockets</a></li><li><a href="global.html#removeScrollListen">removeScrollListen</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#responsive">responsive</a></li><li><a href="global.html#scrollDown">scrollDown</a></li><li><a href="global.html#scrollListen">scrollListen</a></li><li><a href="global.html#scrollUp">scrollUp</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#smallScreen">smallScreen</a></li><li><a href="global.html#userize">userize</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 11 2021 15:42:15 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

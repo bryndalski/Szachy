@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/templates/RightSide.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/templates/RightSide.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import ScrollBehavior from "../LobbyScroll.js";
+
+export default class RightSideContainer extends ScrollBehavior {
+  constructor() {
+    super();
+    this.firstRender = true;
+    this.sendableData = {};
+    window.addEventListener("roomChange", this.handleListen);
+  }
+  /**
+   * Renders basic page structure
+   */
+  render() {
+    //renders maoin container
+    this.renderContainer = document.createElement("div");
+    this.renderContainer.classList.add("rightContainer");
+    document.body.appendChild(this.renderContainer);
+    //basic look generator
+    let roomImage = document.createElement("img");
+    roomImage.src = "/images/pawn.svg";
+    this.renderContainer.appendChild(roomImage);
+    //buttonJoin
+  }
+  /**
+   * Listens for event
+   * @param {Event} e Envent containg data with details
+   */
+  handleListen = (e) => {
+    if (this.firstRender) this.buildUserize();
+    if (JSON.stringify(this.sendableData) !== JSON.stringify(e.detail)) {
+      this.userize(e.detail);
+      this.sendableData = e.detail;
+    }
+  };
+
+  /**
+   * Creates everything which is neede for user to join the room
+   */
+  userize(element) {
+    this.roomName.innerText = element.roomName;
+    this.passInput.style.visibility = element.private ? "visible" : "hidden";
+    //submit Button
+    this.enterButton = document.createElement("button");
+  }
+  /**
+   * First userize render
+   */
+  buildUserize() {
+    let container = document.createElement("div");
+    container.classList.add("RightSideAuthcContainer");
+    this.roomName = document.createElement("span");
+    this.passInput = document.createElement("input");
+    this.passInput.type = "password";
+    this.joinButton = document.createElement("button");
+    this.joinButton.innerText = "Dołącz";
+    this.authorizeError = document.createElement("span");
+    this.firstRender = false;
+    this.renderContainer.appendChild(this.roomName);
+    container.appendChild(this.passInput);
+    container.appendChild(this.joinButton);
+    container.appendChild(this.authorizeError);
+    this.renderContainer.appendChild(container);
+    //listen to butto
+    this.joinButton.addEventListener("click", this.buttonSend);
+  }
+  /**
+   * Sends lobby data to client
+   *
+   * Handles connection between client and server sanidng data abnotu lobby and allowing it to
+   * reconnect
+   */
+  buttonSend = async () => {
+    fetch("/addToRoom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.sendableData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("jakakowliek cokolwiek");
+        console.log("Success:", data);
+        if (data.success) {
+          window.location.href = "/game";
+        } else {
+          this.authorizeError.innerText = "Błędne hasło zostało podane";
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="ScrollBehavior.html">ScrollBehavior</a></li><li><a href="TableSelect.html">TableSelect</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:screllDown">screllDown</a></li></ul><h3>Global</h3><ul><li><a href="global.html#alertListener">alertListener</a></li><li><a href="global.html#atomize">atomize</a></li><li><a href="global.html#buildUserize">buildUserize</a></li><li><a href="global.html#closeListen">closeListen</a></li><li><a href="global.html#collectPage">collectPage</a></li><li><a href="global.html#connectScokets">connectScokets</a></li><li><a href="global.html#customListen">customListen</a></li><li><a href="global.html#customListenersRemover">customListenersRemover</a></li><li><a href="global.html#filtrate">filtrate</a></li><li><a href="global.html#fire">fire</a></li><li><a href="global.html#hugeScrean">hugeScrean</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#listenSockets">listenSockets</a></li><li><a href="global.html#removeScrollListen">removeScrollListen</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#responsive">responsive</a></li><li><a href="global.html#scrollDown">scrollDown</a></li><li><a href="global.html#scrollListen">scrollListen</a></li><li><a href="global.html#scrollUp">scrollUp</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#smallScreen">smallScreen</a></li><li><a href="global.html#userize">userize</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 11 2021 15:42:15 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
