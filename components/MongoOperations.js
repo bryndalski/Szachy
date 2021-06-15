@@ -105,5 +105,13 @@ class MongoOperations {
         .then((result) => suc(result));
     });
   }
+
+  increment(id, filed) {
+    return new Promise((suc) => {
+      this.collection
+        .updateOne({ _id: this.ObjectID(id) }, { $inc: { [filed]: 1 } })
+        .then((result) => suc(result));
+    });
+  }
 }
 module.exports = new MongoOperations();

@@ -1,3 +1,5 @@
+const MongoOperations = require("../MongoOperations");
+
 const router = require("express").Router(),
   path = require("path"),
   User = require("../User"),
@@ -127,6 +129,13 @@ router.post("/addToRoom", async (req, res) => {
     req.session.user.sendableUser.gameID = req.body.roomId;
     res.json({ success: true });
   } else res.json({ success: false });
+});
+
+router.get("/TEST", async (req, res) => {
+  console.log(
+    await MongoOperations.increment("60c213360b6c360f287cc738", "stats.played")
+  );
+  res.json({ xd: "ddd" });
 });
 
 //* LAST CHANCE
