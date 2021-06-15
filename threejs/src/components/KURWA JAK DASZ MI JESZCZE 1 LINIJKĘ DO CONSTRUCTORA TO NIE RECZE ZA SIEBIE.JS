@@ -37,157 +37,116 @@ export default class Main {
     this.container = container;
     this.scene = new Scene();
 
-    // połączenie z websocketem i pobranie danych o kolorze pionków
-    this.websocket = new WebSocket(
-      `ws://${window.location.hostname}:${window.location.port}/sockets/Szaszki`
-    );
+    // // połączenie z websocketem i pobranie danych o kolorze pionków
+    // this.websocket = new WebSocket(`wss://${window.location.hostname}:${window.location.port}/sockets/Szaszki`)
 
-    this.websocket.onopen = (e) => {
-      this.websocket.send(JSON.stringify({ type: "init" }));
-    };
+    // this.websocket.onopen = (e) => {
+    //     this.websocket.send(JSON.stringify({ type: "init" }))
+    // }
 
-    this.pieces = {};
-    this.fieldsMap = new Map();
-    this.fieldsMap.set("a", 1);
-    this.fieldsMap.set("b", 2);
-    this.fieldsMap.set("c", 3);
-    this.fieldsMap.set("d", 4);
-    this.fieldsMap.set("e", 5);
-    this.fieldsMap.set("f", 6);
-    this.fieldsMap.set("g", 7);
-    this.fieldsMap.set("h", 8);
+    // this.pieces = {}
+    // this.fieldsMap = new Map()
+    // this.fieldsMap.set('a', 1)
+    // this.fieldsMap.set('b', 2)
+    // this.fieldsMap.set('c', 3)
+    // this.fieldsMap.set('d', 4)
+    // this.fieldsMap.set('e', 5)
+    // this.fieldsMap.set('f', 6)
+    // this.fieldsMap.set('g', 7)
+    // this.fieldsMap.set('h', 8)
 
-    this.greenFields = [];
+    // this.greenFields = []
 
     // odbieranie danych z serwera
-    this.websocket.onmessage = (e) => {
-      console.log(e.data);
-      this.data = JSON.parse(e.data);
-      console.log(this.data);
-      switch (this.data.type) {
-        case "init":
-          this.pieces = JSON.parse(e.data);
-          this.board = this.pieces.loadBoard;
-          break;
-        case "moveOptions":
-          if (
-            this.data.ischeck ||
-            this.data.ischeckmate ||
-            this.data.isstalemate ||
-            this.data.isdraw
-          ) {
-            console.log(
-              this.data.ischeck,
-              this.data.ischeckmate,
-              this.data.isdraw,
-              this.data.isstalemate
-            );
-            console.log("to już jest koniec... gry");
-            if (this.data.ischeck) {
-            }
-            if (this.data.ischeckmate) {
-            }
-            if (this.data.isstalemate) {
-            }
-            if (this.data.isdraw) {
-            }
-          } else {
-            console.log(this.data.moves);
+    // this.websocket.onmessage = (e) => {
+    //     console.log(e.data)
+    //     this.data = JSON.parse(e.data)
+    //     console.log(this.data)
+    //     switch (this.data.type) {
+    //         case "init":
+    //             this.pieces = JSON.parse(e.data)
+    //             this.board = this.pieces.loadBoard
+    //             break;
+    //         case "moveOptions":
+    //             if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
+    //                 console.log(this.data.ischeck, this.data.ischeckmate, this.data.isdraw, this.data.isstalemate)
+    //                 console.log("to już jest koniec... gry")
+    //                 if (this.data.ischeck) {
 
-            /*
-                            podczas generowania zielonych pól dla dozwolonych ruchów pole a1 jest równe -39.5, -39.5
-                            kolejna plansza w każdą stronę będzie przesunięta o 11.25
-                        */
-            this.greenFields.forEach((mesh) => this.scene.remove(mesh));
-            this.greenFields = [];
-            this.scene.remove(this.selectedPiece);
+    //                 }
+    //                 if (this.data.ischeckmate) {
 
-            this.selectedPiece = new Mesh(
-              new PlaneGeometry(10, 10),
-              new MeshStandardMaterial({ color: 0xe6d30b })
-            );
-            this.selectedPiece.boardPosition = this.data.clicked;
-            this.selectedPiece.rotation.x = -Math.PI / 2;
-            if (this.data.clicked.length == 3) {
-              this.selectedPiece.position.set(
-                -39.5 + 11.25 * (this.fieldsMap.get(this.data.clicked[1]) - 1),
-                0.25,
-                -39.5 + 11.25 * (parseInt(this.data.clicked[2]) - 1)
-              );
-            } else {
-              this.selectedPiece.position.set(
-                -39.5 + 11.25 * (this.fieldsMap.get(this.data.clicked[0]) - 1),
-                0.25,
-                -39.5 + 11.25 * (parseInt(this.data.clicked[1]) - 1)
-              );
-            }
-            this.scene.add(this.selectedPiece);
+    //                 }
+    //                 if (this.data.isstalemate) {
 
-            this.data.moves.forEach((pos) => {
-              this.plane = new Mesh(
-                new PlaneGeometry(10, 10),
-                new MeshStandardMaterial({ color: 0x2cde62 })
-              );
-              this.plane.boardPosition = pos;
-              this.plane.rotation.x = -Math.PI / 2;
-              if (pos.length == 3) {
-                this.plane.position.set(
-                  -39.5 + 11.25 * (this.fieldsMap.get(pos[1]) - 1),
-                  0.25,
-                  -39.5 + 11.25 * (parseInt(pos[2]) - 1)
-                );
-              } else {
-                this.plane.position.set(
-                  -39.5 + 11.25 * (this.fieldsMap.get(pos[0]) - 1),
-                  0.25,
-                  -39.5 + 11.25 * (parseInt(pos[1]) - 1)
-                );
-              }
-              this.scene.add(this.plane);
-              this.greenFields.push(this.plane);
-            });
+    //                 }
+    //                 if (this.data.isdraw) {
 
-            // przekazanie do raycastera pól do wyboru oraz pozycji zaznaczonego elementu
-            this.raycaster.greenFields = this.greenFields;
-            this.raycaster.selectedPiece = this.selectedPiece;
-          }
+    //                 }
+    //             } else {
+    //                 console.log(this.data.moves)
 
-          break;
+    //                 /*
+    //                     podczas generowania zielonych pól dla dozwolonych ruchów pole a1 jest równe -39.5, -39.5
+    //                     kolejna plansza w każdą stronę będzie przesunięta o 11.25
+    //                 */
+    //                 this.greenFields.forEach(mesh => this.scene.remove(mesh))
+    //                 this.greenFields = []
+    //                 this.scene.remove(this.selectedPiece)
 
-        case "move":
-          console.log(this.data.move);
-          break;
-      }
-    };
+    //                 this.selectedPiece = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0xe6d30b }))
+    //                 this.selectedPiece.boardPosition = this.data.clicked
+    //                 this.selectedPiece.rotation.x = -Math.PI / 2
+    //                 if (this.data.clicked.length == 3) {
+    //                     this.selectedPiece.position.set(-39.5 + 11.25 * (this.fieldsMap.get(this.data.clicked[1]) - 1), 0.25, -39.5 + 11.25 * (parseInt(this.data.clicked[2]) - 1))
+    //                 } else {
+    //                     this.selectedPiece.position.set(-39.5 + 11.25 * (this.fieldsMap.get(this.data.clicked[0]) - 1), 0.25, -39.5 + 11.25 * (parseInt(this.data.clicked[1]) - 1))
+    //                 }
+    //                 this.scene.add(this.selectedPiece)
+
+    //                 this.data.moves.forEach(pos => {
+    //                     this.plane = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0x2cde62 }))
+    //                     this.plane.boardPosition = pos
+    //                     this.plane.rotation.x = -Math.PI / 2
+    //                     if (pos.length == 3) {
+    //                         this.plane.position.set(-39.5 + 11.25 * (this.fieldsMap.get(pos[1]) - 1), 0.25, -39.5 + 11.25 * (parseInt(pos[2]) - 1))
+    //                     } else {
+    //                         this.plane.position.set(-39.5 + 11.25 * (this.fieldsMap.get(pos[0]) - 1), 0.25, -39.5 + 11.25 * (parseInt(pos[1]) - 1))
+    //                     }
+    //                     this.scene.add(this.plane)
+    //                     this.greenFields.push(this.plane)
+    //                 })
+
+    //                 // przekazanie do raycastera pól do wyboru oraz pozycji zaznaczonego elementu
+    //                 this.raycaster.greenFields = this.greenFields
+    //                 this.raycaster.selectedPiece = this.selectedPiece
+    //             }
+
+    //             break;
+
+    //         case "move":
+    //             console.log(this.data.move)
+    //             break;
+    //     }
+    // }
 
     // właściwości klasy ciąg dalszy
-    this.renderer = new Renderer(this.scene, container);
-    this.camera = new Camera(
-      75,
-      this.renderer.threeRenderer.domElement.width,
-      this.renderer.threeRenderer.domElement.height
-    );
-    this.camera.position.set(0, 90, 0);
-    this.camera.lookAt(0, 0, 0);
+    // this.renderer = new Renderer(this.scene, container);
+    // this.camera = new Camera(75, this.renderer.threeRenderer.domElement.width, this.renderer.threeRenderer.domElement.height);
+    // this.camera.position.set(0, 90, 0)
+    // // this.camera.lookAt(0, 0, 0)
 
-    this.light = new AmbientLight(0xffffff);
-    this.scene.add(this.light);
+    // this.light = new AmbientLight(0xffffff)
+    // this.scene.add(this.light)
 
-    const controls = new OrbitControls(
-      this.camera,
-      this.renderer.threeRenderer.domElement
-    );
+    // const controls = new OrbitControls(this.camera, this.renderer.threeRenderer.domElement);
 
-    const gridHelper = new GridHelper(10000, 100);
-    this.scene.add(gridHelper);
+    // const gridHelper = new GridHelper(10000, 100);
+    // this.scene.add(gridHelper);
 
     //stats - statystyki wydajności
 
-    this.stats = new Stats();
-    this.stats.showPanel(0); // 0: fps, 1: ms, 2: mb
-
-    document.body.appendChild(this.stats.dom);
-
+    
     // zegar - vide lekcja 4
 
     this.clock = new Clock();

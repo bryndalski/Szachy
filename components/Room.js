@@ -1,11 +1,11 @@
 "use strict";
 const { v4: uuidv4 } = require("uuid");
-// const chess = require('chess');
+const { Chess } = require("chess.js");
 /**
  * EXTENDS CHESS JS
  */
 
-class Room {
+class Room extends Chess {
   /**
    *
    * @param {string} playerOne creator nickname
@@ -14,6 +14,7 @@ class Room {
    * @param {string=} [password=null] password for private room
    */
   constructor(playerOne, roomName, isPrivate, password) {
+    super();
     this.roomId = uuidv4(); //unique lobby id
     this.roomName = roomName;
     this.private = isPrivate || false;
@@ -48,6 +49,24 @@ class Room {
     if (this.playerTwo === null) return true;
     else return false;
   }
+  /**
+   *
+   * @param {*} popsition
+   * @returns {JSON} resurns object with positions, game status
+   */
+  moveOption(popsition) {
+    let moves = this.moves({ square: position });
+    return {
+      type: "moveOptions",
+      clicked: position,
+      moves: moves,
+      ischeck: this.in_check(),
+      ischeckmate: this.in_checkmate(),
+      isdraw: this.in_draw(),
+      isstalemate: this.in_stalemate(),
+    };
+  }
+  
 }
 
 module.exports = Room;
