@@ -387,6 +387,7 @@ export default class Main {
                         }
                     }
                     this.whitePieces[index].position.set(x, 0, z)
+                    this.whitePieces[index].boardPosition = square
                 } else { // czarne pionki
                     for (const property in mapa) {
                         if (square == property) {
@@ -396,12 +397,15 @@ export default class Main {
                         }
                     }
                     this.blackPieces[index % 16].position.set(x, 0, z)
+                    this.blackPieces[index].boardPosition = square
                 }
             } else {
                 if (index < 16) { // białe pionki
                     this.scene.remove(this.whitePieces[index])
+                    this.whitePieces[index].boardPosition = null
                 } else { // czarne pionki
                     this.scene.remove(this.blackPieces[index % 16])
+                    this.blackPieces[index].boardPosition = null
                 }
             }
         })
