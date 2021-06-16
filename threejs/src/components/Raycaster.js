@@ -1,7 +1,7 @@
 import { Raycaster, Vector2, Vector3 } from "three"
 
 export default class Collisions extends Raycaster {
-    constructor(scene, camera, whitePieces, BlackPieces, pieces, websocket, fields) {
+    constructor(scene, camera, whitePieces, BlackPieces, pieces, websocket, mapa, board, meshWhitePieces, meshBlackPieces) {
         super()
         this.scene = scene
         this.websocket = websocket
@@ -11,73 +11,100 @@ export default class Collisions extends Raycaster {
         this.color = pieces.color
         this.greenFields = []
         this.selectedPiece = {}
-        this.fieldsMap = fields
-        this.bord = []
+        this.mapa = mapa
+        this.board = board
+        this.meshWhitePieces = meshWhitePieces
+        this.meshBlackPieces = meshBlackPieces
 
         window.addEventListener('click', (e) => {
             this.mouseVector = new Vector2((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1)
             this.setFromCamera(this.mouseVector, this.camera);
             if (this.color == "white") {
-                this.intersects = this.intersectObjects(this.whitePieces.chessSet.children);
+                this.intersects = this.intersectObjects(this.meshWhitePieces);
                 if (this.intersects[0]) {
-                    this.distances = this.intersects.map(x => x.distance)
-                    this.intersects = this.intersects.filter(x => x.distance == Math.min(...this.distances))
-                    this.websocket.send(JSON.stringify({ type: "moveOptions", position: this.intersects[0].object.boardPosition }))
-                    console.log(this.intersects[0].object.boardPosition)
+                    console.log(this.intersects[0])
+                    // this.distances = this.intersects.map(x => x.distance)
+                    // this.intersects = this.intersects.filter(x => x.distance == Math.min(...this.distances))
+                    this.websocket.send(JSON.stringify({ type: "moveOptions", position: this.intersects[0].object.parent.boardPosition }))
+                    console.log(this.intersects[0].object.parent.boardPosition)
                 }
             } else {
-                this.intersects = this.intersectObjects(this.blackPieces.chessSet.children);
+                this.intersects = this.intersectObjects(this.meshBlackPieces);
                 if (this.intersects[0]) {
-                    this.distances = this.intersects.map(x => x.distance)
-                    this.intersects = this.intersects.filter(x => x.distance == Math.min(...this.distances))
-                    this.websocket.send(JSON.stringify({ type: "moveOptions", position: this.intersects[0].object.boardPosition }))
-                    console.log(this.intersects[0].object.boardPosition)
+                    // this.distances = this.intersects.map(x => x.distance)
+                    // this.intersects = this.intersects.filter(x => x.distance == Math.min(...this.distances))
+                    this.websocket.send(JSON.stringify({ type: "moveOptions", position: this.intersects[0].object.parent.boardPosition }))
+                    console.log(this.intersects[0].object.parent.boardPosition)
                 }
             }
 
             if (this.greenFields.length > 0) {
                 this.newPosition = this.intersectObjects(this.greenFields)
                 if (this.newPosition[0]) {
+                    if (this.newPosition[0].object.boardPosition.includes("x") && this.color == "white") {
+                        this.scene.remove(this.blackPieces.filter(x => x.boardPosition == this.newPosition[0].object.boardPosition[1] + this.newPosition[0].object.boardPosition[2])[0])
+                        this.blackPieces.filter(x => x.boardPosition == this.newPosition[0].object.boardPosition[1] + this.newPosition[0].object.boardPosition[2])[0].boardPosition = null
+                    } else if (this.newPosition[0].object.boardPosition.includes("x") && this.color == "black") {
+                        this.scene.remove(this.whitePieces.filter(x => x.boardPosition == this.newPosition[0].object.boardPosition[1] + this.newPosition[0].object.boardPosition[2])[0])
+                        this.whitePieces.filter(x => x.boardPosition == this.newPosition[0].object.boardPosition[1] + this.newPosition[0].object.boardPosition[2])[0].boardPosition = null
+                    }
                     this.piecePos = this.selectedPiece.boardPosition
                     this.destPos = this.newPosition[0].object.boardPosition
 
                     if (this.color == "white") {
-                        this.toMove = this.whitePieces.chessSet.children.filter(x => x.boardPosition == this.piecePos)
+                        this.toMove = this.whitePieces.filter(x => x.boardPosition == this.piecePos)
                     } else {
-                        this.toMove = this.blackPieces.chessSet.children.filter(x => x.boardPosition == this.piecePos)
+                        this.toMove = this.blackPieces.filter(x => x.boardPosition == this.piecePos)
                     }
 
                     if (this.destPos.length == 3) {
                         this.destPos = this.destPos[1] + this.destPos[2]
                     }
 
-                    this.websocket.send(JSON.stringify({ type: "move", piecePos: this.piecePos, destPos: this.destPos }))
 
-                    this.v1 = this.toMove[0].position
+                    let x = 0
+                    let z = 0
 
-                    let x
-                    let z
-                    if (this.destPos.length == 3) {
-                        x = this.fieldsMap.get(this.toMove[0].boardPosition[0]) - this.fieldsMap.get(this.destPos[1])
-                        z = parseInt(this.toMove[0].boardPosition[1]) - parseInt(this.destPos[2])
-                    } else {
-                        x = this.fieldsMap.get(this.toMove[0].boardPosition[0]) - this.fieldsMap.get(this.destPos[0])
-                        z = parseInt(this.toMove[0].boardPosition[1]) - parseInt(this.destPos[1])
+                    for (const property in mapa) {
+                        if (this.destPos == property) {
+                            x = mapa[property][0]
+                            z = mapa[property][1]
+                            break
+                        }
                     }
 
-                    if (Math.abs(30.5 * x) > Math.abs(30.5 * z)) {
-                        this.v2 = new Vector3(this.toMove[0].position.x - 30.5 * x, Math.abs(30.5 * x) / 2, this.toMove[0].position.z - 30.5 * z)
+                    if (Math.abs(x) > Math.abs(z)) {
+                        this.v2 = new Vector3(x, Math.abs(x) / 2, z)
                     } else {
-                        this.v2 = new Vector3(this.toMove[0].position.x - 30.5 * x, Math.abs(30.5 * z) / 2, this.toMove[0].position.z - 30.5 * z)
+                        this.v2 = new Vector3(x, Math.abs(z) / 2, z)
                     }
 
-                    console.log(this.v2)
+                    // this.pozycjaWlasciwa = this.v2.clone()
+                    // this.v2.x = Math.floor(this.v2.x)
+                    // this.v2.z = Math.floor(this.v2.z)
+                    // this.toMove[0].position.x = parseInt(this.toMove[0].position.x.toFixed(0))
+                    // this.toMove[0].position.z = parseInt(this.toMove[0].position.z.toFixed(0))
 
-                    this.czyPrzeszlo = false
+                    // console.log(this.toMove[0].position)
+                    // console.log(this.v2)
 
+                    // this.czyPrzeszlo = false
+
+                    this.toMove[0].position.x = this.v2.x
+                    this.toMove[0].position.z = this.v2.z
                     this.toMove[0].boardPosition = this.destPos
-                    this.fading = 20
+                    //this.fading = 20
 
+                    this.board = []
+
+                    this.whitePieces.forEach(obj => {
+                        this.board.push(obj.boardPosition)
+                    })
+                    this.blackPieces.forEach(obj => {
+                        this.board.push(obj.boardPosition)
+                    })
+
+                    this.websocket.send(JSON.stringify({ type: "move", piecePos: this.piecePos, destPos: this.destPos, board: this.board }))
 
                     this.greenFields.forEach(mesh => this.scene.remove(mesh))
                     this.scene.remove(this.selectedPiece)
@@ -91,25 +118,25 @@ export default class Collisions extends Raycaster {
     }
 
     updatePos() {
-        if (this.fading > 0) {
-            if (this.toMove[0].position.x != this.v2.x && this.toMove[0].position.x < this.v2.x) {
-                this.toMove[0].position.x += 0.5
-            } else if (this.toMove[0].position.x != this.v2.x && this.toMove[0].position.x > this.v2.x) {
-                this.toMove[0].position.x -= 0.5
-            }
-            if (this.toMove[0].position.z != this.v2.z && this.toMove[0].position.z < this.v2.z) {
-                this.toMove[0].position.z += 0.5
-            } else if (this.toMove[0].position.z != this.v2.z && this.toMove[0].position.z > this.v2.z) {
-                this.toMove[0].position.z -= 0.5
-            }
-            if (this.toMove[0].position.y < this.v2.y && !this.czyPrzeszlo) {
-                this.toMove[0].position.y += 0.5
-            } else if ((this.toMove[0].position.y >= this.v2.y || this.czyPrzeszlo) && this.toMove[0].position.y > 0) {
-                this.czyPrzeszlo = true
-                this.toMove[0].position.y -= 0.5
-            }
-            this.fading -= 0.01
-        }
+        // if (this.fading > 0) {
+        //     if (this.toMove[0].position.x != this.v2.x && this.toMove[0].position.x < this.v2.x) {
+        //         this.toMove[0].position.x += 0.5
+        //     } else if (this.toMove[0].position.x != this.v2.x && this.toMove[0].position.x > this.v2.x) {
+        //         this.toMove[0].position.x -= 0.5
+        //     }
+        //     if (this.toMove[0].position.z != this.v2.z && this.toMove[0].position.z < this.v2.z) {
+        //         this.toMove[0].position.z += 0.5
+        //     } else if (this.toMove[0].position.z != this.v2.z && this.toMove[0].position.z > this.v2.z) {
+        //         this.toMove[0].position.z -= 0.5
+        //     }
+        //     if (this.toMove[0].position.y < this.v2.y && !this.czyPrzeszlo) {
+        //         this.toMove[0].position.y += 0.5
+        //     } else if ((this.toMove[0].position.y >= this.v2.y || this.czyPrzeszlo) && this.toMove[0].position.y > 0) {
+        //         this.czyPrzeszlo = true
+        //         this.toMove[0].position.y -= 0.5
+        //     }
+        //     this.fading -= 0.01
+        // }
     }
 
 }
