@@ -32,6 +32,7 @@ class User {
         played: 0,
         wins: 0,
         looses: 0,
+        checks: 0,
       },
     };
   }

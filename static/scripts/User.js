@@ -47,13 +47,13 @@ class User {
     new Chart(this.canvasContext, {
       type: "bar",
       data: {
-        labels: ["Wygrane", "Przegrane", "Remisy"],
+        labels: ["Rozegrane", "Wygrane", "Przegrane"],
         datasets: [
           {
             label: "Statystyka",
             data: this.chartStats, //TODO dane z serwera tutaj
             backgroundColor: ["transparent", "transparent", "transparent"],
-            borderColor: ["#5cb85c", "#d9534f", "#5bc0de"],
+            borderColor: ["#d9534f", "#5bc0de", "#5cb85c"],
             borderWidth: 2,
           },
         ],
