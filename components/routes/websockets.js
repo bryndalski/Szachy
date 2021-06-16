@@ -14,7 +14,7 @@ router.ws("/lobbyWS", function (ws, req) {
     lobby.addListener("change", () => {
       try {
         ws.send(JSON.stringify(lobby.lobbyContent));
-      } catch (err) { }
+      } catch (err) {}
     });
     ws.on("close", (msg) => {
       console.log(ws.readyState);
@@ -29,9 +29,9 @@ router.ws("/Szaszki", function (ws, req) {
   try {
     ws.on("message", function (msg) {
       try {
-        let room
+        let room;
         msg = JSON.parse(msg);
-        console.log(msg)
+        console.log(msg);
         switch (msg.type) {
           case "init":
             ws.socektId = socektId++;
@@ -47,9 +47,9 @@ router.ws("/Szaszki", function (ws, req) {
             socektArray[socektId] = ws;
             socektArray[
               lobby.lobby[room][
-              req.session.user.user.nickname == lobby.lobby[room].playerOne
-                ? "playerOneWsId"
-                : "playerTwoWsId"
+                req.session.user.user.nickname == lobby.lobby[room].playerOne
+                  ? "playerOneWsId"
+                  : "playerTwoWsId"
               ]
             ].send(
               JSON.stringify({
@@ -58,7 +58,7 @@ router.ws("/Szaszki", function (ws, req) {
                   lobby.lobby[room].playerOne == req.session.user.user.nickname
                     ? "white"
                     : "black",
-                board: lobby.lobby[room].board
+                board: lobby.lobby[room].board,
               })
             );
             break;
@@ -68,15 +68,15 @@ router.ws("/Szaszki", function (ws, req) {
             );
             socektArray[
               lobby.lobby[room][
-              req.session.user.user.nickname == lobby.lobby[room].playerOne
-                ? "playerOneWsId"
-                : "playerTwoWsId"
+                req.session.user.user.nickname == lobby.lobby[room].playerOne
+                  ? "playerOneWsId"
+                  : "playerTwoWsId"
               ]
             ].send(
               JSON.stringify({
                 type: "moveOptions",
                 clicked: msg.position,
-                moves: lobby.lobby[room].moves({ square: msg.position })
+                moves: lobby.lobby[room].chess.moves({ square: msg.position }),
               })
             );
             break;
@@ -88,27 +88,30 @@ router.ws("/Szaszki", function (ws, req) {
               lobby.lobby[room2].playerOneWsId,
               lobby.lobby[room2].playerTwoWsId,
             ];
-            let move = lobby.lobby[room2].move({ from: msg.piecePos, to: msg.destPos });
-            lobby.lobby[room2].board = msg.board
+            let move = lobby.lobby[room2].chess.move({
+              from: msg.piecePos,
+              to: msg.destPos,
+            });
+            lobby.lobby[room2].board = msg.board;
 
-            socketDestinations = socketDestinations.filter(x => x != null)
+            socketDestinations = socketDestinations.filter((x) => x != null);
 
             socketDestinations.forEach((e) => {
-              socektArray[e].send(JSON.stringify({
-                type: "move",
-                move: move,
-                board: lobby.lobby[room2].board,
-                ischeck: lobby.lobby[room2].in_check(),
-                ischeckmate: lobby.lobby[room2].in_checkmate(),
-                isdraw: lobby.lobby[room2].in_draw(),
-                isstalemate: lobby.lobby[room2].in_stalemate(),
-              }))
-            }
-            );
+              socektArray[e].send(
+                JSON.stringify({
+                  type: "move",
+                  move: move,
+                  board: lobby.lobby[room2].board,
+                  ischeck: lobby.lobby[room2].chess.in_check(),
+                  ischeckmate: lobby.lobby[room2].chess.in_checkmate(),
+                  isdraw: lobby.lobby[room2].chess.in_draw(),
+                  isstalemate: lobby.lobby[room2].chess.in_stalemate(),
+                })
+              );
+            });
             break;
           case "end":
             //!!! zwiększ statystyki
-
 
             let room3 = lobby.lobby.findIndex(
               (elem) => elem.roomId == req.session.user.sendableUser.gameID
@@ -118,26 +121,27 @@ router.ws("/Szaszki", function (ws, req) {
               lobby.lobby[room3].playerTwoWsId,
             ];
 
-            socketDestinations2 = socketDestinations2.filter(x => x != null)
+            socketDestinations2 = socketDestinations2.filter((x) => x != null);
 
-            if (lobby.lobby[room3].turn() == 'b') {
+            if (lobby.lobby[room3].turn() == "b") {
               socketDestinations2.forEach((e) => {
-                socektArray[e].send(JSON.stringify({
-                  type: "end",
-                  winner: "czarny"
-                }))
-              }
-              );
+                socektArray[e].send(
+                  JSON.stringify({
+                    type: "end",
+                    winner: "czarny",
+                  })
+                );
+              });
             } else {
               socketDestinations2.forEach((e) => {
-                socektArray[e].send(JSON.stringify({
-                  type: "end",
-                  winner: "biały"
-                }))
-              }
-              );
+                socektArray[e].send(
+                  JSON.stringify({
+                    type: "end",
+                    winner: "biały",
+                  })
+                );
+              });
             }
-
 
             break;
         }

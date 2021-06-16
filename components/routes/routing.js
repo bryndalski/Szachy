@@ -119,7 +119,8 @@ router.post("/addToRoom", async (req, res) => {
   //   req.session.user.sendableUser.gameID !== null
   // )
   //   return res.sendStatus(403);
-  console.log(req.body, req.session);
+  // console.log("essa");
+  // console.log(req.body, req.session);
   if (
     lobby.addPlayerToRoomLobby(
       req.body.roomId,

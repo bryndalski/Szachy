@@ -19,7 +19,7 @@ export default class LobbySelect extends BasicLobby {
     this.render(); // renders page
     this.header.listen();
     this.socket = new WebSocket(
-      `wss://${window.location.hostname}:${window.location.port}/sockets/lobbyWS`
+      `wss://${window.location.hostname}:${window.location.port}/sockets/lobbyWS` //TODO zmeiń mnie pilnie mega
     ); // init websocket
     this.lastScrollDirection = null; // last scroll direction
     this.init(); // method from BASCI LOBBY class
