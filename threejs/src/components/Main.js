@@ -95,18 +95,29 @@ export default class Main {
                     this.scene.add(this.selectedPiece)
 
                     this.data.moves.forEach(pos => {
-                        if (pos.includes('+') == true) {
+                        if (pos.includes('+') == true && pos != "O-O" && pos != "O-O-O") {
                             pos = pos.substr(0, pos.length - 1)
                         }
-
-                        if (pos.includes('x') == false) {
+                        if (pos.includes('x') == false && pos != "O-O" && pos != "O-O-O") {
                             this.plane = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0x2cde62 }))
-                        } else {
+                            this.plane.boardPosition = pos
+
+                        } else if (pos.includes('x') == true && pos != "O-O" && pos != "O-O-O") {
                             this.plane = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0xc21f0a }))
                             let temp = pos.split('x')
                             pos = 'x' + temp[1]
+                            this.plane.boardPosition = pos
                         }
-                        this.plane.boardPosition = pos
+                        if (pos == "O-O") {
+                            this.plane = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0x2cde62 }))
+                            this.plane.boardPosition = pos
+                            pos = 'g1'
+                        }
+                        if (pos == "O-O-O") {
+                            this.plane = new Mesh(new PlaneGeometry(10, 10), new MeshStandardMaterial({ color: 0x2cde62 }))
+                            this.plane.boardPosition = pos
+                            pos = 'c1'
+                        }
 
                         this.plane.rotation.x = -Math.PI / 2
                         if (pos.length == 3) {
@@ -141,7 +152,6 @@ export default class Main {
                 case "move":
                     if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
                         console.log(this.data.ischeck, this.data.ischeckmate, this.data.isdraw, this.data.isstalemate)
-                        console.log("to już jest koniec... gry")
                         if (this.data.ischeck) {
                             alert('check')
                         }
@@ -337,7 +347,6 @@ export default class Main {
 
                 this.puzle()
 
-                console.log("raycaster")
                 this.raycaster = new Collisions(this.scene, this.camera, this.whitePieces, this.blackPieces, this.pieces, this.websocket, mapa, this.Board, this.meshWhitePieces, this.meshBlackPieces)
 
                 this.render();

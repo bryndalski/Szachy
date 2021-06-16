@@ -38,6 +38,7 @@ router.ws("/Szaszki", function (ws, req) {
             room = lobby.lobby.findIndex(
               (elem) => elem.roomId == req.session.user.sendableUser.gameID
             );
+
             lobby.lobby[room][
               req.session.user.user.nickname == lobby.lobby[room].playerOne
                 ? "playerOneWsId"
