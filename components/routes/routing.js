@@ -114,11 +114,11 @@ router.post("/addToRoom", async (req, res) => {
   console.log(`Address : ${req.url}, method: ${req.method}`.blue);
   //!!! to może walnąc sprawdź czy nie walnie a jak walnie to solidnie
   //if user owns room
-  if (
-    req.session.user === undefined ||
-    req.session.user.sendableUser.gameID !== null
-  )
-    return res.sendStatus(403);
+  // if (
+  //   req.session.user === undefined ||
+  //   req.session.user.sendableUser.gameID !== null
+  // )
+  //   return res.sendStatus(403);
   if (
     lobby.addPlayerToRoomLobby(
       req.body.roomId,
