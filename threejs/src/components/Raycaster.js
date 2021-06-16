@@ -268,6 +268,7 @@ export default class Collisions extends Raycaster {
                         // console.log(this.v2)
 
                         // this.czyPrzeszlo = false
+                        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                         console.log(this.whitePieces)
                         console.log(this.blackPieces)
 
@@ -302,28 +303,6 @@ export default class Collisions extends Raycaster {
 
 
         });
-    }
-
-    updatePos() {
-        // if (this.fading > 0) {
-        //     if (this.toMove[0].position.x != this.v2.x && this.toMove[0].position.x < this.v2.x) {
-        //         this.toMove[0].position.x += 0.5
-        //     } else if (this.toMove[0].position.x != this.v2.x && this.toMove[0].position.x > this.v2.x) {
-        //         this.toMove[0].position.x -= 0.5
-        //     }
-        //     if (this.toMove[0].position.z != this.v2.z && this.toMove[0].position.z < this.v2.z) {
-        //         this.toMove[0].position.z += 0.5
-        //     } else if (this.toMove[0].position.z != this.v2.z && this.toMove[0].position.z > this.v2.z) {
-        //         this.toMove[0].position.z -= 0.5
-        //     }
-        //     if (this.toMove[0].position.y < this.v2.y && !this.czyPrzeszlo) {
-        //         this.toMove[0].position.y += 0.5
-        //     } else if ((this.toMove[0].position.y >= this.v2.y || this.czyPrzeszlo) && this.toMove[0].position.y > 0) {
-        //         this.czyPrzeszlo = true
-        //         this.toMove[0].position.y -= 0.5
-        //     }
-        //     this.fading -= 0.01
-        // }
     }
 
 }
