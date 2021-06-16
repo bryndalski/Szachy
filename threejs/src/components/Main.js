@@ -37,7 +37,7 @@ export default class Main {
         this.scene = new Scene();
 
         // połączenie z websocketem i pobranie danych o kolorze pionków
-        this.websocket = new WebSocket(`wss://${window.location.hostname}:${window.location.port}/sockets/Szaszki`)
+        this.websocket = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/sockets/Szaszki`)
         // this.websocket = new WebSocket(`ws://localhost:5500/sockets/Szaszki`)
 
         this.websocket.onopen = (e) => {
