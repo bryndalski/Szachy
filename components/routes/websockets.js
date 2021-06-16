@@ -14,7 +14,7 @@ router.ws("/lobbyWS", function (ws, req) {
     lobby.addListener("change", () => {
       try {
         ws.send(JSON.stringify(lobby.lobbyContent));
-      } catch (err) {}
+      } catch (err) { }
     });
     ws.on("close", (msg) => {
       console.log(ws.readyState);
@@ -47,9 +47,9 @@ router.ws("/Szaszki", function (ws, req) {
             socektArray[socektId] = ws;
             socektArray[
               lobby.lobby[room][
-                req.session.user.user.nickname == lobby.lobby[room].playerOne
-                  ? "playerOneWsId"
-                  : "playerTwoWsId"
+              req.session.user.user.nickname == lobby.lobby[room].playerOne
+                ? "playerOneWsId"
+                : "playerTwoWsId"
               ]
             ].send(
               JSON.stringify({
@@ -68,9 +68,9 @@ router.ws("/Szaszki", function (ws, req) {
             );
             socektArray[
               lobby.lobby[room][
-                req.session.user.user.nickname == lobby.lobby[room].playerOne
-                  ? "playerOneWsId"
-                  : "playerTwoWsId"
+              req.session.user.user.nickname == lobby.lobby[room].playerOne
+                ? "playerOneWsId"
+                : "playerTwoWsId"
               ]
             ].send(
               JSON.stringify({
@@ -92,11 +92,17 @@ router.ws("/Szaszki", function (ws, req) {
               from: msg.piecePos,
               to: msg.destPos,
             });
+            console.log(lobby.lobby[room2].board)
+            console.log(msg.board)
             lobby.lobby[room2].board = msg.board;
+            console.log(lobby.lobby[room2].board)
 
+            console.log(socketDestinations)
             socketDestinations = socketDestinations.filter((x) => x != null);
+            console.log(socketDestinations)
 
             socketDestinations.forEach((e) => {
+              console.log(socektArray[e])
               socektArray[e].send(
                 JSON.stringify({
                   type: "move",
