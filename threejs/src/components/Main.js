@@ -397,7 +397,7 @@ export default class Main {
                         }
                     }
                     this.blackPieces[index % 16].position.set(x, 0, z)
-                    this.blackPieces[index].boardPosition = square
+                    this.blackPieces[index % 16].boardPosition = square
                 }
             } else {
                 if (index < 16) { // białe pionki
@@ -405,7 +405,7 @@ export default class Main {
                     this.whitePieces[index].boardPosition = null
                 } else { // czarne pionki
                     this.scene.remove(this.blackPieces[index % 16])
-                    this.blackPieces[index].boardPosition = null
+                    this.blackPieces[index % 16].boardPosition = null
                 }
             }
         })
