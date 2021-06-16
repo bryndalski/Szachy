@@ -153,6 +153,8 @@ export default class Main {
                     if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
                         console.log(this.data.ischeck, this.data.ischeckmate, this.data.isdraw, this.data.isstalemate)
                         if (this.data.ischeck) {
+                            this.Board = this.data.board
+                            this.puzle()
                             alert('check')
                         }
                         if (this.data.ischeckmate) {
