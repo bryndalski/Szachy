@@ -98,8 +98,8 @@ router.ws("/Szaszki", function (ws, req) {
             console.log(lobby.lobby[room2].board)
 
             console.log(socketDestinations)
-            socketDestinations = socketDestinations.filter((x) => x != null);
-            console.log(socketDestinations)
+            // socketDestinations = socketDestinations.filter((x) => x != null);
+            // console.log(socketDestinations)
 
             socketDestinations.forEach((e) => {
               console.log(socektArray[e])

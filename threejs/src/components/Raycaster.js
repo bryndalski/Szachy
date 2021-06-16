@@ -111,6 +111,7 @@ export default class Collisions extends Raycaster {
                         this.toMove[0].position.x = this.v2.x
                         this.toMove[0].position.z = this.v2.z
                         this.toMove[0].boardPosition = this.destPos
+                        this.newPosition[0].object.boardPosition = this.destPos
                         //this.fading = 20
 
                         this.board = []
@@ -197,6 +198,7 @@ export default class Collisions extends Raycaster {
                         this.toMove[0].position.x = this.v2.x
                         this.toMove[0].position.z = this.v2.z
                         this.toMove[0].boardPosition = this.destPos
+                        this.newPosition[0].object.boardPosition = this.destPos
                         //this.fading = 20
 
                         this.board = []
@@ -260,6 +262,7 @@ export default class Collisions extends Raycaster {
                         this.toMove[0].position.x = this.v2.x
                         this.toMove[0].position.z = this.v2.z
                         this.toMove[0].boardPosition = this.destPos
+                        this.newPosition[0].object.boardPosition = this.destPos
                         //this.fading = 20
 
                         this.board = []
