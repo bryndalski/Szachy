@@ -37,7 +37,7 @@ export default class Main {
         this.scene = new Scene();
 
         // połączenie z websocketem i pobranie danych o kolorze pionków
-        this.websocket = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/sockets/Szaszki`)
+        this.websocket = new WebSocket(`wss://${window.location.hostname}:${window.location.port}/sockets/Szaszki`)
         // this.websocket = new WebSocket(`ws://localhost:5500/sockets/Szaszki`)
 
         this.websocket.onopen = (e) => {
@@ -153,6 +153,8 @@ export default class Main {
                     if (this.data.ischeck || this.data.ischeckmate || this.data.isstalemate || this.data.isdraw) {
                         console.log(this.data.ischeck, this.data.ischeckmate, this.data.isdraw, this.data.isstalemate)
                         if (this.data.ischeck) {
+                            this.Board = this.data.board
+                            this.puzle()
                             alert('check')
                         }
                         if (this.data.ischeckmate) {
@@ -401,11 +403,15 @@ export default class Main {
                 }
             } else {
                 if (index < 16) { // białe pionki
-                    this.scene.remove(this.whitePieces[index])
-                    this.whitePieces[index].boardPosition = null
+                    try {
+                        this.scene.remove(this.whitePieces[index])
+                        this.whitePieces[index].boardPosition = null
+                    } catch { }
                 } else { // czarne pionki
-                    this.scene.remove(this.blackPieces[index % 16])
-                    this.blackPieces[index % 16].boardPosition = null
+                    try {
+                        this.scene.remove(this.blackPieces[index % 16])
+                        this.blackPieces[index % 16].boardPosition = null
+                    } catch { }
                 }
             }
         })

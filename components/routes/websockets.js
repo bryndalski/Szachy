@@ -1,4 +1,5 @@
 require("colors");
+const MongoOperations = require("../MongoOperations");
 const router = require("express").Router();
 const lobby = require("../data/Lobby");
 const { logIn } = require("../User");
@@ -14,7 +15,7 @@ router.ws("/lobbyWS", function (ws, req) {
     lobby.addListener("change", () => {
       try {
         ws.send(JSON.stringify(lobby.lobbyContent));
-      } catch (err) {}
+      } catch (err) { }
     });
     ws.on("close", (msg) => {
       console.log(ws.readyState);
@@ -47,9 +48,9 @@ router.ws("/Szaszki", function (ws, req) {
             socektArray[socektId] = ws;
             socektArray[
               lobby.lobby[room][
-                req.session.user.user.nickname == lobby.lobby[room].playerOne
-                  ? "playerOneWsId"
-                  : "playerTwoWsId"
+              req.session.user.user.nickname == lobby.lobby[room].playerOne
+                ? "playerOneWsId"
+                : "playerTwoWsId"
               ]
             ].send(
               JSON.stringify({
@@ -68,9 +69,9 @@ router.ws("/Szaszki", function (ws, req) {
             );
             socektArray[
               lobby.lobby[room][
-                req.session.user.user.nickname == lobby.lobby[room].playerOne
-                  ? "playerOneWsId"
-                  : "playerTwoWsId"
+              req.session.user.user.nickname == lobby.lobby[room].playerOne
+                ? "playerOneWsId"
+                : "playerTwoWsId"
               ]
             ].send(
               JSON.stringify({
@@ -128,7 +129,7 @@ router.ws("/Szaszki", function (ws, req) {
             ];
 
             socketDestinations2 = socketDestinations2.filter((x) => x != null);
-
+            MongoOperations.increment("60c213360b6c360f287cc738", "stats.played")
             if (lobby.lobby[room3].turn() == "b") {
               socketDestinations2.forEach((e) => {
                 socektArray[e].send(
