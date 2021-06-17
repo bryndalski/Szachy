@@ -105,13 +105,16 @@ export default class Main {
               pos != "O-O" &&
               pos != "O-O-O"
             ) {
+              console.log("wycinanie");
               pos = pos.substr(0, pos.length - 1);
+              console.log(pos);
             }
             if (pos.includes("x") == false && pos != "O-O" && pos != "O-O-O") {
               this.plane = new Mesh(
                 new PlaneGeometry(10, 10),
                 new MeshStandardMaterial({ color: 0x2cde62 })
               );
+              console.log(pos);
               this.plane.boardPosition = pos;
             } else if (
               pos.includes("x") == true &&
@@ -142,7 +145,7 @@ export default class Main {
               this.plane.boardPosition = pos;
               pos = "c1";
             }
-
+            console.log(pos);
             this.plane.rotation.x = -Math.PI / 2;
             if (pos.length == 3) {
               for (const property in mapa) {
@@ -165,6 +168,7 @@ export default class Main {
             }
             this.scene.add(this.plane);
             this.greenFields.push(this.plane);
+            console.log(this.greenFields);
           });
 
           // przekazanie do raycastera pól do wyboru oraz pozycji zaznaczonego elementu
